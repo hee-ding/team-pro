@@ -18,17 +18,18 @@
  		</div>
 	</form>
 	<div class="caption">
-		<a href="/member/createAccountPage">고객 회원가입</a> | <a href="/member/createAccountPartner">기업 회원가입</a>
+		<a href="/member/createAccountPage">고객 회원가입</a> | <a href="/member/createAccountPagePartner">기업 회원가입</a>
 	</div>
 	
 	<div class="caption">
 		<a href="./searchIDPage.jsp">아이디 찾기</a> | <a href="./searchPasswordPage.jsp">비밀번호 찾기</a>
 		</div><br/>
 		<div class="kakao-login">
-			<form id="form-kakao-login" method="post" action="./member/Action/loginKakaoAction.jsp">
+			<form id="form-kakao-login" method="post" action="/member/kakaologin">
 				<input type="image" src="../resources/asset/images/kakao_login_medium_wide.png" style width="300px;" name="button" onclick="javascript:kakaoLogin();return false;">
 				<input type="hidden" name="email"/>
-				<input type="hidden" name="name"/>
+				<input type="hidden" name="nickname"/>
+				<input type="hidden" name="type" value="C"/>
 			</form>	
 		</div>
 		<!-- 
