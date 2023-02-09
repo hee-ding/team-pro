@@ -4,12 +4,12 @@
 <%
 	request.setCharacterEncoding("utf-8");
 %>
-<form action="./member/Action/joinAction_Partner.jsp" id ="sfrm" method="post" name="sfrm" >
+<form action="/member/createAccountPartner" id ="sfrm" method="post" name="sfrm" >
 	<input type="hidden" name="type" value="C" />
 	<div class="member">
 	    <!-- 로고 -->
 	   	<div id = "logoContainer">
-			<a href="./homePage.jsp"><img id = "logo" src="./resources/asset/images/logo_1.jpg"/></a>
+			<a href="./homePage.jsp"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 		</div>
 	
 	    <!-- 필드 -->
