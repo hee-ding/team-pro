@@ -93,6 +93,34 @@ public class MemberDAO {
 			 
 		}
 		
+		public int kakaologin(MemberTO to){
+					
+					Connection conn = null;
+					PreparedStatement pstmt = null;
+					
+					int flag = 1;
+					
+					try {
+						 conn = this.dataSource.getConnection();
+						 
+						 String sql = "insert into kakao_login values ( 0,0,?,? )";
+						 pstmt = conn.prepareStatement(sql);
+						 pstmt.setString(1, to.getNickname());
+						 pstmt.setString(2, to.getEmail());
+						 
+						 if(pstmt.executeUpdate() == 1 ) {
+							 flag = 0; //정상
+						 }
+					} catch (SQLException e){
+						System.out.println( "[에러] " +  e.getMessage());
+					} finally {
+						if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+						if(conn != null) try {conn.close();} catch(SQLException e) {}
+					}
+					return flag;
+					
+				}
+		
 		
 		public int join(MemberTO to){ //회원가입 메서드
 			
