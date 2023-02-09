@@ -23,7 +23,7 @@ import com.maumgagym.dto.MemberTO;
 public class CommunityDAO {
 	
 	@Autowired
-	private DataSource dataSource = null;
+	private DataSource dataSource;
 		
 		public CommunityDAO() {
 			
@@ -160,6 +160,7 @@ public class CommunityDAO {
 			return to;
 		}
 		
+		
 		public BoardTO boardModify(BoardTO to) {
 			
 			Connection conn = null;
@@ -192,5 +193,119 @@ public class CommunityDAO {
 				
 				return to;
 			}
+		
+		public int boardModifyOK(MemberTO to1, BoardTO to) {
+			
+			 Connection conn = null;
+			 PreparedStatement pstmt = null;
+			 
+			 int flag = 2;
+			 
+			   try{
+			      conn = this.dataSource.getConnection();
+			      
+			      String sql = "insert into board_modify values (0 , now() , ?) ";
+			      pstmt = conn.prepareStatement(sql);
+			      pstmt.setInt(1, to.getSeq());
+			      pstmt.executeUpdate();
+			      
+			      // 수정할 경우 status = 2 로 고정 값 ( 2 = 수정 )
+			      sql = "update board b left join member m on (b.write_seq = m.seq) set b.title = ? , b.content=?, b.status = 2 where b.seq =? and m.password =? ";
+			      pstmt = conn.prepareStatement(sql);
+			      pstmt.setString( 1, to.getTitle() );
+			      pstmt.setString( 2, to.getContent() );
+			      pstmt.setInt( 3, to.getSeq() );
+			      pstmt.setString( 4, to1.getPassword() );
+			      
+			      int result = pstmt.executeUpdate(); //수정된애들을 result 에 던진다.
+			      if( result ==0 ) {
+			         flag = 1;
+			      } else if( result ==1 ) {
+			         // 정상 동작
+			         flag = 0;
+			      }
+			      
+			   } catch( SQLException e ){
+			      System.out.println( "[에러]" +e.getMessage() );
+			   } finally {
+				   if(pstmt != null) try{pstmt.close();} catch(SQLException e) {}
+				   if(conn != null) try{conn.close();} catch(SQLException e) {}
+			      
+			   }
+			return flag;
+	}
+	
+		
+		public BoardTO boardDelete(BoardTO to) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			
+			try {
+				conn = this.dataSource.getConnection();
+				
+				String sql = "select m.name , b.title, m.password from board b left join member m on  (b.write_seq = m.seq) where b.seq = ? ";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, to.getSeq());
+				
+				rs = pstmt.executeQuery();
+				
+				if(rs.next()){
+					to.setWriter(rs.getString("m.name"));
+					to.setTitle(rs.getString("b.title"));
+				}
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+				
+			} finally {
+				if(rs != null) try {rs.close();} catch(SQLException e) {}
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+			return to;
+			
+		}
+		
+		
+		public int boardDeleteOK(MemberTO to1, BoardTO to) {
+			
+			 Connection conn = null;
+			 PreparedStatement pstmt = null;
+			 
+			 int flag = 2;
+			 
+			   try{
+			      conn = this.dataSource.getConnection();
+			      
+			      String sql = "insert into board_delete values (0 , now() , ?) ";
+			      pstmt = conn.prepareStatement(sql);
+			      pstmt.setInt(1, to.getSeq());
+			      pstmt.executeUpdate();
+			      
+			      //삭제시 board 테이블에 기존데이터 그대로 두고 status만 3으로 변경 ( 3 = 삭제 )
+			      sql = "update board b left join member m on (b.write_seq = m.seq) set b.status = 3 where b.seq =? and m.password =? ";
+			      pstmt = conn.prepareStatement(sql);
+			      pstmt.setInt( 1, to.getSeq() );
+			      pstmt.setString( 2, to1.getPassword() );
+			      
+			      int result = pstmt.executeUpdate(); //수정된애들을 result 에 던진다.
+			      if( result ==0 ) {
+			         flag = 1;
+			      } else if( result ==1 ) {
+			         // 정상 동작
+			         flag = 0;
+			      }
+			      
+			   } catch( SQLException e ){
+			      System.out.println( "[에러]" +e.getMessage() );
+			   } finally {
+				   if(pstmt != null) try{pstmt.close();} catch(SQLException e) {}
+				   if(conn != null) try{conn.close();} catch(SQLException e) {}
+			      
+			   }
+			return flag;
+	}
 		
 }
