@@ -1,5 +1,8 @@
 package com.maumgagym.controller;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.BoardDAO;
+import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.MemberTO;
+import com.maumgagym.dto.ReviewTO;
 
 
 @Controller
@@ -18,30 +24,54 @@ public class BoardController {
 	@Autowired
 	private BoardDAO dao;
 	
-	// 아래는 샘플 코드입니다. 삭제 후 사용해주세요.
-	// '/board/list/' 요청에 대해서 응답
-	// {pageNumber}은 변수처리
-	// URL에는 동사가 아닌 명사를 사용
-	// 파라미터가 많아질 경우 @RequestParam HashMap<String,String> paramMap) 으로 받기
-	/* 예)
-	 * write
-	 * modify
-		게시판 목록		/board
-		게시글 작성화면		/board/write	method => get
-		게시글 작성		/board/write	method => post
-		게시글 상세화면		/board/글번호		method => get
-		게시글 수정		/board/글번호		method => put
-		게시글 삭제		/board/글번호		method => delete
-	*/
-	@RequestMapping(value = "/board/list/{pageNumber}", method = RequestMethod.GET)
-	public ModelAndView list( HttpServletRequest request, @PathVariable("pageNumber") int pageNumber ) { 
+	@RequestMapping(value = "/facility/{seq}", method = RequestMethod.GET)
+	public ModelAndView list( HttpServletRequest request, @PathVariable("seq") int seq ) { 
 		
 		//파라미터를 확인하기 위한 주석
-		System.out.println( pageNumber ); 
+		//System.out.println( "parameter" + seq );
+		
+		BoardTO bto = new BoardTO();
+		bto.setSeq(seq);
+		
+		Map<String, Object> map = dao.selectFacilityBoard(bto);
+		map.put( "membershipList", dao.selectMemberShips(bto) );
+		map.put( "noticeList" , dao.selectNotices(bto) );
+		map.put( "imageList", dao.selectImages(bto) );
+		map.put( "reviewList", dao.selectReviews(bto) );
+		
+		System.out.println( "=================================" );
+		bto = (BoardTO) map.get( "bto" );
+		String title = bto.getTitle();
+		System.out.println( title );
+		
+		MemberTO mto = (MemberTO) map.get( "mto" );
+		String fullAdress = mto.getFullAddress();
+		System.out.println( fullAdress );
+		String phone = mto.getPhone();
+		System.out.println( phone );
+		
+		ReviewTO rvto = (ReviewTO) map.get("rvto");
+		Float avgStarScore = rvto.getAvg_star_score();
+		System.out.println( avgStarScore );
+		
+		ArrayList<ReviewTO> reviewList = (ArrayList) map.get("reviewList");
+		 
+		for( ReviewTO rvto2 : reviewList ) {
+			
+			String nickname = rvto2.getNickname();
+			String writeDate = rvto2.getWrite_date();
+			String content = rvto2.getContent();
+			
+			System.out.println( nickname );
+			System.out.println( writeDate );
+			System.out.println( content );
+		}
+		System.out.println( "=================================" );
 		
 		ModelAndView modelAndView = new ModelAndView();
 		
-		modelAndView.setViewName("homePage");
+		modelAndView.addObject("map", map );
+		modelAndView.setViewName("viewPage");
 		
 		return modelAndView;
 		

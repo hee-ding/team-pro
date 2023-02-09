@@ -2,9 +2,11 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String id = null;
+	String id = "id1";
+	String type = "M";
+	String nickname = "닉네임";
 	
-	if( session.getAttribute("id") != null ) {
+/* 	if( session.getAttribute("id") != null ) {
 		id = ( String ) session.getAttribute("id");
 	} else {
 		id = null;
@@ -24,11 +26,11 @@
 		nickname = ( String ) session.getAttribute("nickname");
 	} else {
 		nickname = null;
-	}
+	} */
 	
-	System.out.println( id );
-	System.out.println( type );
-	System.out.println( nickname );
+	//System.out.println( id );
+	//System.out.println( type );
+	//System.out.println( nickname );
 	
 	
 	
@@ -49,11 +51,11 @@
         <!-- Bootstrap icons-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 
-	    <link rel="stylesheet" href="./resources/asset/css/owl.carousel.min.css"/>
+	    <link rel="stylesheet" href="../resources/asset/css/owl.carousel.min.css"/>
 	
-	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
+	    <link rel="stylesheet" href="../resources/asset/css/owl.theme.default.min.css"/>
 	
-	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
+	    <link href="../resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
 	    <!-- nav bar -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <!-- 좋아요 -->
@@ -91,14 +93,12 @@
 			<jsp:param name="nickname" value="<%= nickname %>"/>
 		</jsp:include>
 	    
-	    
-	    <!--<script src="./view/view_source/pay.js"></script> -->
-	    <script src="./view/view_source/view_jquery.js"></script>
+	    <script src="../resources/asset/js/view_jquery.js"></script>
 	    
 	    <!-- JAVASCRIPT FILES -->
-	    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-	    <script src="./resources/asset/js/owl.carousel.min.js"></script>
-	    <script src="./resources/asset/js/custom.js"></script>
+	    <script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
+	    <script src="../resources/asset/js/owl.carousel.min.js"></script>
+	    <script src="../resources/asset/js/custom.js"></script>
 	    
 	</body>
 </html>
