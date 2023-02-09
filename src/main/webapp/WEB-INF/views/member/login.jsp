@@ -88,7 +88,7 @@
 	              console.log(res);
 	              var account = res.kakao_account;
 	              $('#form-kakao-login input[name=email]').val(account.email);
-				  $('#form-kakao-login input[name=name]').val(account.profile.nickname);
+				  $('#form-kakao-login input[name=nickname]').val(account.profile.nickname);
 	              var kakao_nickname = account.profile.nickname;
 	              var kakao_email = account.email;
 	              console.log(kakao_nickname);
