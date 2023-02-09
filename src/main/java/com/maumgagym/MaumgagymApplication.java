@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan( basePackages = { "com.maumgagym.controller", "com.maumgagym.dao", "com.maumgagym.dto","com.maumgagym.service" })
+@ComponentScan( basePackages = { "com.maumgagym", "com.maumgagym.controller", "com.maumgagym.dao", "com.maumgagym.dto","com.maumgagym.service" })
 public class MaumgagymApplication {
 
 	public static void main(String[] args) {
