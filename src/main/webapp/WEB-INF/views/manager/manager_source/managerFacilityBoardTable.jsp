@@ -6,40 +6,32 @@
 <%
 	
 	BoardDAO dao = new BoardDAO();
-	ArrayList<BoardTO> boardLists = dao.boardList();
+	ArrayList<BoardTO> facilityBoardLists = dao.facilityBoardList();
 	
-	int totalRecord = boardLists.size(); //총데이터갯수
+	int totalRecord = facilityBoardLists.size(); //총데이터갯수
 	
-	StringBuilder sbBoard = new StringBuilder();
-			 /*
-			 					BoardTO to = new BoardTO();
-					to.setSeq(rs.getInt("b.seq"));
-					to.setCategory(rs.getString("c.category"));
-					to.setTopic(rs.getString("c.topic"));
-					to.setTitle(rs.getString("b.title"));
-					to.setNickname(rs.getString("m.nickname"));
-					to.setWrite_date(rs.getString("b.write_date"));
-					boardLists.add(to);
-			 */
-			 for( BoardTO to : boardLists){
+	StringBuilder sbFacility = new StringBuilder();
+			 
+			 for( BoardTO to : facilityBoardLists){
 				int seq = to.getSeq();
 				String category = to.getCategory();
 				String topic = to.getTopic();
 				String title = to.getTitle();
-				String nickname = to.getNickname();
+				String name = to.getName();
+				int write_seq = to.getWrite_seq();
 				String date = to.getWrite_date();
 				 
-				sbBoard.append("<tr>");
-				sbBoard.append("<td scope='row'>" + seq + "</td>");
-				sbBoard.append("<td>" + category + "</td>");
-				sbBoard.append("<td>" + topic + "</td>");
-				sbBoard.append("<td class='text-start fw-bold'>");
-				sbBoard.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
-				sbBoard.append("</td>");
-				sbBoard.append("<td>" + nickname + "</td>");
-				sbBoard.append("<td>" + date + "</td>");
-				sbBoard.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
-				sbBoard.append("</tr>");
+				sbFacility.append("<tr>");
+				sbFacility.append("<td scope='row'>" + seq + "</td>");
+				sbFacility.append("<td class='text-muted'>" + category + "</td>");
+				sbFacility.append("<td>" + topic + "</td>");
+				sbFacility.append("<td class='text-start fw-bold'>");
+				sbFacility.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbFacility.append("</td>");
+				sbFacility.append("<td>" + name + "</td>");
+				sbFacility.append("<td>" + date + "</td>");
+				sbFacility.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
+				sbFacility.append("</tr>");
 			 }
 %>    
 <hr/>
@@ -50,7 +42,6 @@ function deleteboard(deleteSeq) {
 	//ajax 삭제 쿼리
 }
 </script>
-
 		<div class="container mt-5">
 			<div class="row">
 
@@ -58,8 +49,8 @@ function deleteboard(deleteSeq) {
                 <section class="section">
                     <div class="card">
                         <div class="card-header bg-white">
-                          <h3>게시물관리</h3>
-                          <p class="text-subtitle text-muted">공지/이벤트, 커뮤니티 게시글들을 통합하여 관리합니다.</p>
+                          <h3>운동시설관리</h3>
+                          <p class="text-subtitle text-muted">등록된 운동시설 게시글들을 통합하여 관리합니다.</p>
                         </div>
                         <div class="card-body">
                             <table class="table table-hover" id="table1">
@@ -68,14 +59,13 @@ function deleteboard(deleteSeq) {
                                         <th>번호</th>
                                         <th>카테고리</th>
                                         <th>토픽</th>
-                                        <th>제목</th>
-                                        <th>작성자</th>
+                                        <th>업체게시글</th>
+                                        <th>업체명</th>
                                         <th>작성일</th>
                                         <th>기능</th>
                                     </tr>
                                 </thead>
-                                <%= sbBoard.toString() %>
-                          
+                                <%= sbFacility.toString() %>
                             </table>
                         </div>
                     </div>

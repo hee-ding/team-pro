@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.to.member.MemberTO" %>
-<%@page import="com.dao.member.MemberDAO"%>
+<%@page import="com.to.member.MemberDAO"%>
 <%@ page import="java.util.ArrayList" %>
 
 <%
 
 MemberDAO dao = new MemberDAO();
-ArrayList<MemberTO> memberLists = dao.memList();
+ArrayList<MemberTO> memberLists = dao.memberList();
 
 int totalRecord = memberLists.size();
 
