@@ -40,10 +40,10 @@
 	            <%
 	            	if( id == null ) {
 	            %>
-	            <a class="navbar-brand ps-3" href="./loginPage.jsp">
+	            <a class="navbar-brand ps-3" href="/member/login">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
 	            </a>
-	            <a class="navbar-brand ps-3" href="./createAccountPage.jsp">
+	            <a class="navbar-brand ps-3" href="#">
 	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">회원가입</span></button>
 	            </a>
        	        <%
