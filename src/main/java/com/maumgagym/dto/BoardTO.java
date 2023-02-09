@@ -7,14 +7,18 @@ import lombok.Setter;
 @Getter
 public class BoardTO {
 	
-	int seq;
-	int category_seq;
-	String fullCategoryString; 
-	String title;
-	String content;
-	String writer;
-	int write_seq;
-	String write_date;
+	int seq;				// 게시판SEQ
+	int category_seq;		// 카테고리번
+	String category;		// 카테고리
+	String title;			// 제목
+	String topic;			//토픽
+	String nickname;  		//닉네임
+	String name;  		//닉네임
+	String content;			//내용
+	String writer;			//글쓴이
+	int write_seq;			//글번호
+	String write_date;		//글쓴날짜
+	
 	String status;
 	String tag;
 	int view_count;
@@ -24,6 +28,8 @@ public class BoardTO {
 	String membership_name;
 	int membership_price;
 	int membership_period;
+	String fullCategoryString; 
+
 	
 	int flag;
 
