@@ -1,0 +1,299 @@
+
+a {
+    text-decoration: none;
+    color: #222;
+}
+
+#logoContainer {
+
+  text-align: center;
+  padding-bottom: 30px;
+	
+}
+
+img#logo {
+
+  width: 270px;
+  aspect-ratio: auto 1/1;
+	
+}
+
+
+.member {
+    /* border: 1px solid #000; */
+    width: 500px;
+    margin: auto;
+    padding: 0 20px;
+    margin-bottom: 20px;
+}
+.member .logo {
+    display: block;
+    margin: 50px auto;
+}
+.member .field {
+    /* border: 1px solid red; */
+    margin: 5px 0;
+}
+.member b {
+    display: block;
+    margin: 5px;
+}
+
+.member input:not(input[type=radio]):not(input[type=button]), .member select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #dadada;
+}
+
+.member input[type=button] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #dadada;
+}
+
+.member input[type=button],
+.member input[type=submit] {
+    background-color: #1187CF;
+    color: #fff;
+}
+.member button {
+    width: 100px;
+    padding: 15px;
+    margin-bottom: 5px;
+    border: 1px solid #dadada;
+    background-color: #1187CF;
+    color: #fff;
+}
+
+.member input:not(input[type=radio]):focus, .member select:focus {
+    border: 1px solid #1187CF;
+}
+
+.placehold-text {
+    /* border: 1px solid red; */
+    display: block;
+    position: relative;
+}
+
+/*
+.field .userpw {   기본이 transparent이므로 
+    background: #fff url(./images/favicon.png) no-repeat center right 15px;
+    background-size: 20px;
+}
+.field .userpw-confirm {
+    background: #fff url(./images/favicon.png) no-repeat center right 15px;
+    background-size: 20px;
+}
+
+*/
+
+.field.birth div {
+    display: flex;
+    gap: 10px;
+}
+
+.field.gender div {
+    border: 1px solid #dadada;
+    padding: 15px 5px;
+    background-color: #fff;
+}
+
+.field.tel-number div {
+    display: flex;
+    gap: 5px;
+}
+.field.tel-number div input:nth-child(1) {
+    flex: 2;
+}
+.field.tel-number div input:nth-child(2) {
+    flex: 1;
+}
+
+.member-footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+}
+/* .member-footer div a {
+    border-right: 1px solid #bbb;
+    margin-right: 10px;
+    padding-right: 10px;
+}
+.member-footer div a:last-child {
+    border: none;
+    margin: 0;
+} */
+.member-footer div a:hover {
+    text-decoration: underline;
+    color: #1187CF;
+}
+.member-footer div a:after {
+    content: '|';
+    font-size: 10px;
+    color: #bbb;
+    margin-right: 5px;
+    margin-left: 7px;
+    display: inline-block;  /* inline 요소에서는 transform 사용 X */
+    transform: translateY(-2px);
+}
+.member-footer div a:last-child:after {
+    display: none;
+}
+
+#email, #email_confirm {
+	width: 360px;
+	padding-top: 17px;
+}
+
+#email_submit, #email_confirm_btn {
+	width: 100px;
+}
+
+#mail1 {
+	width: 200px;
+	padding-top: 17px;
+}
+
+#mail2 {
+	width: 240px;
+}
+
+#pw-confirm {
+	width: 360px;
+	padding-top: 17px;
+}
+
+#check {
+	width: 100px;
+}
+
+#postcode {
+	width: 360px;
+	padding-top: 17px;
+}
+
+#search {
+	width: 100px;
+}
+
+
+
+.hasNick:before {
+    content: '닉네임을 입력해 주세요.';
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.notAbleNick:before {
+    content: '이미 사용 중인 닉네임입니다.';
+    color: red;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.ableNick:before {
+   content: '사용 가능한 닉네임 입니다.';
+   color: blue;
+   position: absolute;
+   right: 20px;
+   top: 13px;
+   pointer-events: none;
+}
+
+.hasId:before {
+    content: '아이디를 입력해 주세요.';
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.notAbleId:before {
+    content: '이미 사용 중인 아이디입니다.';
+    color: red;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.ableId:before {
+   content: '사용 가능한 아이디 입니다.';
+   color: blue;
+   position: absolute;
+   right: 20px;
+   top: 13px;
+   pointer-events: none;
+}
+
+.notAblePw:before {
+    content: '사용 가능한 비밀번호가 아닙니다.';
+    color: red;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.ablePw:before {
+   content: '사용 가능한 비밀번호 입니다.';
+   color: blue;
+   position: absolute;
+   right: 20px;
+   top: 13px;
+   pointer-events: none;
+}
+
+.hasPw:before {
+    content: '우선 비밀번호를 입력해 주세요.';
+    color: red;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.notAblePwConfirm:before {
+    content: '비밀번호가 동일하지 않습니다.';
+    color: red;
+    position: absolute;
+    right: 20px;
+    top: 13px;
+    pointer-events: none;
+}
+
+.ablePwConfirm:before {
+   content: '비밀번호가 동일합니다.';
+   color: blue;
+   position: absolute;
+   right: 20px;
+   top: 13px;
+   pointer-events: none;
+}
+
+.caption {
+    text-align: center;
+}
+
+.caption div a:hover {
+    text-decoration: underline;
+    color: #1187CF;
+}
+.caption div a:after {
+    content: '|';
+    font-size: 10px;
+    color: #bbb;
+    margin-right: 5px;
+    margin-left: 7px;
+    display: inline-block;
+    transform: translateY(-2px);
+}
+
+
+

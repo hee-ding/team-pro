@@ -1,0 +1,64 @@
+// 멤버 테이블 insert
+
+insert into member values (0, '닉네임1', 'id1' , '1234' , '이름1' , '2000-01-01' , '010-1234-5678', 'email1@email.com', 'M' , '08810', '서울 관악구 남현동' , '서울 관악구 남현동 1072-12' ,'(남현동, 한울아파트)');
+insert into member values (0, '닉네임2', 'id2' , '1234' , '이름2' , '2000-01-01' , '010-1234-5678', 'email2@email.com', 'C' , '06253', '서울특별시 강남구 역삼1동' , '서울특별시 강남구 역삼1동 강남대로 310' ,'');
+insert into member values (0, '닉네임3', 'id3' , '1234' , '이름3' , '2000-01-01' , '010-1234-5678', 'email3@email.com', 'M' , '06253', '서울특별시 서초구 서초동' , '서울 서초구 반포대로 58' ,'');
+insert into member values (0, '닉네임4', 'id4' , '1234' , '이름4' , '2000-01-01' , '010-1234-5678', 'email4@email.com', 'C' , '06652', '서울 서초구 서초동' , '서울 서초구 반포대로 58 지하 1,2층' ,'');
+
+
+// 카테고리
+
+insert into category values( 0, "운동시설", "피트니스" );
+insert into category values( 0, "운동시설", "요가" );
+insert into category values( 0, "운동시설", "수영" );
+insert into category values( 0, "운동시설", "테니스" );
+insert into category values( 0, "운동시설", "타바타" );
+insert into category values( 0, "운동시설", "필라테스" );
+insert into category values( 0, "운동시설", "골프" );
+insert into category values( 0, "운동시설", "복싱" );
+insert into category values( 0, "운동시설", "댄스" );
+insert into category values( 0, "커뮤니티", "운동" );
+insert into category values( 0, "커뮤니티", "건강" );
+insert into category values( 0, "커뮤니티", "수다" );
+insert into category values( 0, "공지", "공지" );
+insert into category values( 0, "공지", "이벤트" )
+
+
+// 운동시설 글쓰기
+insert into board values( 0, 1, '테스트짐1' , '<b>테스트짐, 인근 프리미엄 헬스장 테스트짐을 사진으로 구경해보세요.</b>', 2, now(), 1);
+insert into board values( 0, 1, '테스트짐2' , '<b>테스트짐, 인근 프리미엄 헬스장 테스트짐을 사진으로 구경해보세요.</b>', 4, now(), 1);	
+
+// 회원권 옵션 쓰기
+insert into membership values( 0, 2, '테스트짐1 1개월', 100000, 1, 1 );
+insert into membership values( 0, 2, '테스트짐1 3개월', 250000, 3, 1 );
+insert into membership values( 0, 2, '테스트짐1 6개월', 550000, 6, 1 );
+
+insert into membership values( 0, 4, '테스트짐2 1개월', 100000, 1, 2 );
+insert into membership values( 0, 4, '테스트짐2 3개월', 250000, 3, 2 );
+insert into membership values( 0, 4, '테스트짐2 12개월', 250000, 12, 2 );
+
+
+// 공지 쓰기
+insert into board values ( 0, 14, '헬스 12개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 2, now(), 1);
+insert into board values ( 0, 14, '헬스 6개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 2, now(), 1);
+insert into board values ( 0, 14, '헬스 3개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 2, now(), 1);
+
+insert into board values ( 0, 14, '헬스 12개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 4, now(), 1);
+insert into board values ( 0, 14, '헬스 6개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 4, now(), 1);
+insert into board values ( 0, 14, '헬스 3개월 구매 시 헬스보이 블랙/골드지점 이용 가능(단일회원권에만 해당)', '테스트', 4, now(), 1);
+
+
+// 리뷰 쓰기
+insert into review values (0, '리뷰제목 1', '리뷰내용 1', now() , 1 , 5.0 , 1, 1 );
+insert into review values (0, '리뷰제목 2', '리뷰내용 2', now() , 3 , 2.0 , 1, 1 );
+
+insert into review values (0, '리뷰제목 1', '리뷰내용 1', now() , 1 , 5.0 , 1, 2 );
+insert into review values (0, '리뷰제목 2', '리뷰내용 2', now() , 3 , 2.0 , 1, 2 );
+
+// 이미지 첨부
+insert into image value( 0, 'test1.jpg', 0, 1 );
+insert into image value( 0, 'test2.jpg', 0, 1 );
+
+insert into image value( 0, 'test1.jpg', 0, 2 );
+insert into image value( 0, 'test2.jpg', 0, 2 );
+
