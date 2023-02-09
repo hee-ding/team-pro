@@ -21,7 +21,7 @@ import com.maumgagym.dto.MemberTO;
 public class MemberDAO {
 	
 	@Autowired
-	private DataSource dataSource = null;
+	private DataSource dataSource;
 		
 		public MemberDAO() {
 			

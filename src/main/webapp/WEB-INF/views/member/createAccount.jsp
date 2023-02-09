@@ -7,7 +7,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>Maumgagym</title>
-	    <link href="./resources/asset/css/createAccount_custom.css" rel="stylesheet"/>
+	    <link href="../resources/asset/css/createAccount_custom.css" rel="stylesheet"/>
 	    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	    
         <!-- jquery-->
@@ -67,9 +67,9 @@
 		<body>
 		<jsp:include page="./createAccount_source/createAccount_form.jsp"/>
 		
-	    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
+	    <script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
 	   	<!-- Bootstrap core JS-->
-	    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
+	    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
 	   
 	   <!-- 비밀번호 일치 검사 & 정규식 -->
 	    <script type="text/javascript">

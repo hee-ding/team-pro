@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<title>Maumgagym</title>
-	    <link href="./resources/asset/css/login_custom.css" rel="stylesheet"/>
+	    <link href="../resources/asset/css/login_custom.css" rel="stylesheet"/>
 	    
 	    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	    
@@ -65,9 +65,9 @@
 
 	<jsp:include page="./login_source/login_form.jsp"/>
 
-    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
+    <script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
    	<!-- Bootstrap core JS-->
-    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
+    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
     
     <!-- 카카오 로그인 -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
