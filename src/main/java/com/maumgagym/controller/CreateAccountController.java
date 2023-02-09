@@ -11,7 +11,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.MemberDAO;
 import com.maumgagym.dto.MemberTO;
-import com.maumgagym.message.scriptMessage;
 
 
 @Controller
@@ -51,6 +50,28 @@ public class CreateAccountController {
 		to.setFullAddress(request.getParameter("fullAddress"));
 		
 		int flag = dao.join(to);
+		model.addAttribute("flag" , flag);
+		
+		return "createOK";
+   }
+	
+	@RequestMapping(value = "/member/createAccountPartner"  )
+	public String createAccountPartner(HttpServletRequest request, Model model) {
+	     
+		MemberTO to = new MemberTO();
+		to.setNickname(request.getParameter("companyname")); 
+		to.setId(request.getParameter("id")); 
+		to.setPassword(request.getParameter("password")); 
+		to.setName(request.getParameter("president")); 
+		to.setMail1(request.getParameter("mail1")); 
+		to.setMail2(request.getParameter("mail2"));
+		to.setType(request.getParameter("type"));
+		to.setZipcode(request.getParameter("zipcode"));
+		to.setAddress(request.getParameter("address"));
+		to.setReferAddress(request.getParameter("referAddress"));
+		to.setFullAddress(request.getParameter("fullAddress"));
+		
+		int flag = dao.joinPartner(to);
 		model.addAttribute("flag" , flag);
 		
 		return "createOK";
