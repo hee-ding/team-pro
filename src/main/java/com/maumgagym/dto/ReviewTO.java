@@ -9,7 +9,6 @@ public class ReviewTO {
 	
 	int seq;
 	String nickname;
-	String title;
 	String content;
 	String write_date;
 	int writer_seq;

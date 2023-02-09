@@ -300,7 +300,6 @@ public class MypageDAO {
 	// [기업 회원] 이전 정지 사용 여부 확인
 	// flag 0 정상
 	// flag 1 정지 1회 초과
-	// flag 8 비정상 실행
 	// flag 9 서버 오류
 	public int pauseDuplicateCheck( PayTO pto ) {
 		int flag = 9;
@@ -318,7 +317,7 @@ public class MypageDAO {
 			
 			rs = pstmt.executeQuery();
 		
-			if( rs.next() ) { flag = 1; } else { flag = 8; }
+			if( rs.next() ) { flag = 1; } else { flag = 0; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -399,9 +398,10 @@ public class MypageDAO {
 		ResultSet rs = null;
 		try {
 			conn = dataSource.getConnection();
-			String sql = "insert into membership_hold ( seq, hold_date, register_seq ) value ( 0, now(), ?) ";
+			String sql = "update membership_register SET status = 3 where merchant_uid = ? ";
+			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, pto.getMembership_register_seq() );
+			pstmt.setString(1, pto.getMerchant_uid() );
 			
 			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
@@ -551,7 +551,6 @@ public class MypageDAO {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		MemberShipTO msto = null;
 		try {
 			conn = dataSource.getConnection();
 			String sql = "select * from membership_hold where register_seq = ?";
@@ -612,7 +611,11 @@ public class MypageDAO {
 	// flag 0 정상
 	// flag 2 멤버쉽 재개를 위한 membership_register 테이블 변경 오류
 	// flag 9 서버 오류
-	public int updateRestartMembershipInfo( PayTO pto ) { 
+	public int updateRestartMembershipInfo( PayTO pto ) {
+		
+		System.out.println( pto.getMembership_expiry_date() );
+		System.out.println( pto.getHold_sum_date() );
+		System.out.println( pto.getMerchant_uid() );
 		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -635,7 +638,7 @@ public class MypageDAO {
 				if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 				if( conn != null) try {conn.close();} catch(SQLException e) {}
 			}
-		
+		System.out.println( flag );
 		return flag;
 	}
 	

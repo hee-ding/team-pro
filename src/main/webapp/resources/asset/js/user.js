@@ -104,7 +104,7 @@ function pauseOk( data ) {
 		} else if ( jsonData.flag == 1 ) {
 			alert( '이전 회원권 중지 사용' );
 		} else if ( jsonData.flag == 8 ) {
-			alert( '이전 회원권 중지 사용' );
+			alert( '비정상 입력' );
 		} else {
 			alert( '서버 오류' );
 		}
@@ -129,7 +129,7 @@ function restartConfirm( data  ){
 
 $("#restartOk").on( 'click', function(){
 
-	console.log( "restartOk" + merchant_uid );
+	//console.log( "restartOk" + merchant_uid );
 	restartOk( merchant_uid );
 	
   });
@@ -142,7 +142,7 @@ $("#restartcancle").on( 'click', function(){
 
 
 function restartOk( data ) { 
-	console.log( data );
+	//console.log( data );
 		$.ajax({
 		url: '/membership/restart',
 		type: 'put',
@@ -196,8 +196,8 @@ $("#refundOk").on( 'click', function(){
 function refundOk( data ) { 
 	console.log( data );
 	$.ajax({
-	url: '/user/user_source/refund_ok.jsp',
-	type: 'post',
+	url: '/membership/refund',
+	type: 'put',
 	data: {
 		merchant_uid : data
 	},

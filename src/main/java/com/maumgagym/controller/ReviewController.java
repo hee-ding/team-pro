@@ -26,7 +26,7 @@ public class ReviewController {
 	
 	@ResponseBody
 	@RequestMapping( value = "/review/write", method = RequestMethod.POST )
-	public HashMap<String, Integer> insertReview( HttpServletRequest request ) { 
+	public HashMap<String, Object> insertReview( HttpServletRequest request ) { 
 		
 		ReviewTO rvto = new ReviewTO();
 		
@@ -37,8 +37,9 @@ public class ReviewController {
 		rvto.setBoard_seq( Integer.valueOf( request.getParameter( "board_seq" ) ) ); 
 		
 		rvto = dao.insertReview(rvto);
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put( "flag", rvto.getFlag() );
+		map.put( "merchant_uid", rvto.getMerchant_uid() );
 		
 		return map;
 	}

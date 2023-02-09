@@ -196,7 +196,7 @@
 		StringBuilder sbReview = new StringBuilder();
 		
 		// 조인을 통해 리뷰를 가져옵니다.
-		sbReview.append( " SELECT rv.title, rv.content, rv.write_date, rv.star_score, m.nickname " );
+		sbReview.append( " SELECT rv.content, rv.write_date, rv.star_score, m.nickname " );
 		sbReview.append( " 		FROM review rv " );
 		sbReview.append( " 			LEFT OUTER JOIN board b " );
 		sbReview.append( " 					ON ( rv.board_seq = b.seq ) left outer join member m" );
@@ -217,7 +217,6 @@
 			
 			ReviewTO rvto = new ReviewTO();
 			rvto.setNickname( rs.getString("m.nickname") );
-			rvto.setTitle( rs.getString("rv.title") );
 			rvto.setContent( rs.getString("rv.content") );
 			rvto.setWrite_date( rs.getString("rv.write_date") );
 			rvto.setStar_score( rs.getFloat( "rv.star_score"));

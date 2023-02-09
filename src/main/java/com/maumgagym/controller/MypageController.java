@@ -148,7 +148,7 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/membership/restart", method = RequestMethod.PUT)
-	public int updateRestartMembership( HttpServletRequest request ) { 
+	public HashMap<String, Integer> updateRestartMembership( HttpServletRequest request ) { 
 		// flag 0 정상
 		// flag 1 멤버쉽 재개를 위한 membership_hold 테이블 변경 오류
 		// flag 2 멤버쉽 재개를 위한 membership_register 테이블 변경 오류
@@ -156,6 +156,7 @@ public class MypageController {
 		// flag 9 서버 오류
 		PayTO pto = new PayTO();
 		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
+		
 		pto = dao.selectRegisterMembership(pto);
 		pto = dao.selectPauseMembershipInfo(pto);
 		int flag = dao.updateRestartMembership(pto);
@@ -163,10 +164,10 @@ public class MypageController {
 			pto = dao.selectPauseMembershipInfo(pto);
 			flag = dao.updateRestartMembershipInfo(pto);
 		}
-		HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put( "flag", flag );
 		
-		return flag;
+		return map;
 	}
 	
 	@ResponseBody
