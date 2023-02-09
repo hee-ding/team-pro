@@ -65,4 +65,13 @@ public class LoginController {
 		model.addAttribute("flag", flag);
 		return "memberkakaologinOK";
 	   }
+	
+	@RequestMapping(value = "/member/logout" )
+	public ModelAndView logoutPage() {
+	      
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("logoutPage");
+		
+		return modelAndView;
+	   }
 }
