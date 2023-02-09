@@ -52,8 +52,20 @@ public class CreateAccountController {
 		int flag = dao.join(to);
 		model.addAttribute("flag" , flag);
 		
-		return "createOK";
+		return "membercreateOK";
    }
+	
+	
+	@RequestMapping(value = "/member/createAccountPagePartner"  )
+	public ModelAndView createAccountPagePartner() {
+	     
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("createAccountPage_partner");
+		
+		return modelAndView;
+		
+	   }
+	
 	
 	@RequestMapping(value = "/member/createAccountPartner"  )
 	public String createAccountPartner(HttpServletRequest request, Model model) {
@@ -74,7 +86,7 @@ public class CreateAccountController {
 		int flag = dao.joinPartner(to);
 		model.addAttribute("flag" , flag);
 		
-		return "createOK";
+		return "membercreateOK";
    }
 	
 }
