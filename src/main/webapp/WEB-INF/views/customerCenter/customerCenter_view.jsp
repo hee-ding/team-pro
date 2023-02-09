@@ -26,9 +26,8 @@
 	
 	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
 	
-	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
-	    
-	    <!-- text편집기 -->
+	    <link href="../resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
+
 
  
 	</head>
@@ -46,10 +45,7 @@
 	
 
     
-    <!-- JAVASCRIPT FILES -->
-    <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-    <script src="./resources/asset/js/owl.carousel.min.js"></script>
-    <script src="./resources/asset/js/custom.js"></script>
+
     <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
