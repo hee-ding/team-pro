@@ -13,4 +13,6 @@ public class CommentTO {
 	int status;
 	int board_seq;
 	
+	int flag;
+	
 }

@@ -1,11 +1,11 @@
-
+// 등록 승인 요청 관련
+// [일반 회원] 멤버쉽 승인 요청
 function membershipRegister( data ){ 
 	
 	$.ajax({
-	url: './user/user_source/membership_register_ok.jsp',
+	url: '/membership/request',
 	type: 'post',
 	data: {
-		
 		merchant_uid : data.value
 	},
 	dataType: 'json',
@@ -30,9 +30,9 @@ function membershipRegister( data ){
 	
 }
 
-let merchant_uid;
-
 // 등록 승인 관련
+// [기어 회원] 멤버쉽 승인
+let merchant_uid;
 function registerConfirm( data  ){ 
 
 	console.log( data.value );
@@ -51,95 +51,60 @@ $("#registerOk").on( 'click', function(){
 	
   });
 
-
-$("#registercancle").on( 'click', function(){
-
-	alert("결제 취소를 눌렀습니다.");
-  });
-
-
 function RegisterOk( data ) { 
-	
 	$.ajax({
-	url: './user/user_source/register_ok.jsp',
-	type: 'post',
-	data: {
-		
-		merchant_uid : data
-	},
-	dataType: 'json',
-	success: function( jsonData ) {
-		if( jsonData.flag == 0 ) {
+		url: '/membership/approve',
+		type: 'put',
+		data: {
 			
-			console.log( '성공' );
-			
-			// 새로고침 
-			location.reload();
-			
-
-			
-		} else {
-			
-			alert( '실패' );
-			
+			merchant_uid : data
+		},
+		dataType: 'json',
+		success: function( jsonData ) {
+			if( jsonData.flag == 0 ) {
+				console.log( '성공' );
+				location.reload();
+			} else {
+				alert( '실패' );
+			}
+		},
+		error: function(err) {
+			alert( '[에러] ' + err.status);
 		}
-	},
-	error: function(err) {
-		alert( '[에러] ' + err.status);
+	});
 	}
-});
-	
-}
-
-// 등록 승인 관련
 
 // 홀딩 관련
-
+// [기어 회원] 멤버쉽 정지
 function pauseConfirm( data  ){ 
-
-	//console.log( data.value );
-	
 	$('#pauseConfirmMessage').text( data.id +" 님의 회원권을 정말로 중지 하시겠습니까?" );
-	
 	$('#pauseModal').modal("show");
-	
 	merchant_uid = data.value;
 }
 
 $("#pauseOk").on( 'click', function(){
-
 	console.log( "pauseOk" + merchant_uid );
 	pauseOk( merchant_uid );
 	
   });
 
-
-$("#pausecancle").on( 'click', function(){
-
-	alert("결제 취소를 눌렀습니다.");
-  });
-
-
 function pauseOk( data ) { 
 	console.log( data );
 	$.ajax({
-	url: './user/user_source/pause_ok.jsp',
-	type: 'post',
+	url: '/membership/pause',
+	type: 'put',
 	data: {
 		merchant_uid : data
 	},
 	dataType: 'json',
 	success: function( jsonData ) {
 		if( jsonData.flag == 0 ) {
-			
 			console.log( '성공' );
-			
 			location.reload();
-			
 		} else if ( jsonData.flag == 1 ) {
-			
 			alert( '이전 회원권 중지 사용' );
-			
+		} else if ( jsonData.flag == 8 ) {
+			alert( '이전 회원권 중지 사용' );
 		} else {
 			alert( '서버 오류' );
 		}
@@ -151,11 +116,8 @@ function pauseOk( data ) {
 	
 }
 
-// 홀딩 관련
- 
- 
 // 재개 관련 
-
+// [기업 회원] 멤버쉽 재개
 function restartConfirm( data  ){ 
 
 	$('#restartConfirmMessage').text( data.id +" 님의 회원권을 정말로 재개 하시겠습니까?" );
@@ -181,34 +143,36 @@ $("#restartcancle").on( 'click', function(){
 
 function restartOk( data ) { 
 	console.log( data );
-	$.ajax({
-	url: './user/user_source/restart_ok.jsp',
-	type: 'post',
-	data: {
-		merchant_uid : data
-	},
-	dataType: 'json',
-	success: function( jsonData ) {
-		if( jsonData.flag == 0 ) {
-			
-			console.log( '성공' );
-			
-			location.reload();
-			
-		} else {
-			alert( '서버 오류' );
+		$.ajax({
+		url: '/membership/restart',
+		type: 'put',
+		data: {
+			merchant_uid : data
+		},
+		dataType: 'json',
+		success: function( jsonData ) {
+			if( jsonData.flag == 0 ) {
+				console.log( '성공' );
+				location.reload();
+			} else if ( jsonData.flag == 1 ) {
+				alert( ' membership_hold 테이블 변경 오류' );
+			} else if ( jsonData.flag == 2 ) {
+				alert( 'membership_register 테이블 변경 오류' );
+			} else if ( jsonData.flag == 8 ) {
+				alert( '비정상 오류' );
+			} else {
+				alert( '서버 오류' );
+			}
+		},
+		error: function(err) {
+			alert( '[에러] ' + err.status);
 		}
-	},
-	error: function(err) {
-		alert( '[에러] ' + err.status);
-	}
-});
+	});
 	
 }
-// 재개 관련
 
-// 환불 관련
-
+// 환불 관련 
+// [기업 회원] 멤버쉽 환불
 let cancel_request_amount;
 
 function refundConfirm( data ) {
@@ -232,7 +196,7 @@ $("#refundOk").on( 'click', function(){
 function refundOk( data ) { 
 	console.log( data );
 	$.ajax({
-	url: './user/user_source/refund_ok.jsp',
+	url: '/user/user_source/refund_ok.jsp',
 	type: 'post',
 	data: {
 		merchant_uid : data
@@ -256,10 +220,7 @@ function refundOk( data ) {
 	
 }
 
-// 환불 관련
-
 // 회원 정보 수정 관련
-
 function memberModify( id, nickname ) {
 	
 	if ( $( "#inputNickName" ).val() == '' ) {
@@ -376,20 +337,79 @@ function memberModifyOk( ) {
 	
 }
 
-// 회원 정보 수정 관련
-
 
 // 리뷰 작성 관련
+// [일반 회원] 멤버쉽 만료에 따른 리뷰 작성
+let content;
+let writerSeq;
+let starScore;
+let boardSeq;
+let merchantUid;
 
-function reviewRegister( boardSeq, writerSeq, membershipName ) {
-	
-	
-	console.log( "리뷰작성 함수 호출");
-	
+function reviewRegister( data, boardSeq, writerSeq, membershipName, imageName, address ) {
 	$('#title').text( membershipName );
-	
+	$('#address').text( address );
+	$("#membershipImage").attr("src","../upload/" + imageName + "");
 	$('#reviewModal').modal("show");
-
+	
+	this.boardSeq = boardSeq;
+	this.writerSeq = writerSeq;
+	this.merchantUid = data.id;
 } 
 
-// 리뷰 작성 관련
+
+
+$("#reviewOk").on( 'click', function(){
+	
+	if ( $("input[name='rating']").is(':checked') == false ) {
+		alert( "별점을 체크해 주세요.");
+		return false;
+	}
+	
+	if ( $("#message-text").val() == '' ) {
+		alert( "내용을 작성해 주세요.");
+		return false;
+	}
+	
+	reviewRegisterOk( );
+	
+	$('#reviewModal').modal("hide"); 
+	$('input[name=rating]').prop( 'checked', false );
+	$("#message-text").val('');
+	
+ });
+ 
+ function reviewRegisterOk( ) { 
+	$.ajax({
+	url: '/review/write',
+	type: 'post',
+	data: {
+		merchant_uid : this.merchantUid,
+		content : $("#message-text").val(),
+		writer_seq : this.writerSeq,
+		star_score :  $("input[name='rating']:checked").val(),
+		board_seq : this.boardSeq
+	},
+	dataType: 'json',
+	success: function( jsonData ) {
+		if( jsonData.flag == 0 ) {
+			
+			$("#" + jsonData.merchant_uid).attr("disabled", true);			
+			$("#" + jsonData.merchant_uid).removeClass( 'btn-primary' );
+			$("#" + jsonData.merchant_uid).addClass( 'btn-secondary' );
+			$("#" + jsonData.merchant_uid).text( '리뷰가 정상적으로 등록되었습니다.' );
+			
+			
+		} else if ( jsonData.flag == 1) {
+			alert( '입력 오류' );
+			
+		} else {
+			alert( '서버 오류' );
+		}
+	},
+	error: function(err) {
+		alert( '[에러] ' + err.status);
+	}
+});
+	
+}

@@ -12,5 +12,7 @@ public class MemberShipTO {
 	String full_membership_name;
 	int membership_price;
 	int membership_period;
+	
+	int flag;
 
 }

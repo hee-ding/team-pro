@@ -17,6 +17,8 @@ public class PageTO {
 	private int startBlock;
 	private int endBlock;
 	
+	int flag;
+	
 	private ArrayList<BoardTO> boardLists; 
 	
 	public PageTO() {

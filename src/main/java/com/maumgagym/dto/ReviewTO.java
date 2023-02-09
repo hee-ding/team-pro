@@ -18,5 +18,8 @@ public class ReviewTO {
 	String status;
 	int board_seq;
 	
+	int flag;
+	String merchant_uid;
+	
 
 }

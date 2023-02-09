@@ -44,6 +44,7 @@
 <title>마음가짐 일반회원 마이페이지</title>
 	<link href="../resources/asset/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="../resources/asset/css/user.css" rel="stylesheet" />
+	<link href="../resources/asset/css/review.css" rel="stylesheet" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
 	

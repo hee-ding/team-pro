@@ -27,12 +27,12 @@
 	}
 	
 	
- 	if( id == null || type == null ||  nickname == null ) {
+/*  	if( id == null || type == null ||  nickname == null ) {
 		out.println( "<script type = 'text/javascript'>");
 		out.println( "alert( '로그인을 하셔야 합니다.'); " );
 		out.println( "location.href='./loginPage.jsp';" );
 		out.println( "</script>" );
-	} 
+	}  */
 	
 %>
 <!DOCTYPE html>
@@ -46,9 +46,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
    
    <!-- table css -->
-	<link rel="stylesheet" href="../manager/manager_source/resources/css/perfect-scrollbar.css">
-    <link rel="stylesheet" href="../manager/manager_source/resources/css/app.css">
-    <link rel="stylesheet" href="../manager/manager_source/resources/css/style.css">
+	<link rel="stylesheet" href="../resources/asset/css/manager/perfect-scrollbar.css">
+    <link rel="stylesheet" href="../resources/asset/css/manager/app.css">
+    <link rel="stylesheet" href="../resources/asset/css/manager/style.css">
     <style>
     	#table1 {
     		font-size: 14px;
@@ -64,7 +64,7 @@
 	<jsp:include page="../main/main_source/main_search.jsp" />
 	
 	<!-- 마이페이지 -->
-	<jsp:include page="./user_source/facility_user_view.jsp"/>
+	<jsp:include page="./user_source/facility_user_content.jsp"/>
 	
 	<!-- modal -->
 	<jsp:include page="./user_modal/register_modal.jsp" />
@@ -83,9 +83,9 @@
     <script src="../resources/asset/js/user.js"></script>
     
     <!-- table script -->
-    <script src="../manager/manager_source/resources/js/perfect-scrollbar.min.js"></script>
-    <script src="../manager/manager_source/resources/js/simple-datatables.js"></script>
-    <script src="../manager/manager_source/resources/js/main.js"></script>
+    <script src="../resources/asset/js/manager/perfect-scrollbar.min.js"></script>
+    <script src="../resources/asset/js/manager/simple-datatables.js"></script>
+    <script src="../resources/asset/js/manager/main.js"></script>
     
     <script>
        // Simple Datatable

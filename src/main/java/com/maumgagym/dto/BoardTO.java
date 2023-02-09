@@ -24,5 +24,7 @@ public class BoardTO {
 	String membership_name;
 	int membership_price;
 	int membership_period;
+	
+	int flag;
 
 }

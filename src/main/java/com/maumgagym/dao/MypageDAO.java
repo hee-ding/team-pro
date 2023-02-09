@@ -77,9 +77,10 @@ public class MypageDAO {
 	// [일반 회원, 기업 회원] update 마이 페이지 정보 수정
 	// flag 0 정상
 	// flag 1 비밀번호 오류
-	// flag 2 서버 오류
+	// flag 8 비정상 오류
+	// flag 9 서버 오류
 	public int updateMember( MemberTO mto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -101,7 +102,7 @@ public class MypageDAO {
 			if( pstmt.executeUpdate() == 1) {
 				flag = 0;
 			} else {
-				flag = 1;
+				flag = 8;
 			}
 			
 			} catch( SQLException e) {
@@ -146,7 +147,6 @@ public class MypageDAO {
 			sb.append( "															WHERE m.id = ?");
 			sb.append( "																group BY p.merchant_uid");
 			sb.append( "																	ORDER BY p.pay_date desc");
-			
 			
 			String sql = sb.toString();
 			
@@ -300,9 +300,10 @@ public class MypageDAO {
 	// [기업 회원] 이전 정지 사용 여부 확인
 	// flag 0 정상
 	// flag 1 정지 1회 초과
-	// flag 2 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int pauseDuplicateCheck( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -317,7 +318,7 @@ public class MypageDAO {
 			
 			rs = pstmt.executeQuery();
 		
-			if( rs.next() ) { flag = 1; } else { flag = 0; }
+			if( rs.next() ) { flag = 1; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -331,10 +332,10 @@ public class MypageDAO {
 	
 	// [기업 회원] 결제 번호로 register table의 seq, expiry_date 조회
 	// flag 0 정상
-	// flag 1 비정상 조회
-	// flag 2 서버 오류
+	// flag 8 비정상 조회
+	// flag 9 서버 오류
 	public PayTO selectRegisterMembership( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -348,7 +349,7 @@ public class MypageDAO {
 				flag = 0;
 				pto.setMembership_register_seq( rs.getInt("seq") );
 				pto.setMembership_expiry_date( rs.getString("expiry_date") );
-			} else { flag = 1; }
+			} else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -362,10 +363,10 @@ public class MypageDAO {
 	
 	// [기업 회원] 해당 멤버쉽 정지를 위한 멤버쉽 hold 테이블 insert
 	// flag 0 정상
-	// flag 1 비정상 실행
-	// flag 2 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int insertPauseMembership( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -375,7 +376,7 @@ public class MypageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pto.getMembership_register_seq() );
 			
-			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -389,10 +390,10 @@ public class MypageDAO {
 	
 	// [기업 회원] 멤버쉽 정지에 따른 등록 테이블 status 변경
 	// flag 0 정상
-	// flag 1 비정상 실행
-	// flag 2 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int updatePauseMembership( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -402,7 +403,7 @@ public class MypageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, pto.getMembership_register_seq() );
 			
-			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -416,9 +417,10 @@ public class MypageDAO {
 	
 	// [일반 회원] update 멤버쉽 승인 요청
 	// flag 0 정상
-	// flag 1 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int InsertRequestMembership( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		MemberTO mto = new MemberTO();
@@ -433,9 +435,7 @@ public class MypageDAO {
 			
 			if( pstmt.executeUpdate() == 1) {
 				flag = 0;
-			} else {
-				flag = 1;
-			}
+			} else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -451,9 +451,10 @@ public class MypageDAO {
 	// [기업 회원] update 멤버쉽 환불 
 	// flag가 0 이면 정상
 	// flag가 1 이면 pay 테이블 update 오류
-	// flag가 2 이면 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int updateRefundMembershipOfPay( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		MemberTO mto = new MemberTO();
@@ -466,8 +467,7 @@ public class MypageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pto.getMerchant_uid() );
 			
-			if( pstmt.executeUpdate() == 1) {
-				flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -483,9 +483,10 @@ public class MypageDAO {
 	// [기업 회원] update 멤버쉽 환불 
 	// flag가 0 이면 정상
 	// flag가 1 이면 register 테이블 update 오류
-	// flag가 2 이면 서버 오류
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
 	public int updateRefundMembershipOfRegister( PayTO pto ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		MemberTO mto = new MemberTO();
@@ -498,8 +499,7 @@ public class MypageDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, pto.getMerchant_uid() );
 			
-			if( pstmt.executeUpdate() == 1) {
-				flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -514,10 +514,9 @@ public class MypageDAO {
 	
 	// [기업 회원] select 멤버쉽 승인을 위한 회원권 개월수 확인
 	// flag 0 정상
-	// flag 1 비정상 입력
-	// flag 2 서버 오류
-	public PayTO selectMembershipPeriod( PayTO pto ) { 
-		int flag = 2;
+	// flag 9 서버 오류
+	public MemberShipTO selectMembershipPeriod( PayTO pto ) { 
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -540,15 +539,15 @@ public class MypageDAO {
 				if( conn != null) try {conn.close();} catch(SQLException e) {}
 				if(rs != null) try {rs.close();} catch(SQLException e) {}
 			}
-		return pto;
+		return msto;
 	}
 	
 	// [기업 회원] select 멤버쉽 재개를 위한 정보 가져오기 가져오기
 	// flag 0 정상
-	// flag 1 비정상 입력
-	// flag 2 서버 오류
+	// flag 8 비정상 입력
+	// flag 9 서버 오류
 	public PayTO selectPauseMembershipInfo( PayTO pto ) { 
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -566,7 +565,7 @@ public class MypageDAO {
 				flag = 0;
 				pto.setHold_date( rs.getString( "hold_date") );
 				pto.setHold_sum_date( rs.getString( "hold_sum_date") );
-			} else { flag = 1; }
+			} else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -580,10 +579,11 @@ public class MypageDAO {
 	
 	// [기업 회원] update 멤버쉽 재개를 위한 변경
 	// flag 0 정상
-	// flag 1 비정상 입력
-	// flag 2 서버 오류
+	// flag 1 멤버쉽 재개를 위한 변경 오류
+	// flag 8 비정상 입력
+	// flag 9 서버 오류
 	public int updateRestartMembership( PayTO pto ) { 
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -610,10 +610,10 @@ public class MypageDAO {
 	
 	// [기업 회원] update 재개내용 반영
 	// flag 0 정상
-	// flag 1 비정상 입력
-	// flag 2 서버 오류
+	// flag 2 멤버쉽 재개를 위한 membership_register 테이블 변경 오류
+	// flag 9 서버 오류
 	public int updateRestartMembershipInfo( PayTO pto ) { 
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -627,7 +627,7 @@ public class MypageDAO {
 			pstmt.setString(2, pto.getHold_sum_date() );
 			pstmt.setString(3, pto.getMerchant_uid() );
 			
-			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 2; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -642,10 +642,10 @@ public class MypageDAO {
 	
 	// [기업 회원] update 멤버쉽 승인
 	// flag 0 정상
-	// flag 1 비정상 입력
-	// flag 2 서버 오류
+	// flag 8 비정상 입력
+	// flag 9 서버 오류
 	public int updateApprovalMembership( MemberShipTO msto, PayTO pto ) { 
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -658,8 +658,7 @@ public class MypageDAO {
 			pstmt.setInt(1, msto.getMembership_period() );
 			pstmt.setString(2, pto.getMerchant_uid() );
 			
-			if( pstmt.executeUpdate() == 1) {
-				flag = 0; } else { flag = 1; }
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());
@@ -674,9 +673,9 @@ public class MypageDAO {
 	// [일반 회원, 기업 회원] update 정보 수정 전 닉네임 중복 검사
 	// flag가 0 이면 정상
 	// flag가 1 이면 중복
-	// flag가 2 이면 서버 오류
+	// flag가 9 이면 서버 오류
 	public int nicknameDuplicateCheck( MemberTO to ) {
-		int flag = 2;
+		int flag = 9;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;

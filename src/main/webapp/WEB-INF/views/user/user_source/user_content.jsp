@@ -366,7 +366,7 @@
 			ReviewTO rvto = (ReviewTO) map.get("rvto");
 			String reviewStatus = rvto.getStatus();
 
-			if( membership_register_status.equals( "4" ) ) {
+			if( membership_register_status.equals( "4" ) && payStatus.equals("1") ) {
 			
 			sbExpireMembership.append( "	<div class='mt-3 mb-4'>");
 			sbExpireMembership.append( "		<div class='col-xl-12'>");
@@ -403,10 +403,10 @@
 			sbExpireMembership.append( "						</tbody>");
 			sbExpireMembership.append( "					</table>");
 			sbExpireMembership.append( "					<div class='d-grid gap-2'> ");
- 			if( reviewStatus.equals( "0" ) ) {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ", '" + bto.getTitle() + "')' value='" + merchantUid + "'> 리뷰쓰기 </button>");
-			} else if ( reviewStatus.equals( "1" ) ) {
-				sbExpireMembership.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ")' value='" + merchantUid + "' disabled='disabled'> 이미 리뷰를 등록했습니다. </button>");		
+ 			if( reviewStatus.equals( "0" ) && payStatus.equals("1") ) {
+				sbExpireMembership.append( "						<button id='" + merchantUid + "' class='btn btn-primary mt-1' type='button' onclick='reviewRegister(this, " + boardSeq + ", " + mto.getSeq() + ", `" + bto.getTitle() + "`, `" + imageName + "`, `" + facilityFullAddress + "` )' value='" + merchantUid + "'> 리뷰쓰기 </button>");
+			} else if ( reviewStatus.equals( "1" ) && !payStatus.equals("1") ) {
+				sbExpireMembership.append( "						<button id='" + merchantUid + "' class='btn btn-secondary mt-1' type='button' onclick='reviewRegister(" + boardSeq + ", " + mto.getSeq() + ")' value='" + merchantUid + "' disabled='disabled'> 이미 리뷰를 등록했습니다. </button>");		
 			} 
 			sbExpireMembership.append( "					</div>");
 			sbExpireMembership.append( "				</div>");

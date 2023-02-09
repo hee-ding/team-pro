@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.MypageDAO;
+import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
+import com.maumgagym.dto.PayTO;
 
 
 @Controller
@@ -87,7 +89,240 @@ public class MypageController {
 		map.put("flag", flag);
 		
 		return map;
-		
 	}
+	
+	@ResponseBody
+	@RequestMapping( value = "/membership/request", method = RequestMethod.POST )
+	public HashMap<String, Integer> insertRequestMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
+		
+		int flag = dao.InsertRequestMembership(pto);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping( value = "/membership/approve", method = RequestMethod.PUT )
+	public HashMap<String, Integer> updateApprovalMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
+
+		MemberShipTO msto = dao.selectMembershipPeriod(pto);
+		int flag = dao.updateApprovalMembership( msto, pto );
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping( value = "/membership/pause", method = RequestMethod.PUT )
+	public HashMap<String, Integer> pauseDuplicateCheck( HttpServletRequest request ) { 
+		// flag 0 정상
+		// flag 1 정지 1회 초과
+		// flag 8 비정상 조회
+		// flag 9 서버 오류
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
+		
+		int flag = dao.pauseDuplicateCheck(pto);
+		if( flag == 0 ) {
+			pto = dao.selectRegisterMembership(pto);
+			flag = dao.insertPauseMembership(pto);
+			if( flag == 0 ) {
+				flag = dao.updatePauseMembership(pto);
+			}
+		}
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag);
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/restart", method = RequestMethod.PUT)
+	public int updateRestartMembership( HttpServletRequest request ) { 
+		// flag 0 정상
+		// flag 1 멤버쉽 재개를 위한 membership_hold 테이블 변경 오류
+		// flag 2 멤버쉽 재개를 위한 membership_register 테이블 변경 오류
+		// flag 8 비정상 조회
+		// flag 9 서버 오류
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
+		pto = dao.selectRegisterMembership(pto);
+		pto = dao.selectPauseMembershipInfo(pto);
+		int flag = dao.updateRestartMembership(pto);
+		if( flag == 0 ) {
+			pto = dao.selectPauseMembershipInfo(pto);
+			flag = dao.updateRestartMembershipInfo(pto);
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put( "flag", flag );
+		
+		return flag;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/refund", method = RequestMethod.PUT)
+	public HashMap<String, Integer> updateRefundMembership( HttpServletRequest request ) { 
+		// flag 0 정상
+		// flag 1 pay 테이블 update 오류
+		// flag 2 register 테이블 update 오류
+		// flag 8 비정상 조회
+		// flag 9 서버 오류
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter("merchant_uid") );
+		
+		int flag = dao.updateRefundMembershipOfPay(pto);
+		if( flag == 0 ) {
+			flag = dao.updateRefundMembershipOfRegister(pto);
+		}
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag );
+		
+		return map;
+	}
+	
+	
+	/*
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/register", method = RequestMethod.GET)
+	public HashMap<String, Object> selectRegisterMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter("merchant_uid") );
+		
+		pto = dao.selectRegisterMembership(pto);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("register_seq", pto.getMembership_register_seq() );
+		map.put("expiry_date", pto.getMembership_expiry_date() );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/pause", method = RequestMethod.POST)
+	public HashMap<String, Object> insertPauseMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMembership_register_seq( Integer.valueOf( request.getParameter("register_seq") ) );
+		
+		int flag = dao.insertPauseMembership(pto);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("register_seq", pto.getMembership_register_seq() );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/pause", method = RequestMethod.PUT)
+	public HashMap<String, Integer> updatePauseMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMembership_register_seq( Integer.valueOf( request.getParameter("register_seq") ) );
+		
+		int flag = dao.updatePauseMembership(pto);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/pay/refund", method = RequestMethod.PUT)
+	public HashMap<String, Integer> updateRefundMembershipOfPay( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter("merchant_uid") );
+		
+		int flag = dao.updateRefundMembershipOfPay(pto);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/register/refund", method = RequestMethod.PUT)
+	public HashMap<String, Integer> updateRefundMembershipOfRegister( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( request.getParameter("merchant_uid") );
+		
+		int flag = dao.updateRefundMembershipOfRegister(pto);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("flag", flag );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/period/{merchant_uid}", method = RequestMethod.GET)
+	public HashMap<String, Object> updateRefundMembershipOfRegister( HttpServletRequest request, @PathVariable("merchant_uid") String merchantUid ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMerchant_uid( merchantUid );
+		
+		MemberShipTO msto = dao.selectMembershipPeriod(pto);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put( "membership_period", msto.getMembership_period() );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/pause/{register_seq}", method = RequestMethod.GET)
+	public HashMap<String, Object> selectPauseMembershipInfo( HttpServletRequest request, @PathVariable("register_seq") int seq ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMembership_register_seq( seq );
+		
+		pto = dao.selectPauseMembershipInfo(pto);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put( "hold_date", pto.getHold_date() );
+		map.put( "hold_sum_date", pto.getHold_sum_date() );
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/pause/restart", method = RequestMethod.PUT)
+	public int updateRestartMembership( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setHold_date( request.getParameter("hold_date") );
+		pto.setMembership_register_seq( Integer.valueOf( request.getParameter("register_seq") ) );
+		
+		int flag = dao.updateRestartMembership(pto);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put( "flag", flag );
+		
+		return flag;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/membership/register/restart", method = RequestMethod.PUT)
+	public HashMap<String, Integer> updateRestartMembershipInfo( HttpServletRequest request ) { 
+		
+		PayTO pto = new PayTO();
+		pto.setMembership_expiry_date( request.getParameter("expiry_date") );
+		pto.setHold_sum_date( request.getParameter("hold_sum_date") );
+		pto.setMerchant_uid( request.getParameter("merchant_uid"));
+		
+		int flag = dao.updateRestartMembershipInfo(pto);
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put( "flag", flag );
+		
+		return map;
+	}
+	*/
 }
 
