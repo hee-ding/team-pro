@@ -1,8 +1,9 @@
+<%@page import="com.maumgagym.dao.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.to.board.BoardTO"%>
+<%@page import="com.maumgagym.dto.BoardTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.to.board.BoardDAO"%>  
+<%@page import="com.maumgagym.dao.MemberDAO"%>  
     <%
 	
 	BoardDAO dao = new BoardDAO();
@@ -44,6 +45,7 @@
 
 
 %>
+
 
 <hr />
 <div class="container mt-5">
