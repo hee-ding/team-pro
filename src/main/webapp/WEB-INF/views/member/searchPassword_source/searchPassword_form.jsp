@@ -3,9 +3,9 @@
     
 	<div class="forgetId_form">
 		<div id = "logoContainer">
-			<a href="./homePage.jsp"><img id = "logo" src="./resources/asset/images/logo_1.jpg"/></a>
+			<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 		</div>
-		<form action="./member/Action/emailAction_Password.jsp" id="fPwFrm" method="post" name="fPwFrm">
+		<form action="/passwordsearch/mailsender" id="fPwFrm" method="post" name="fPwFrm">
 			<div class="int-area">
 				<input type="text" name="email" id="email" autocomplete="off" required>
 				<label for="email">회원가입한 이메일 주소</label>
@@ -17,6 +17,6 @@
 			</div>
 		</form>
 		<div class="caption linkContainer">
-			<a href="./homePage.jsp">홈</a> | <a href="./loginPage.jsp">로그인</a> | <a href="./searchIDPage.jsp">아이디 찾기</a>
+			<a href="/">홈</a> | <a href="/member/login">로그인</a> | <a href="/member/searchid">아이디 찾기</a>
 		</div>
 	</div>

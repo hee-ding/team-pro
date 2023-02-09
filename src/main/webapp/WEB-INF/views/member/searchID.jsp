@@ -7,7 +7,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<title>Maumgagym</title>
-	    <link href="./resources/asset/css/search_custom.css" rel="stylesheet"/>
+	    <link href="../resources/asset/css/search_custom.css" rel="stylesheet"/>
 	    <script src="http://code.jquery.com/jquery-latest.js"></script> 
 	</head>
 	

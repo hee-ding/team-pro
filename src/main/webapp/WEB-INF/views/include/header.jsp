@@ -43,7 +43,7 @@
 	            <a class="navbar-brand ps-3" href="/member/login">
 	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
 	            </a>
-	            <a class="navbar-brand ps-3" href="#">
+	            <a class="navbar-brand ps-3" href="/member/createAccountPage">
 	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">회원가입</span></button>
 	            </a>
        	        <%
@@ -57,7 +57,7 @@
 	            <a class="navbar-brand ps-3" href="./userPage.jsp">
 	              <i class="bi bi-person"></i>
 	            </a>
-	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>
 	            
        	        <%
 	            		} else {
@@ -69,7 +69,7 @@
 	            <a class="navbar-brand ps-3" href="./facilityUserPage.jsp">
 	              <i class="bi bi-person"></i>
 	            </a>
-	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>
 	            
 	            <%
 	            		}

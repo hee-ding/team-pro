@@ -9,7 +9,7 @@
 	<div class="member">
 	    <!-- 1. 로고 -->
 	   	<div id = "logoContainer">
-			<a href="./homePage.jsp"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
+			<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 		</div>
 	
 	    <!-- 2. 필드 -->
@@ -107,9 +107,7 @@
 	     <!-- 이동하기 링크 -->
    		<div class="caption">
    			<div>
-				<a href="./loginPage.jsp">로그인</a>
-				<a href="./forgetId.jsp">아이디 찾기</a>
-				<a href="./forgetPw.jsp">비밀번호 찾기</a>
+				<a href="/member/createAccountPagePartner">기업 회원가입 하러가기</a>
 			</div>
 		</div>
 
