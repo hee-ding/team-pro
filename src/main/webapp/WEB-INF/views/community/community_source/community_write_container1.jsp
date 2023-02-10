@@ -2,12 +2,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String nickname = (String) session.getAttribute("nickname");
-%>    
+		
+	request.setCharacterEncoding( "utf-8" );
+	
+	String id = null;
+	String nickname = null;
+	// get id	
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
+	}
+	
+	if( session.getAttribute("nickname") != null ) {
+		nickname = ( String ) request.getParameter("nickname");
+	} 
+	
+	
+%>      
 
 <hr/>
 	<br/><br/><br/>
-	<form action="./community/Action/write_ok_Action.jsp" method="post" name="wfrm">
+	<form action="/community/writeok" method="post" name="wfrm">
 	<div class="container px-3 px-lg-5">
 			<!--게시판-->
 			<div class="board_view">
@@ -30,7 +44,6 @@
 				<tr>
 					<th width="15%" class="text-bg-light p-3">글쓴이</th>
 					<td class="top"><input type="text" name="writer" id="writer" value="<%= nickname %>" class="form-control" /></td>
-					<input type="hidden" id="write_seq" name="write_seq" value=""/>
 				</tr>
 				<tr>
 					<th width="15%" class="text-bg-light p-3">제목</th>
@@ -54,12 +67,12 @@
 			</div>
 			<div class="row">
 				<div class="col-md-6">
-					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./communityPage.jsp'" />
+					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/list'" />
 				</div>
 				<div class="col-md-6 text-end">
 					<!-- <input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="" />
 					<input type="button" value="삭제" class="btn btn-outline-primary" style="cursor: pointer;" onclick="" />  -->
-					<input type="button" id="wbtn" value="작성하기" class="btn btn-outline-dark" style="cursor: pointer;" onclick="location.href='./communityPage.jsp'" />
+					<input type="button" id="wbtn" value="작성하기" class="btn btn-outline-dark" style="cursor: pointer;"  />
 				</div> 
 			</div>
 			 </form>

@@ -3,8 +3,7 @@
     
 <%
 	String id = request.getParameter("id");
-
-	//System.out.println( id );
+	String nickname = request.getParameter("nickname");
 %>   
 <!DOCTYPE html>
 <html>

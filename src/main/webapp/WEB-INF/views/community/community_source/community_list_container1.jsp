@@ -107,7 +107,8 @@
 		<%= sbHtml.toString() %>
 	</table>
 			<div class="text-end">
-				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./community_write.jsp'"/>
+				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/write'"/>
+					<input type="hidden" type="nickname"/>
 			</div>
 	
 	<br/><br/><br/>
