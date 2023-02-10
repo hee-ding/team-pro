@@ -1,43 +1,52 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@page import="com.to.board.BoardTO"%>
+<%@page import="com.maumgagym.dto.BoardTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.to.board.CommunityDAO"%>
+<%@page import="com.maumgagym.dao.CommunityDAO"%>
 
 <%
 	
 	CommunityDAO dao = new CommunityDAO();
-	ArrayList<BoardTO> boardLists = dao.boardList();
+	ArrayList<BoardTO> communityList = dao.communityList();
 	
-	int totalRecord = boardLists.size(); //총데이터갯수
+	int totalRecord = communityList.size();
 	
 	StringBuilder sbHtml = new StringBuilder();
+		 
+	for( BoardTO to : communityList){
+		
+			int seq = to.getSeq();
+			String topic = to.getTopic();
+			String nickname = to.getNickname();
+			String title = to.getTitle();
+			String content = to.getContent();
+			String date = to.getWrite_date();
+			int like_count =  to.getLike_count();
+			String status = to.getStatus();
 			 
-			 for( BoardTO to : boardLists){
-				int seq = to.getSeq();
-				int category_seq = to.getCategory_seq();
-				int write_seq = to.getWrite_seq();
-				String title = to.getTitle();
-				String date = to.getWrite_date();
-				int like_count = to.getLike_count();
-				 
-				sbHtml.append("<tr>");
-				sbHtml.append("<td>&nbsp;</td>");
-				sbHtml.append("<td scope='row'>" + seq + "</td>");
-				sbHtml.append("<td class='text-muted'>" + category_seq + "</td>");
-				sbHtml.append("<td>" + write_seq + "</td>");
+			sbHtml.append("<tr>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("<td scope='row'>" + seq + "</td>");
+			sbHtml.append("<td class='text-muted'>" + topic + "</td>");
+			sbHtml.append("<td>" + nickname + "</td>");
+			if(status.equals("3")){
+				sbHtml.append("<td class='text-muted'>삭제된 게시물 입니다.</td>&nbsp;"); 
+			}
+			else {
 				sbHtml.append("<td class='text-start fw-bold'>");
 				sbHtml.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbHtml.append("</td>");
-				sbHtml.append("<td>" + date + "</td>");
-				sbHtml.append("<td>" + like_count + "</td>");
-				sbHtml.append("<td>&nbsp;</td>");
-				sbHtml.append("</tr>");
-			 }
+			}
+			sbHtml.append("<td>" + date + "</td>");
+			sbHtml.append("<td>" + like_count + "</td>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("</tr>");
+		}
+
 %>    
       
+ 
 <hr/><br/><br/>
 
 <main>
@@ -69,7 +78,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p class="h5">실시간 전체글 <span class="count"><%= totalRecord%></span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count"><%= totalRecord %></span>개</p>
                 </div>
 		        <div class="col-md-4">
 		            <div class="input-group">
@@ -96,80 +105,18 @@
 		</tr>
 		</thead>	
 		
-		<%= sbHtml.toString() %> <!-- 절대 디자인이 깨지면 안된다.  -->
-	<!-- <tr>
-			<td>&nbsp;</td>
-			<td scope="row">6</td>
-			<td class="text-muted">공지</td>	
-			<td>마음가짐</td>
-			<td class="text-start fw-bold"><a href="./community_viewPage.jsp" style="text-decoration-line: none;">✔️ 커뮤니티 관련 공지사항 입니다. 반드시 확인해주시고 이용해주세요 :)</a></td>
-			<td>2023-01-01</td>
-			<td>543</td>
-			<td>&nbsp;</td>
-		</tr>	
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">5</td>
-			<td class="text-muted">건강</td>	
-			<td>하태현</td>
-			<td class="text-start">🔥 2023년 계묘년 뜨는 food! 입맛과 건강을 동시에 챙기고싶으신 부운~</td>
-			<td>2023-01-22</td>
-			<td>150</td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">4</td>
-			<td class="text-muted">운동</td>	
-			<td>엄기준</td>
-			<td class="text-start">🔥 2023년, 가장 주목받고 있는 운동은?!</td>
-			<td>2023-01-22</td>
-			<td>120</td>
-			<td>&nbsp;</td>
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">3</td>
-			<td class="text-muted">건강</td>	
-			<td>김경호</td>
-			<td class="text-start">겨울철 반드시 챙겨먹야되는 BEST3!</td>
-			<td>2023-01-22</td>
-			<td>15</td>
-			<td>&nbsp;</td>
-		</tr>			
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">2</td>
-			<td class="text-muted">건강</td>	
-			<td>전도연</td>
-			<td class="text-start">사람한테 물이 좋은 이유!</td>
-			<td>2023-01-22</td>
-			<td>10</td>
-			<td>&nbsp;</td>
-		</tr>		
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">1</td>
-			<td class="text-muted">운동</td>	
-			<td>박지성</td>
-			<td class="text-start">혼자서도 제대로하는 스쿼트 알려드립니다.</td>
-			<td>2023-01-22</td>
-			<td>5</td>
-			<td>&nbsp;</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> 
-		</tr>
-		 -->
+		<%= sbHtml.toString() %>
 	</table>
 			<div class="text-end">
 				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./community_write.jsp'"/>
 			</div>
 	
 	<br/><br/><br/>
-		<ul class="pagination justify-content-center">
-		  <li class="page-item"><a class="page-link" href="#"><</a></li>
-		  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-		  <li class="page-item"><a class="page-link" href="#">2</a></li>
-		  <li class="page-item"><a class="page-link" href="#">3</a></li>
-		  <li class="page-item"><a class="page-link" href="#">></a></li>
-		</ul>
-	</div>	
-</div>
+			<ul class='pagination justify-content-center'>
+				<li class='page-item'><a class='page-link' href='#'> &lt; </a></li>
+				<li class='page-item'><a class='page-link' href='#'> 1 </a></li>
+				<li class='page-item'><a class='page-link' href='#'> 2 </a></li>
+				<li class='page-item'><a class='page-link' href='#'> 3 </a></li>
+				<li class='page-item'><a class='page-link' href='#'> &gt; </a></li>
+			</ul>
+</div>	
