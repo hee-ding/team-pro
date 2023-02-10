@@ -37,7 +37,7 @@
 		        <input type="text" id="mail1" name="mail1"> @ 
 		        <select id="mail2" name="mail2">
 					<option>naver.com</option>
-					<option>daum.net</option>
+					<option>hanmail.net</option>
 					<option>nate.com</option>
 					<option>gmail.com</option>
 				</select>
