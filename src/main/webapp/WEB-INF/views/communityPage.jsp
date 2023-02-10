@@ -2,15 +2,13 @@
     pageEncoding="UTF-8"%>
     
 <%
-	/*
+
 	String id = null;
 
 	if( session.getAttribute("id") != null ) {
 		id = ( String ) session.getAttribute("id");
 	}
-	*/
 	
-	String id = "id1";
 	
 %> 
 <jsp:include page="./community/community_list.jsp">
