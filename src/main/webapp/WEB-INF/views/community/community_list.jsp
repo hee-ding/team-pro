@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String id = request.getParameter("id"); 
+	String id = request.getParameter("id");
+
+	//System.out.println( id );
 %>   
 <!DOCTYPE html>
 <html>
@@ -27,9 +29,7 @@
 <body>
     
     <!--  header -->
-	<jsp:include page="../include/header.jsp">
-		<jsp:param name="id" value="<%= id %>"/>
-	</jsp:include>
+	<jsp:include page="../include/header.jsp" />
 	<!--  search  -->
 	<jsp:include page="../community/community_source/main_search.jsp"/>
 

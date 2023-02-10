@@ -7,8 +7,7 @@
 
 <%
 	
-	CommunityDAO dao = new CommunityDAO();
-	ArrayList<BoardTO> communityList = dao.communityList();
+	ArrayList<BoardTO> communityList = (ArrayList) request.getAttribute("communityList");
 	
 	int totalRecord = communityList.size();
 	
