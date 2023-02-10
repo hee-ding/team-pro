@@ -18,7 +18,7 @@
 <hr/>
 	
 	<br/><br/><br/>
-	<form action="/community/modifyok?seq=<%=seq %>" method="post" name="mfrm">
+	<form action="/community/deleteok" method="post" name="mfrm">
 	<div class="container px-3 px-lg-5">
 			<!--게시판-->
 			<p class="h2" style="font-weight: bold;">커뮤니티 수정</p>

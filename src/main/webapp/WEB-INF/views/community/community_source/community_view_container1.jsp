@@ -80,7 +80,7 @@
 				</div>
 				<div class="col-md-6 text-end">
 					<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>
-					<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="" />
+					<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="location.href='/community/delete?seq=<%=seq %>'" />
 				<!--<input type="button" value="쓰기" class="btn btn-outline-info" style="cursor: pointer;" onclick="" />  -->	
 				</div> 
 			</div>

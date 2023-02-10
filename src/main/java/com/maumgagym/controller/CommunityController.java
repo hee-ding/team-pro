@@ -52,7 +52,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/community/writeok")
-	public String communitywriteok(@ModelAttribute MemberTO to1, BoardTO to, HttpServletRequest request, Model model, HttpSession session ) throws NamingException { 
+	public String communitywriteok(@ModelAttribute MemberTO to1, BoardTO to, HttpServletRequest request, Model model) throws NamingException { 
 		
 		to.setTitle(request.getParameter("subject"));
 		to.setContent(request.getParameter("contents"));
@@ -107,4 +107,25 @@ public class CommunityController {
 		return "community_modifyok";
 	}
 	
+	@GetMapping("/community/delete")
+	public String communitydelete(int seq, Model model){ 
+		BoardTO to = new BoardTO();
+		to.setSeq(seq);
+		
+		to = dao.boardDelete(to);
+		model.addAttribute("to" , to); 
+		
+		return "community_deletePage";
+	}
+	
+	@PostMapping("/community/deleteok")
+	public String communitydeleteok(HttpServletRequest request,BoardTO to, MemberTO to1, Model model){ 
+		to1.setPassword(request.getParameter("password")); // member
+		to.setSeq(Integer.parseInt(request.getParameter("seq"))); //board
+		
+		int flag = dao.boardDeleteOK(to1, to);
+		model.addAttribute("flag" , flag); 
+		
+		return "community_deleteok";
+	}
 }
