@@ -34,7 +34,7 @@
 			}
 			else {
 				sbHtml.append("<td class='text-start fw-bold'>");
-				sbHtml.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbHtml.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbHtml.append("</td>");
 			}
 			sbHtml.append("<td>" + date + "</td>");
