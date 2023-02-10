@@ -16,20 +16,19 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link href="./resources/asset/css/community.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"> </script>
+    <link href="../resources/asset/css/community.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../resources/asset/script/jquery-1.11.1.min.js"> </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	  
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	 <!-- 서머노트를 위해 추가해야할 부분  -->
-	 <script src="./community/summerNote/summernote-lite.js"></script>
-	 <script src="./community/summerNote/summernote-ko-KR.js"></script>
-	 <link rel="stylesheet" href="./community/summerNote/summernote-lite.css">
+	 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 </head>
 <body>
-
 	<!--  header -->
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="id" value="<%= id %>"/>
@@ -47,7 +46,7 @@
 	<jsp:include page="../include/footer.jsp" />
 	
 	
-	
+
 	<script> // Jquery
 		$('#summernote').summernote({
 			  height: 450,
@@ -69,10 +68,11 @@
 			document.getElementById('wbtn').onclick = function() {
 			// 필수 입력항목 검사 (not null인 목록들을 검사)
 			
-			//if ($("#category".val == '')){ //Jquery
-			//	alert('카테고리를 선택하셔야 합니다.');
-			//	return false;
-			//}
+			if ($("#category_seq").val() == ''){ //Jquery
+				alert('카테고리를 선택하셔야 합니다.');
+				$("#category_seq").focus();
+				return false;
+			}
 			if (document.wfrm.subject.value.trim() == ''){ // Javascript 
 				alert('제목을 입력하셔야 합니다.');
 				return false;
