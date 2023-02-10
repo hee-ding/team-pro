@@ -69,9 +69,8 @@ public class CommunityController {
 		
 	}
 	
-	@GetMapping(value = "/community/view")
-	public String communityview(HttpServletRequest request,int seq, Model model) {
-		System.out.println(seq);
+	@GetMapping("/community/view")
+	public String communityview(int seq, Model model) {
 		BoardTO to = new BoardTO();
 		to.setSeq(seq);
 		
@@ -79,5 +78,16 @@ public class CommunityController {
 		
 		model.addAttribute("to" , to); 
 		return "community_viewPage";
+	}
+	
+	@GetMapping("/community/modify")
+	public String communitymodify(int seq, Model model){ 
+		BoardTO to = new BoardTO();
+		to.setSeq(seq);
+		
+		to = dao.boardModify(to);
+		model.addAttribute("to" , to); 
+		
+		return "community_modifyPage";
 	}
 }

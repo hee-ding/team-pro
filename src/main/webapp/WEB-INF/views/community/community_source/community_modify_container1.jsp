@@ -2,18 +2,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@page import="com.to.board.CommunityDAO"%>
-<%@page import="com.to.board.BoardTO"%>
+<%@page import="com.maumgagym.dto.BoardTO"%>
 
 <%
 
-	request.setCharacterEncoding("utf-8");
-
-	BoardTO to = new BoardTO();
-	to.setSeq(Integer.parseInt(request.getParameter("seq")));
+	BoardTO to = (BoardTO)request.getAttribute("to");
 	
-	CommunityDAO dao = new CommunityDAO();
-	to = dao.boardModify(to);
 	
 	String subject = to.getTitle();
 	String date = to.getWrite_date();

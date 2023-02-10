@@ -23,9 +23,9 @@ String id = (String) session.getAttribute("id");
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> 
 	 <!-- 서머노트를 위해 추가해야할 부분  -->
-	 <script src="./community/summerNote/summernote-lite.js"></script>
-	 <script src="./community/summerNote/summernote-ko-KR.js"></script>
-	 <link rel="stylesheet" href="./community/summerNote/summernote-lite.css">
+	  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
+  	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
 </head>
 <body>
 
