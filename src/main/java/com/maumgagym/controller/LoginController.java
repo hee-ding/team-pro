@@ -37,14 +37,17 @@ public class LoginController {
 	@PostMapping("/member/loginAction")
 	public String loginAction(@ModelAttribute MemberTO to, HttpServletRequest request, Model model, HttpSession session) {
 		//센션값 주고 전달
+		
 		String id = request.getParameter("id");
 		String type = request.getParameter("type");
-		String nickname = request.getParameter("nickname");
+		
 		session.setAttribute("id", id);          
 		session.setAttribute("type", type);         
-		session.setAttribute("nickname", nickname);      
 		
+		to.setId(id);
 		MemberTO result = dao.login(to);
+		String nickname = result.getNickname();
+		session.setAttribute("nickname", nickname);
 		model.addAttribute("result" , result);
 		return "memberloginOK";
 	}
