@@ -14,5 +14,5 @@ public class MemberShipTO {
 	int membership_period;
 	
 	int flag;
-
+	
 }

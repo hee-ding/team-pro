@@ -26,7 +26,7 @@ import com.maumgagym.dto.ReviewTO;
 public class MypageDAO {
 	
 	@Autowired
-	private DataSource dataSource = null;
+	private DataSource dataSource;
 	
 		public MypageDAO() {
 			try {

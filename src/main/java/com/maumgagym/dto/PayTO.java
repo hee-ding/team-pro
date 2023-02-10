@@ -1,5 +1,7 @@
 package com.maumgagym.dto;
 
+import java.util.UUID;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,5 +29,9 @@ public class PayTO {
 	String hold_sum_date;					// 홀딩 총 기간	==> 중지 버튼 클릭시 자동 생성
 	
 	int flag;
+	
+	public PayTO() {
+		this.merchant_uid =  "merchant_" + UUID.randomUUID().toString();
+	}
 	
 }

@@ -18,7 +18,7 @@
 	
 	      <!-- Modal footer -->
 	      <div class="modal-footer">
-	      	<button id="paymentOk" type="button" class=" btn btn-primary"  data-bs-dismiss="modal">결제하기</button> <!-- 결제하기 버튼 생성 -->
+	      	<button id="paymentOk" type="button" class=" btn btn-primary"  data-bs-dismiss="modal">결제하기</button>
 	        <button id="paymentcancle" type="button" class="btn btn-danger" data-bs-dismiss="modal">취소하기</button>
 	      </div>
 	

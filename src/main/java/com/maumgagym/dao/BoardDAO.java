@@ -345,16 +345,7 @@ public class BoardDAO {
 				rvto.setWrite_date( rs.getString("rv.write_date") );
 				rvto.setStar_score( rs.getFloat( "rv.star_score"));
 				arryList.add(rvto);
-				
-				String nickname = rvto.getNickname();
-				String writeDate = rvto.getWrite_date();
-				String content = rvto.getContent();
-				
-				System.out.println( nickname );
-				System.out.println( writeDate );
-				System.out.println( content );
 			}
-			
 			System.out.println( "size" + arryList.size() );
 		}catch(SQLException e) {
 			System.out.println( "[에러] " +  e.getMessage());

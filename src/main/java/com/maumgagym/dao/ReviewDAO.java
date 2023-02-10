@@ -26,7 +26,7 @@ import com.maumgagym.dto.ReviewTO;
 public class ReviewDAO {
 	
 	@Autowired
-	private DataSource dataSource = null;
+	private DataSource dataSource;
 	
 	public ReviewDAO() {
 		try {
