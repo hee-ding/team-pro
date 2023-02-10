@@ -1,5 +1,52 @@
+<%@page import="com.maumgagym.dto.BoardTO"%>
+<%@page import="java.util.ArrayList"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	request.setCharacterEncoding( "utf-8" );
+	ArrayList<BoardTO> arryList = (ArrayList) request.getAttribute("arryList");
+	
+	StringBuilder sbRecommendedList = new StringBuilder();
+	
+	for( BoardTO to : arryList) {
+		int seq = to.getSeq();
+		String title = to.getTitle();
+		String tags = to.getTag();
+		String imageName = to.getImage_name();
+		String[] arryTag = tags.split(" ");
+		
+		sbRecommendedList.append( " <div class='owl-carousel-info-wrap item'> ");
+		sbRecommendedList.append( " <div style='height: 300px;'> ");
+		sbRecommendedList.append( " <a href= '/facility/" + seq + "'><img src='../upload/" + imageName +"' class='owl-carousel-image img-fluid' alt=''></a> ");
+		sbRecommendedList.append( " </div> ");
+		sbRecommendedList.append( " 		<div class='owl-carousel-info'> ");
+		sbRecommendedList.append( " 			<a href= '/facility/" + seq + "'><h4 class='mb-2'>" + title + ""); 
+		sbRecommendedList.append( " 			</h4></a> ");
+		sbRecommendedList.append( " 			</br> ");
+		for( int i = 0; i < arryTag.length; i++ ) {
+			sbRecommendedList.append( " 			<span class='badge'>" + arryTag[i] + "</span>"); 
+		}
+		sbRecommendedList.append( " 		</div> ");
+		sbRecommendedList.append( " 		</div> "); 
+	}
+	
+	if( arryList.size() < 6) {
+		for( int i = 0; i < (6 - arryList.size() ); i++ ) {
+			sbRecommendedList.append( " <div class='owl-carousel-info-wrap item'> ");
+			sbRecommendedList.append( " <div style='height: 300px;'> ");
+			sbRecommendedList.append( " <img src='../resources/asset/images/logo_3.jpg' class='owl-carousel-image img-fluid' alt=''> ");
+			sbRecommendedList.append( " </div> ");
+			sbRecommendedList.append( " 		<div class='owl-carousel-info'> ");
+			sbRecommendedList.append( " 			<h4 class='mb-2'><small>아직 등록된 글이 없습니다.</small>"); 
+			sbRecommendedList.append( " 			</h4> ");
+			sbRecommendedList.append( " 		</div> ");
+			sbRecommendedList.append( " 		</div> "); 
+		}
+		
+	}
+	
+%>    
 		<div class="container">
 			<div class="row">
 	
@@ -13,99 +60,7 @@
 					</div>
 	
 					<div class="owl-carousel owl-theme">
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">
-									샘플 타이틀1 <img src="./resources/asset/images/main_view/main_icon/verified.png"
-										class="owl-carousel-verified-image img-fluid" alt="">
-								</h4>
-								
-								<span class="badge">샘플 태그1</span> <span class="badge">샘플
-									태그2</span>
-							</div>
-						</div>
-	
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-	
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">
-									샘플 타이틀2 <img src="./resources/asset/images/mainView/main_icon/verified.png"
-										class="owl-carousel-verified-image img-fluid" alt="">
-								</h4>
-								<span class="badge">샘플 태그2</span> <span class="badge">샘플
-									태그3</span>
-							</div>
-						</div>
-	
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-	
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">샘플 타이틀3</h4>
-	
-								<span class="badge">샘플 태그1</span> <span class="badge">샘플
-									태그1</span>
-							</div>
-						</div>
-	
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-	
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">샘플 타이틀4</h4>
-	
-								<span class="badge">샘플 태그1</span>
-							</div>
-						</div>
-	
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-	
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">
-									샘플 타이틀5 <img src="images/verified.png"
-										class="owl-carousel-verified-image img-fluid" alt="">
-								</h4>
-	
-								<span class="badge">샘플 태그1</span>
-							</div>
-						</div>
-	
-						<div class="owl-carousel-info-wrap item">
-							<div style="height: 300px;">
-								<img
-									src="./resources/asset/images/main_view/main_carousel/4K7xqzbHYGoUo8ZhTgSANce63XwHT7JgzARhFJ4SsPCT.jpg"
-									class="owl-carousel-image img-fluid" alt="">
-							</div>
-	
-							<div class="owl-carousel-info">
-								<h4 class="mb-2">샘플 타이틀6</h4>
-	
-								<span class="badge">샘플 태그1</span>
-							</div>
-						</div>
+						<%= sbRecommendedList.toString() %>
 					</div>
 				</div>
 	
@@ -269,7 +224,7 @@
 	
 							<div class="custom-block-info custom-block-overlay-info">
 								<h5 class="mb-1">
-									<a href="listing-page.html"> 타바타 </a>
+									<a href="listing-page.html"> 댄스 </a>
 								</h5>
 	
 								<p class="badge mb-0">10개</p>

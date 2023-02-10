@@ -3,13 +3,13 @@
 
 <%
 
-		String id = null;
-		
-		if( (String) session.getAttribute("id") != null && !"null".equals( (String) session.getAttribute("id") ) ) {
-			id = (String) session.getAttribute("id");
-		} else {
-			id = null;
-		}
+	String id = null;
+	
+	if( (String) session.getAttribute("id") != null && !"null".equals( (String) session.getAttribute("id") ) ) {
+		id = (String) session.getAttribute("id");
+	} else {
+		id = null;
+	}
 
 %>
 <!DOCTYPE html>
