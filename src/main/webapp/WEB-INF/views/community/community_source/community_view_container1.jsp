@@ -76,7 +76,7 @@
 			
 			<div class="row">
 				<div class="col-md-6">
-					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='./communityPage.jsp'" />
+					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/list'" />
 				</div>
 				<div class="col-md-6 text-end">
 					<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>

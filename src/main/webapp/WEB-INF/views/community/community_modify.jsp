@@ -15,8 +15,8 @@ String id = (String) session.getAttribute("id");
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link href="./resources/asset/css/community.css" rel="stylesheet" type="text/css" />
-	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"> </script>
+    <link href="../resources/asset/css/community.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="../resources/asset/script/jquery-1.11.1.min.js"> </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 	  
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -50,6 +50,18 @@ String id = (String) session.getAttribute("id");
 			  lang: "ko-KR"
 			});
 	 </script>
+	 
+	 <script type = "text/javascript"> 
+			window.onload = function () {
+				document.getElementById('mbtn').onclick = function() {
+				if (document.mfrm.password.value.trim() == ''){ // Javascript 
+					alert('비밀번호를 입력하셔야 합니다.');
+					return false;
+				}
+				document.mfrm.submit(); //검사가 따 끝나면submit 해서 다음으로 넘어가!
+			};
+		}
+	</script>
 
 </body>
 </html>

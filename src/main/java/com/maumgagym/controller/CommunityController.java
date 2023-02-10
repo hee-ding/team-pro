@@ -90,4 +90,21 @@ public class CommunityController {
 		
 		return "community_modifyPage";
 	}
+	
+	@PostMapping("/community/modifyok")
+	public String communitymodifyok(HttpServletRequest request,BoardTO to, MemberTO to1, Model model){ 
+		to.setSeq(Integer.parseInt(request.getParameter("seq"))); //board
+		to.setWrite_date(request.getParameter("date")); // board
+		to.setContent(request.getParameter("contents")); // board
+		to.setTitle(request.getParameter("subject")); // board
+		
+		to1.setPassword(request.getParameter("password")); // member
+		to1.setName(request.getParameter("subject")); // member
+		
+		int flag = dao.boardModifyOK(to1, to);
+		model.addAttribute("flag" , flag); 
+		
+		return "community_modifyok";
+	}
+	
 }
