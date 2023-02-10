@@ -25,11 +25,14 @@ public class HomeController {
 		bto.setTag( "마음가짐" );
 		
 		ArrayList<BoardTO> recommendedList = dao.selectRecommendedList( bto );
-		ArrayList<BoardTO> FacilityBoardCountList = dao.selectFacilityBoardCountList( );
+		ArrayList<BoardTO> FacilityBoardCountList = dao.selectFacilityBoardCountList();
+		ArrayList<BoardTO> weeklyBoardList = dao.selectWeeklyBoardList();
 
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("homePage");
-		//modelAndView.addObject("arryList", arryList);
+		modelAndView.addObject("recommendedList", recommendedList);
+		modelAndView.addObject("FacilityBoardCountList", FacilityBoardCountList);
+		modelAndView.addObject("weeklyBoardList", weeklyBoardList);
 		
 		return modelAndView;
 	}

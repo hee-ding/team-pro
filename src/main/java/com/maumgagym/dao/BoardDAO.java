@@ -344,7 +344,6 @@ public class BoardDAO {
 				rvto.setStar_score( rs.getFloat( "rv.star_score"));
 				arryList.add(rvto);
 			}
-			System.out.println( "size" + arryList.size() );
 		}catch(SQLException e) {
 			System.out.println( "[에러] " +  e.getMessage());
 		} finally {

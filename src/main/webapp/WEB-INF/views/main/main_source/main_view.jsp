@@ -5,11 +5,13 @@
     pageEncoding="UTF-8"%>
 <%
 	request.setCharacterEncoding( "utf-8" );
-	ArrayList<BoardTO> arryList = (ArrayList) request.getAttribute("arryList");
+	ArrayList<BoardTO> recommendedList = (ArrayList) request.getAttribute("recommendedList");
+	ArrayList<BoardTO> FacilityBoardCountList = (ArrayList) request.getAttribute("FacilityBoardCountList");
+	ArrayList<BoardTO> weeklyBoardList = (ArrayList) request.getAttribute("weeklyBoardList");
 	
 	StringBuilder sbRecommendedList = new StringBuilder();
 	
-	for( BoardTO to : arryList) {
+ 	for( BoardTO to : recommendedList) {
 		int seq = to.getSeq();
 		String title = to.getTitle();
 		String tags = to.getTag();
@@ -30,9 +32,8 @@
 		sbRecommendedList.append( " 		</div> ");
 		sbRecommendedList.append( " 		</div> "); 
 	}
-	
-	if( arryList.size() < 6) {
-		for( int i = 0; i < (6 - arryList.size() ); i++ ) {
+	if( recommendedList.size() < 6) {
+		for( int i = 0; i < (6 - recommendedList.size() ); i++ ) {
 			sbRecommendedList.append( " <div class='owl-carousel-info-wrap item'> ");
 			sbRecommendedList.append( " <div style='height: 300px;'> ");
 			sbRecommendedList.append( " <img src='../resources/asset/images/logo_3.jpg' class='owl-carousel-image img-fluid' alt=''> ");
@@ -43,7 +44,79 @@
 			sbRecommendedList.append( " 		</div> ");
 			sbRecommendedList.append( " 		</div> "); 
 		}
+	} 
+	
+	StringBuilder sbFacilityBoardCountList = new StringBuilder();
+	String[] imageArry = { "fitness", "yoga", "swimming", "tennis", "tabata", "pilates", "golf", "boxing", "dance" };
+	int i = 0;
+ 	for( BoardTO to : FacilityBoardCountList) {
+		String topic = to.getTopic();
+		int categoryBoardCount = to.getCategoryBoardCount();
 		
+		sbFacilityBoardCountList.append("		<div class='col-lg-3 col-md-6 col-12 mb-4 mb-lg-5'> ");
+		sbFacilityBoardCountList.append("		<div class='custom-block custom-block-overlay'> ");
+		sbFacilityBoardCountList.append("			<a href='detail-page.html' class='custom-block-image-wrap'> "); 
+		sbFacilityBoardCountList.append("				<img src='./resources/asset/images/main_view/main_category/" + imageArry[i] + ".jpg' class='custom-block-image img-fluid' alt=''> ");
+		sbFacilityBoardCountList.append("			</a> ");
+		sbFacilityBoardCountList.append("			<div class='custom-block-info custom-block-overlay-info'> ");
+		sbFacilityBoardCountList.append("				<h5 class='mb-1'> ");
+		sbFacilityBoardCountList.append("					<a href='listing-page.html'>" + topic + "</a> ");
+		sbFacilityBoardCountList.append("				</h5> ");
+		if( categoryBoardCount == 0 ) {
+		sbFacilityBoardCountList.append("				<p class='badge mb-0'>등록된 글이 없습니다.</p> ");
+		} else { 
+		sbFacilityBoardCountList.append("				<p class='badge mb-0'>" + categoryBoardCount + "개</p> ");			
+		}
+		sbFacilityBoardCountList.append("			</div> ");
+		sbFacilityBoardCountList.append("		</div> "); 
+		sbFacilityBoardCountList.append("	</div> ");
+		i++;
+	}
+ 	
+ 	StringBuilder sbWeeklyBoardList = new StringBuilder();
+ 	for( BoardTO to : weeklyBoardList) {
+		String title = to.getTitle();
+		String topic = to.getTopic();
+		String nickname = to.getNickname();
+		int viewCount = to.getView_count();
+		int likeCount = to.getLike_count();
+		int commentCount = to.getComment_count();
+		String imageName = to.getImage_name();
+		
+		sbWeeklyBoardList.append( " <div class='col-lg-4 col-12 mb-4 mb-lg-0'> " );
+		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full'> " );
+		sbWeeklyBoardList.append( "				<div class='custom-block-image-wrap'> " );
+		if( imageName != null ) {
+		sbWeeklyBoardList.append( "					<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/" + imageName + "' class='custom-block-image img-fluid' alt=''> " );
+		} else {
+			if( topic.equals("운동") ) {
+				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/fitness.jpg' class='custom-block-image img-fluid'>" );
+			} else if ( topic.equals("건강") ) {
+				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/health.jpg' class='custom-block-image img-fluid'" );
+			} else if ( topic.equals("수다") ) {
+				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/chat.jpg' class='custom-block-image img-fluid'" );
+			}
+		}
+		sbWeeklyBoardList.append( "					</a> " );
+		sbWeeklyBoardList.append( "				</div> " );
+		sbWeeklyBoardList.append( "				<div class='custom-block-info'> " );
+		sbWeeklyBoardList.append( "					<h5 class='mb-2'> " );
+		sbWeeklyBoardList.append( "						<a href='detail-page.html'> " + title + " </a> " );
+		sbWeeklyBoardList.append( "					</h5> " );
+		sbWeeklyBoardList.append( "					<div class='profile-block d-flex'> " );
+		sbWeeklyBoardList.append( "						<p> " );
+		sbWeeklyBoardList.append( "							" + topic + "<strong>" + nickname + "</strong> " );
+		sbWeeklyBoardList.append( "						</p> " );
+		sbWeeklyBoardList.append( "					</div> " );
+		sbWeeklyBoardList.append( "					<div class='custom-block-bottom d-flex justify-content-between mt-3'> " );
+		sbWeeklyBoardList.append( "						<a href='#' class='bi bi-hand-index-thumb me-1'> <span>" + viewCount + "</span> " );
+		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-heart me-1'> <span>" + likeCount + "</span> " );
+		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-chat me-1'> <span>" + commentCount + "</span> " );
+		sbWeeklyBoardList.append( "						</a> " );
+		sbWeeklyBoardList.append( "					</div> " ); 
+		sbWeeklyBoardList.append( "				</div> " );
+		sbWeeklyBoardList.append( "			</div> " );
+		sbWeeklyBoardList.append( "		</div> " );
 	}
 	
 %>    
@@ -76,167 +149,9 @@
 							<h4 class="section-title">운동 종류</h4>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-5">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 피트니스 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 요가 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 수영 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 테니스 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<!-- 2row -->
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-5">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 타바타 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 필라테스 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 골프 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 복싱 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-					<!-- /2row -->
-	
-					<!-- 3row -->
-					<div class="col-lg-3 col-md-6 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-overlay">
-							<a href="detail-page.html" class="custom-block-image-wrap"> <img
-								src="./resources/asset/images/main_view/main_category/woman-practicing-yoga-mat-home.jpg"
-								class="custom-block-image img-fluid" alt="">
-							</a>
-	
-							<div class="custom-block-info custom-block-overlay-info">
-								<h5 class="mb-1">
-									<a href="listing-page.html"> 댄스 </a>
-								</h5>
-	
-								<p class="badge mb-0">10개</p>
-							</div>
-						</div>
-					</div>
-	
-	
+						<%= sbFacilityBoardCountList.toString() %>	
 				</div>
 			</div>
-	
-	
 		</section>
 	
 		<section class="trending-podcast-section section-padding">
@@ -248,96 +163,7 @@
 							<h4 class="section-title">금주의 인기글</h4>
 						</div>
 					</div>
-	
-					<div class="col-lg-4 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-full">
-							<div class="custom-block-image-wrap">
-								<a href="detail-page.html"> <img
-									src="./resources/asset/images/main_view/main_hot_weekly/main_weekly1.jpg"
-									class="custom-block-image img-fluid" alt="">
-								</a>
-							</div>
-							<div class="custom-block-info">
-								<h5 class="mb-2">
-									<a href="detail-page.html"> 샘플 제목1 </a>
-								</h5>
-	
-								<div class="profile-block d-flex">
-									<p>
-										운동상식 <strong>글쓴이 1</strong>
-									</p>
-								</div>
-								<div
-									class="custom-block-bottom d-flex justify-content-between mt-3">
-									<a href="#" class="bi bi-hand-index-thumb me-1"> <span>100k</span>
-									</a> <a href="#" class="bi-heart me-1"> <span>2.5k</span>
-									</a> <a href="#" class="bi-chat me-1"> <span>924k</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-4 col-12 mb-4 mb-lg-0">
-						<div class="custom-block custom-block-full">
-							<div class="custom-block-image-wrap">
-								<a href="detail-page.html"> <img
-									src="./resources/asset/images/main_view/main_hot_weekly/main_weekly1.jpg"
-									class="custom-block-image img-fluid" alt="">
-								</a>
-							</div>
-	
-							<div class="custom-block-info">
-								<h5 class="mb-2">
-									<a href="detail-page.html"> 샘플 제목2 </a>
-								</h5>
-	
-								<div class="profile-block d-flex">
-									<p>
-										운동상식 <strong>글쓴이 2</strong>
-									</p>
-								</div>
-								<div
-									class="custom-block-bottom d-flex justify-content-between mt-3">
-									<a href="#" class="bi bi-hand-index-thumb me-1"> <span>100k</span>
-									</a> <a href="#" class="bi-heart me-1"> <span>2.5k</span>
-									</a> <a href="#" class="bi-chat me-1"> <span>924k</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-	
-					<div class="col-lg-4 col-12">
-						<div class="custom-block custom-block-full">
-							<div class="custom-block-image-wrap">
-								<a href="detail-page.html"> <img
-									src="./resources/asset/images/main_view/main_hot_weekly/main_weekly1.jpg"
-									class="custom-block-image img-fluid" alt="">
-								</a>
-							</div>
-	
-							<div class="custom-block-info">
-								<h5 class="mb-2">
-									<a href="detail-page.html"> 샘플 제목3 </a>
-								</h5>
-	
-								<div class="profile-block d-flex">
-									<p>
-										운동상식 <strong>글쓴이 3</strong>
-									</p>
-								</div>
-								<div
-									class="custom-block-bottom d-flex justify-content-between mt-3">
-									<a href="#" class="bi bi-hand-index-thumb me-1"> <span>100k</span>
-									</a> <a href="#" class="bi-heart me-1"> <span>2.5k</span>
-									</a> <a href="#" class="bi-chat me-1"> <span>924k</span>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-	
+						<%= sbWeeklyBoardList.toString() %>	
 				</div>
 			</div>
 		</section>

@@ -14,8 +14,6 @@
 	
 	Map<String, Object> map = (HashMap) request.getAttribute("map");
 	
-	//System.out.println( map.size() );
-	
  	// 글 관련
 	BoardTO bto = (BoardTO) map.get( "bto" );
 	String title = bto.getTitle();
@@ -126,7 +124,7 @@
 								class="custom-block-image-wrap custom-block-image-detail-page mb-5">
 								<img src="../upload/<%=btoMainImage.getImage_name()%>" class="custom-block-image img-fluid mb-5"> 
 								<div class="mb-2 pb-3">
-									<span class="material-symbols-outlined"></span><small class="text-muted">&nbsp;<%= fullAdress %></small>
+									<span class="material-symbols-outlined"></span><small id="fullAdress" class="text-muted">&nbsp;<%= fullAdress %></small>
 								</div>
 								<div class="mb-2 pb-3">
 									<span class="material-symbols-outlined"></span><span class="text-muted">&nbsp;<%= phone %></span>
@@ -140,7 +138,7 @@
 <!-- 찜하기&링크 -->
 							<div class="mb-2 pb-3">
 									<!-- 업체이름 -->
-								<h3 class="mb-3">
+								<h3 id="title" class="mb-3">
 									<%= title %>
 								</h3>
 							
@@ -208,30 +206,22 @@
 					</div>
 					<div class="card-body">
 						<h6>공지사항</h6>
-						<div class="row">
-						<%	for ( BoardTO btoNotice : noticeList ) { %>
-							
-							<a href="./view.jsp?%<%=btoNotice.getSeq()%>"><br>- <%=btoNotice.getTitle() %></a>
-						
-						<% 	} %>
+						<div class="row mb-3">
+							<%	for ( BoardTO btoNotice : noticeList ) { %>
+								<a href="./view.jsp?%<%=btoNotice.getSeq()%>"><br>- <%=btoNotice.getTitle() %></a>
+							<% 	} %>
 						</div>
 						<hr>
-						<h6>운영시간 및 운동시설 소개</h6>
+						<h6 class="mb-lg-5">운영시간 및 운동시설 소개</h6>
 						<div class="card">
-							<div class="card-body ">
+							<div class="card-body mb-3">
 								<p class="text-center">
 								<%= bto.getContent() %>
 								</p>
 							</div>
 						</div>
-						<div class="row">
-							<div><br>[평 일] 06:00~24:00</div>
-							<div><br>[주 말] 10:00~19:00</div>
-							<div><br>[공휴일] 10:00~19:00</div>
-						</div>
 						<hr>
-						<br>
-						<h6>사진</h6>
+						<h6 class="mb-lg-3">사진</h6>
 						<div class="row">
 							<div class="table-responsive">
 								<table
@@ -243,9 +233,7 @@
 										<!-- 사진 -->
 											<%	for ( BoardTO btoImage : imageList ) { %>
 											<div class="custom-block-icon-wrap mb-5">
-												<div
-													class="custom-block-image-wrap custom-block-image-detail-page">
-													
+												<div class="custom-block-image-wrap custom-block-image-detail-page">
 													<img src="../upload/<%=btoImage.getImage_name()%>" class="custom-block-image img-fluid">
 												</div>
 											</div> 
@@ -260,20 +248,13 @@
 						<br>
 						<h6>지도</h6>
 						<div class="row">
-						<!-- 요 부분이 살아 있어야 중앙에 들어감 -->
-							<div class="table-responsive">
-								<table class="table text-center border-light table-borderless table-sm">
-									<thead class="border-light">
-										<tr>
-											<th scope="col"></th>
-										</tr>
-									</thead>
-								</table>
+						<div class="custom-block-icon-wrap mb-5">
+							<div class="custom-block-image-wrap custom-block-image-detail-page">
+								<div id="map" style="width:100%;height:350px;"></div>
 							</div>
-								<!-- 요 부분이 살아 있어야 중앙에 들어감 -->
+						</div>
 						</div>
 					</div>
-					<!-- 이용후기 부분 -->
 					<div class="card-footer text-muted">
 						<div class="card-body">
 							<h6>이용후기</h6>
@@ -325,9 +306,6 @@
 	</div>
 </div>
 <br><br><br>
-<br><br><br>
-<br><br><br>
-<br><br><br>
 
 <div class="container">
 	<div class="row">
@@ -339,9 +317,7 @@
 		<div class="col-lg-4 col-12 mb-4 mb-lg-0">
 			<div class="custom-block custom-block-full">
 				<div class="custom-block-image-wrap">
-					<a href="detail-page.html"> <img
-						src="./resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg"
-						class="custom-block-image img-fluid" alt="">
+					<a href="detail-page.html"> <img class="custom-block-image img-fluid" alt="">
 					</a>
 				</div>
 				<div class="custom-block-info">
@@ -349,8 +325,7 @@
 						<a href="detail-page.html"> Vintage Show </a>
 					</h5>
 					<div class="profile-block d-flex">
-						<img src="images/profile/woman-posing-black-dress-medium-shot.jpg"
-							class="profile-block-image img-fluid" alt="">
+						<img class="profile-block-image img-fluid" alt="">
 						<p>
 							Elsa <strong>Influencer</strong>
 						</p>
@@ -374,9 +349,7 @@
 		<div class="col-lg-4 col-12 mb-4 mb-lg-0">
 			<div class="custom-block custom-block-full">
 				<div class="custom-block-image-wrap">
-					<a href="detail-page.html"> <img
-						src="./resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg"
-						class="custom-block-image img-fluid" alt="">
+					<a href="detail-page.html"> <img class="custom-block-image img-fluid" alt="">
 					</a>
 				</div>
 				<div class="custom-block-info">
@@ -384,11 +357,9 @@
 						<a href="detail-page.html"> Vintage Show </a>
 					</h5>
 					<div class="profile-block d-flex">
-						<img src="images/profile/cute-smiling-woman-outdoor-portrait.jpg"
-							class="profile-block-image img-fluid" alt="">
+						<img class="profile-block-image img-fluid" alt="">
 						<p>
-							Taylor <img src="images/verified.png"
-								class="verified-image img-fluid" alt=""> <strong>Creator</strong>
+							Taylor <img class="verified-image img-fluid" alt=""> <strong>Creator</strong>
 						</p>
 					</div>
 
@@ -408,27 +379,23 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-lg-4 col-12">
+		<div class="col-lg-4 col-12 mb-4 mb-lg-0">
 			<div class="custom-block custom-block-full">
 				<div class="custom-block-image-wrap">
-					<a href="detail-page.html"> <img
-						src="./resources/asset/images/main_view/main_carousel/4K6CDVVNJWHwtbMbSDrGaEXeqcKCw9WX4pvJxvnepvUP.jpg"
-						class="custom-block-image img-fluid" alt="">
+					<a href="detail-page.html"> <img class="custom-block-image img-fluid" alt="">
 					</a>
 				</div>
 				<div class="custom-block-info">
 					<h5 class="mb-2">
-						<a href="detail-page.html"> Daily Talk </a>
+						<a href="detail-page.html"> Vintage Show </a>
 					</h5>
 					<div class="profile-block d-flex">
-						<img
-							src="images/profile/handsome-asian-man-listening-music-through-headphones.jpg"
-							class="profile-block-image img-fluid" alt="">
+						<img class="profile-block-image img-fluid" alt="">
 						<p>
-							William <img src="images/verified.png"
-								class="verified-image img-fluid" alt=""> <strong>Vlogger</strong>
+							Taylor <img class="verified-image img-fluid" alt=""> <strong>Creator</strong>
 						</p>
 					</div>
+
 					<p class="mb-0">Lorem Ipsum dolor sit amet consectetur</p>
 					<div
 						class="custom-block-bottom d-flex justify-content-between mt-3">
@@ -445,6 +412,7 @@
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
 </div>
