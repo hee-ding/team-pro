@@ -8,7 +8,8 @@ import lombok.Setter;
 public class BoardTO {
 	
 	int seq;				// 게시판SEQ
-	int category_seq;		// 카테고리번
+	int category_seq;		// 카테고리번호
+	int categoryBoardCount;	// 카테고리별 글 갯수
 	String category;		// 카테고리
 	String title;			// 제목
 	String topic;			//토픽

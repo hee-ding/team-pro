@@ -214,13 +214,11 @@ public class BoardDAO {
 			
 			StringBuilder sbMemberShip = new StringBuilder();
 			
-			// 우선 글번호를 통해 등록된 회원권 대한 정보를 가져옵니다.
 			sbMemberShip.append( " select ms.seq, ms.name, ms.price, ms.period " );
 			sbMemberShip.append( " 		from board b left outer join membership ms " );
 			sbMemberShip.append( " 			on( b.seq = ms.board_seq) " );
 			sbMemberShip.append( " 					where b.seq = ? " );
 			
-			// 변수에 대입합니다.
 	 		String sql = sbMemberShip.toString(); 
 			
 			pstmt = conn.prepareStatement(sql);
