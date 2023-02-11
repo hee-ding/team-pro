@@ -52,7 +52,7 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/community/writeok")
-	public String communitywriteok(@ModelAttribute MemberTO to1, BoardTO to, HttpServletRequest request, Model model) throws NamingException { 
+	public String communitywriteok( MemberTO to1, BoardTO to, HttpServletRequest request, Model model) throws NamingException { 
 		
 		to.setTitle(request.getParameter("subject"));
 		to.setContent(request.getParameter("contents"));
