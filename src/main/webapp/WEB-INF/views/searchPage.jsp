@@ -2,13 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 	String userID = null;
-	if( session.getAttribute("userID") != null ) {
-		userID = ( String ) session.getAttribute("userID");
-	} else {
-		userID = "tester1";
-	}
+
 %>        
 
-<jsp:include page="./search/search.jsp">
-	<jsp:param name="userID" value="<%= userID %>"/>
-</jsp:include>
+<jsp:include page="./search/search.jsp"/>
