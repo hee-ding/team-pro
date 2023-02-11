@@ -6,8 +6,7 @@
 <%@page import="com.maumgagym.dao.MemberDAO"%>  
     <%
 	
-	BoardDAO dao = new BoardDAO();
-	ArrayList<BoardTO> boardLists = dao.boardList();
+	ArrayList<BoardTO> boardLists = (ArrayList) request.getAttribute("boardList");
 	
 	
 	StringBuilder sbBoard = new StringBuilder();
@@ -25,7 +24,7 @@
 				sbBoard.append("<td class='w-25 text-end'>" + nickname + "</td>");
 				sbBoard.append("</tr>");
 			 }
-	ArrayList<BoardTO> facilityBoardLists = dao.facilityBoardList();
+	ArrayList<BoardTO> facilityBoardLists = (ArrayList) request.getAttribute("facilityBoardList");
 
 	StringBuilder sbFacility = new StringBuilder();
 			 
