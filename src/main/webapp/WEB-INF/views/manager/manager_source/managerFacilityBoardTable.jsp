@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="com.to.board.BoardTO"%>
+<%@page import="com.maumgagym.dto.BoardTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.to.board.BoardDAO"%>    
+<%@page import="com.maumgagym.dao.BoardDAO"%>    
 <%
 	
-	BoardDAO dao = new BoardDAO();
-	ArrayList<BoardTO> facilityBoardLists = dao.facilityBoardList();
+	ArrayList<BoardTO> facilityBoardLists = (ArrayList) request.getAttribute("facilityBoardList");
 	
 	int totalRecord = facilityBoardLists.size(); //총데이터갯수
 	
