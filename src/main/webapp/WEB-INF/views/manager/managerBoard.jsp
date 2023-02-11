@@ -23,8 +23,17 @@
 	    
 	    <link rel="stylesheet" href="../resources/manager/css/style.css">
 
+  	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	   	<!-- Bootstrap core JS-->
+  	    
+	    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
+	    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
+	    <script src="../resources/manager/js/simple-datatables.js"></script>
+	    
+	    
+	    
 	</head>
-	
+
 	<body>
 	<jsp:include page="../include/headerManager.jsp">
 		<jsp:param name="userID" value="<%= userID %>"/>
@@ -33,16 +42,7 @@
 
 	<jsp:include page="./manager_source/managerBoardTable.jsp"/>
 
-	
-   	<!-- Bootstrap core JS-->
-    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
-    
-
-    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
-
-    <script src="../resources/manager/js/simple-datatables.js"></script>
-    
-    <script src="../resources/manager/js/main.js"></script>
+	<script src="../resources/manager/js/main.js"></script>
     
     <script>
        // Simple Datatable
