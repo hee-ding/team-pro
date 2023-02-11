@@ -9,8 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="./resources/asset/css/facility_list.css" rel="stylesheet" />
+	<link href="../resources/asset/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/asset/css/facility_list.css" rel="stylesheet" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
       
@@ -32,7 +32,7 @@
 	<jsp:include page="../include/footer.jsp" />
 	
 	<!-- script -->
-    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
-    <script src="./resources/asset/js/owl.carousel.min.js"></script>
+    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
+    <script src="../resources/asset/js/owl.carousel.min.js"></script>
 </body>
 </html>

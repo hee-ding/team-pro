@@ -9,8 +9,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
-	<link href="./resources/asset/css/facility_list.css" rel="stylesheet" />
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f61974c964e26a20af178434325c0690&libraries=services"></script>
+	<script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
+	<script src="../resources/asset/script/jquery-3.6.0.js"></script>	
+	<script src="../resources/asset/js/owl.carousel.min.js"></script>	
+	<link href="../resources/asset/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../resources/asset/css/facility_list.css" rel="stylesheet" />    
+    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
       
@@ -40,20 +45,13 @@
 				<a href="./facilityPage.jsp?" class="btn btn-warning2 btn-lg">이 근처 운동시설 찾기</a>
 			</div>
 			-->
-			<form class="d-grid gap-2 col-6 mx-auto px-5 py-5" action="./facility_list.jsp" method="get" id="facility"> 
+			<form class="d-grid gap-2 col-6 mx-auto px-5 py-5" action="/facility/list/address" method="GET" id="facility"> 
 				<input type="hidden" id="dongAddr" name="dongAddr" value="" />
 				<input class="btn btn-warning2 btn-lg" id="link1" type="button" value="이 근처 운동시설 찾기" onclick="link1_click();" />
 			</form>
 		</div>
 	</div>
 
-
-	<!-- script -->
-    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
-    <script src="./resources/asset/js/owl.carousel.min.js"></script>	
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f61974c964e26a20af178434325c0690&libraries=services"></script>
-	<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
-	<script src="./resources/asset/script/jquery-3.6.0.js"></script>	
 <script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div
     mapOption = { 
@@ -99,7 +97,6 @@ kakao.maps.event.addListener(map, 'center_changed', function() {
 	
 	kakao.maps.event.addListener(map, 'idle', function() {
 
-	
 		//console.log( '위도 : ' + latlng.getLat() );
 		//console.log( '경도 : ' + latlng.getLng() );
 	
@@ -162,10 +159,11 @@ kakao.maps.event.addListener(map, 'center_changed', function() {
 		//alert( $("#centerAddr").text() );
 		var data = $("#centerAddr").text();  // 지도에서 받은 행정동 주소를 data로 넣고 
 		if( data != null ) {	// dat가 null이 아니면
-			location.href="./facilityPage.jsp?dongAddr="+data;  // 링크 이동 
+			//location.href="./facilityPage.jsp?dongAddr="+data;  // 링크 이동 
+			location.href="/facility/list?q="+data;  // 링크 이동 
+			
 		}
 	}
-	
 
 </script>	
 	
