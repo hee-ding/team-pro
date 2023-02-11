@@ -16,13 +16,16 @@
         <!-- Bootstrap icons-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="./resources/asset/css/bootstrap.min.css" rel="stylesheet" />
-			
-	    <link rel="stylesheet" href="./manager/manager_source/resources/css/perfect-scrollbar.css">
-	    <link rel="stylesheet" href="./manager/manager_source/resources/css/app.css">
-	    
-	    <link rel="stylesheet" href="./manager/manager_source/resources/css/style.css">
+        <link href="../resources/asset/css/bootstrap.min.css" rel="stylesheet" />
+	    <link rel="stylesheet" href="../resources/manager/css/perfect-scrollbar.css">
+	    <link rel="stylesheet" href="../resources/manager/css/app.css">
+	    <link rel="stylesheet" href="../resources/manager/css/style.css">
 
+	   	<!-- Bootstrap core JS-->
+	    <script src="../resources/manager/js/bootstrap.bundle.min.js" ></script>
+	    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
+	    <script src="../resources/manager/js/simple-datatables.js"></script>
+	    <script src="../resources/manager/js/main.js"></script>
 	</head>
 	
 	<body>
@@ -34,15 +37,6 @@
 	<jsp:include page="./manager_source/managerMemberTable.jsp"/>
 
 	
-   	<!-- Bootstrap core JS-->
-    <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
-    
-
-    <script src="./manager/manager_source/resources/js/perfect-scrollbar.min.js"></script>
-
-    <script src="./manager/manager_source/resources/js/simple-datatables.js"></script>
-    
-    <script src="./manager/manager_source/resources/js/main.js"></script>
     
     <script>
        // Simple Datatable

@@ -306,7 +306,7 @@ public class MemberDAO {
 			}
 		}
 		
-		public ArrayList<MemberTO> memberList() {
+	public ArrayList<MemberTO> memberList() {
 			
 			Connection conn = null;
 			PreparedStatement pstmt = null;
@@ -317,15 +317,18 @@ public class MemberDAO {
 				
 				conn = this.dataSource.getConnection();
 				
-				String sql = "select name, email from member order by seq desc";
+				String sql = "select seq, name, id, email, birthday from member order by seq desc";
 				pstmt = conn.prepareStatement( sql );
 				
 				rs = pstmt.executeQuery();
 				
 				while( rs.next() ) {
 					MemberTO to = new MemberTO();
+					to.setSeq(rs.getInt("seq"));
 					to.setName (rs.getString( "name" ));
+					to.setId(rs.getString("id"));
 					to.setEmail (rs.getString( "email" ));
+					to.setBirthday(rs.getString("birthday"));
 					
 					memberLists.add(to);
 				}
@@ -341,3 +344,4 @@ public class MemberDAO {
 			return memberLists;
 		}
 	}
+

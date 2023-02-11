@@ -1,27 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.to.member.MemberTO" %>
-<%@page import="com.to.member.MemberDAO"%>
+<%@ page import="com.maumgagym.dto.MemberTO" %>
+<%@page import="com.maumgagym.dao.MemberDAO"%>
 <%@ page import="java.util.ArrayList" %>
 
 <%
 
-MemberDAO dao = new MemberDAO();
-ArrayList<MemberTO> memberLists = dao.memberList();
+ArrayList<MemberTO> memberLists = (ArrayList) request.getAttribute("memberList");
 
 int totalRecord = memberLists.size();
 
 StringBuilder sbHtml = new StringBuilder();
 
 for( MemberTO to : memberLists){
+	int seq = to.getSeq();
 	String name = to.getName();
+	String id = to.getId();
 	String email = to.getEmail();
+	String birthday = to.getBirthday();
 	 
 	sbHtml.append("<tr>");
-	sbHtml.append("<td>&nbsp;</td>");
+	sbHtml.append("<td>" + seq + "</td>");
 	sbHtml.append("<td>" + name + "</td>");
+	sbHtml.append("<td>" + id + "</td>");
 	sbHtml.append("<td>" + email + "</td>");
-	sbHtml.append("<td>&nbsp;</td>");
+	sbHtml.append("<td>" + birthday + "</td>");
+	sbHtml.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
 	sbHtml.append("</tr>");
  }
 %>
