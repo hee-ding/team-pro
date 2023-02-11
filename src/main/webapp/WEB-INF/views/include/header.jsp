@@ -54,7 +54,7 @@
 	            <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
 	              <i class="bi bi-chat-left-dots"></i>
 	            </a>
-	            <a class="navbar-brand ps-3" href="./userPage.jsp">
+	            <a class="navbar-brand ps-3" href="/mypage/<%=id%>">
 	              <i class="bi bi-person"></i>
 	            </a>
 	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>

@@ -27,14 +27,13 @@
 	}
 	
 	
-/*  	if( id == null || type == null ||  nickname == null ) {
+  	if( id == null || type == null ||  nickname == null ) {
 		out.println( "<script type = 'text/javascript'>");
 		out.println( "alert( '로그인을 하셔야 합니다.'); " );
 		out.println( "location.href='./loginPage.jsp';" );
 		out.println( "</script>" );
 	} 
-	 */
-	//System.out.println( id );
+	 
 
 %>
 <!DOCTYPE html>
