@@ -14,6 +14,9 @@
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <!-- Core theme CSS (includes Bootstrap)-->
+    
+    <!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
       
 </head>
 <body>
@@ -36,5 +39,9 @@
     <script src="./resources/asset/js/bootstrap.bundle.min.js" ></script>
 	<script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
+    
+    <!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
+	
 </body>
 </html>

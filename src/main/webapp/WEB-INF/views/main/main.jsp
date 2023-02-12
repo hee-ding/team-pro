@@ -30,23 +30,9 @@
 	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
 	
 	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
+	    <!--  header news -->
+	    <link rel="stylesheet" href="/resources/asset/css/news.css"/>
 	    
-	    <style type="text/css">
-	    
-	    #news{margin : 10px 0px 0px 150px}
-		.alert_list{font-size: 11px; color:grey}
-		li.alert_li {
-		  font-size: 11px; 
-		  color:grey;
-		  padding:10px 0px 2px 0px;
-		  border-bottom: thin solid #c0c0c0;
-		}
-		li.alert_li:hover{background-color:#eee}
-		.turn_off_alert{float:right;margin-bottom :1px}
-		a.alert_message{color : grey}
-		a.alert_message:hover{color : grey}
-	    
-	    </style>
 	</head>
 	
 	<body>
@@ -73,16 +59,8 @@
     <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
     <script src="./resources/asset/js/custom.js"></script>
+    <!--  header news -->
+    <script src="/resources/asset/js/news.js"></script>
     
-    <script>
-    $(document).ready(function(data){
-	    $("#news").popover({
-    	  'title' : '알림', 
-    	  'html' : true,
-    	  'placement' : 'bottom',
-    	  'content' : $(".alert_list").html()
-    	});
-    });
-	</script>
 	</body>
 </html>

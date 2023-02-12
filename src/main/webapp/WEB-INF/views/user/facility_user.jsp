@@ -54,6 +54,9 @@
     		font-size: 14px;
     	}
     </style>
+    
+    <!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 
 </head>
 <body>
@@ -93,5 +96,7 @@
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
     
+    <!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
 </body>
 </html>

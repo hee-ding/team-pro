@@ -218,7 +218,7 @@ public class MypageDAO {
 			
 			StringBuilder sb = new StringBuilder();
 			
-			sb.append( "SELECT CONCAT( c.topic ) '카테고리' ," );
+			sb.append( "SELECT b.seq '글번호', CONCAT( c.topic ) '카테고리' ," );
 			sb.append( "	CONCAT ( '[', ms.seq, '] ', ms.name ) '회원권 정보',");
 			sb.append( "		m.name '회원 이름', m.phone '회원 연락처',");
 			sb.append( "			IFNULL ( DATE_FORMAT( msr.register_date, '%Y-%m-%d'), '-' ) '회원권 등록일', IFNULL( DATE_FORMAT( msr.expiry_date ,'%Y-%m-%d'), '-' ) '회원권 만료일', ");
@@ -260,6 +260,7 @@ public class MypageDAO {
 				map = new HashMap();
 				
 				BoardTO bto = new BoardTO();
+				bto.setSeq( rs.getInt("글번호") );
 				bto.setFullCategoryString( rs.getString("카테고리") );
 				map.put( "bto", bto );
 				
@@ -436,6 +437,37 @@ public class MypageDAO {
 			if( pstmt.executeUpdate() == 1) {
 				flag = 0;
 			} else { flag = 8; }
+			
+			} catch( SQLException e) {
+				System.out.println( e.getMessage());
+			} finally {
+				if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if( conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		
+		return flag;
+	
+	}
+	
+	// [일반 회원] update 멤버쉽 승인 요청 후 news 테이블 insert
+	// flag 0 정상
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
+	public int InsertNews( MemberTO mto, BoardTO bto ) {
+		int flag = 9;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+				
+			conn = dataSource.getConnection();
+			
+			String sql = "insert into news values ( 0, ?, now(), 3, 'N', ? ) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mto.getSeq() );
+			pstmt.setInt(2, bto.getSeq() );
+			
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
 			
 			} catch( SQLException e) {
 				System.out.println( e.getMessage());

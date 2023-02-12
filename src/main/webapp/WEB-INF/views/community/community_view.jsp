@@ -29,6 +29,9 @@ String id = (String) session.getAttribute("id");
 	</script>
 	<script src="https://kit.fontawesome.com/38f6d5c6ab.js" crossorigin="anonymous"></script>
 	
+	<!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
+	
 </head>
 <body>
 
@@ -59,6 +62,9 @@ String id = (String) session.getAttribute("id");
     </script>
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
+	
+	<!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
 
 </body>
 </html>

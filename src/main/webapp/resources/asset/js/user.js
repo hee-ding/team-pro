@@ -2,11 +2,16 @@
 // [일반 회원] 멤버쉽 승인 요청
 function membershipRegister( data ){ 
 	
+		console.log( $('#reqMemberSeq').val() );
+		console.log($('#boardSeq').val() ); 
+	/*
 	$.ajax({
 	url: '/membership/request',
 	type: 'post',
 	data: {
-		merchant_uid : data.value
+		merchant_uid : data.value,
+		req_member_seq : $('#reqMemberSeq').val(),
+		board_seq : $('#boardSeq').val()
 	},
 	dataType: 'json',
 	success: function( jsonData ) {
@@ -27,6 +32,7 @@ function membershipRegister( data ){
 		alert( '[에러] ' + err.status);
 	}
 });
+*/
 	
 }
 

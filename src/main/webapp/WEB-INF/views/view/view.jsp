@@ -63,6 +63,9 @@
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<!-- iamport.payment.js -->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+		
+		<!--  header news -->
+		<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 	        
 	</head>
 		
@@ -94,9 +97,9 @@
 	    <script src="../resources/asset/js/custom.js"></script>
 	    <script src="../resources/asset/js/facilityViewMap.js"></script>
 	    
+	    <!--  header news -->
+		<script src="/resources/asset/js/news.js"></script>
+		
 	</body>
 </html>
-
-
-
     

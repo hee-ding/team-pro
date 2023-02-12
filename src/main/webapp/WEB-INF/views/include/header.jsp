@@ -17,8 +17,6 @@
 	
 	
 %>       
-    <!-- header navbar -->
-
 	<nav class="navbar navbar-expand-lg navbar-light bg-white text-black">
 	    <div class="container px-3 px-lg-5">
 	        <a class="navbar-brand" href="/home"><img src="../resources/asset/images/logo_1.jpg" height="36"></a>
@@ -53,13 +51,13 @@
 	            
 	            <a class="navbar-brand ps-3" id="news" class="btn">
 	              <i class="bi bi-chat-left-dots"></i>
-	              <span style="position: relative; top: -15px; right: 5px; border: $white 1px solid; font-size: 13px;" class="badge badge-danger">2</span>
+	              <span style="position: relative; top: -15px; right: 5px; font-size: 13px;" class="badge bg-primary rounded-pill">2</span>
 	            </a>
 
-				<div style="display:none; font-size: 10px;" class="alert_list">
+				<div style="display:none; font-size: 10px;" class="alert_list ">
 				  <ul class="list-group list-group-flush">
-				    <li data-alert_id="1" class="list-group-item"><a href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert">몇초 전</a></li>
-				    <li data-alert_id="3"class="list-group-item"><a href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert">10분 전</a></li>
+				    <li data-alert_id="1" class="list-group-item"><a class="text-decoration-none" href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert text-decoration-none">몇초 전</a></li>
+				    <li data-alert_id="3"class="list-group-item"><a class="text-decoration-none" href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert text-decoration-none">10분 전</a></li>
 				  </ul>
 				</div>
 	            
@@ -88,4 +86,3 @@
 	        </div>
 	    </div>
 	</nav>
-	<!-- /header navbar -->

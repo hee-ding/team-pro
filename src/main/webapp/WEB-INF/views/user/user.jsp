@@ -50,6 +50,10 @@
 	<!-- review css -->
 	<link href="../resources/asset/css/review.css" rel="stylesheet" />
 	
+	<!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
+	
+	
 </head>
 <body>
 	
@@ -74,6 +78,9 @@
 	<script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="../resources/asset/js/owl.carousel.min.js"></script>
     <script src="../resources/asset/js/user.js"></script>
+    
+    <!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
     
 </body>
 </html>

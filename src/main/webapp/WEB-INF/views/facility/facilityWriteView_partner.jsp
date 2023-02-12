@@ -22,6 +22,9 @@
 	<script src="./facility/facility_source/summernote/summernote-lite.js"></script>
 	<script src="./facility/facility_source/summernote/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="./facility/facility_source/summernote/summernote-lite.css">  
+	
+	<!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 </head>
 <body>
 	
@@ -46,6 +49,9 @@
 	        lang: "ko-KR"
 	    });
     </script>
+    
+    <!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
     
 </body>
 </html>

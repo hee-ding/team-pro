@@ -26,6 +26,9 @@ String id = (String) session.getAttribute("id");
 	  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> 
   	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
   	<script src=" https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+  	
+  	<!--  header news -->
+	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 </head>
 <body>
 
@@ -62,6 +65,9 @@ String id = (String) session.getAttribute("id");
 			};
 		}
 	</script>
+	
+	<!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
 
 </body>
 </html>

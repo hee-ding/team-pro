@@ -99,6 +99,13 @@ public class MypageController {
 		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
 		
 		int flag = dao.InsertRequestMembership(pto);
+		
+		if( flag == 0 ) {
+			//flag = dao.InsertNews( mto, bto );
+		} else {
+			//break;
+		}
+		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		map.put("flag", flag);
 		

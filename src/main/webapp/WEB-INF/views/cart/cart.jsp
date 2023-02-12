@@ -26,6 +26,10 @@
 	    <link rel="stylesheet" href="./resources/asset/css/owl.theme.default.min.css"/>
 	
 	    <link href="./resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
+	    
+	    <!--  header news -->
+		<link rel="stylesheet" href="/resources/asset/css/news.css"/>
+
 	    <!-- nav bar -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	</head>
@@ -48,6 +52,9 @@
     <script src="./resources/asset/script/jquery-1.11.1.min.js"></script>
     <script src="./resources/asset/js/owl.carousel.min.js"></script>
     <script src="./resources/asset/js/custom.js"></script>
+    
+    <!--  header news -->
+	<script src="/resources/asset/js/news.js"></script>
     
 	</body>
 </html>
