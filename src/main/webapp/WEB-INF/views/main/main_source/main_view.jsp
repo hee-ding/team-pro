@@ -45,7 +45,6 @@
 			sbRecommendedList.append( " 		</div> "); 
 		}
 	} 
-	
 	StringBuilder sbFacilityBoardCountList = new StringBuilder();
 	String[] imageArry = { "fitness", "yoga", "swimming", "tennis", "tabata", "pilates", "golf", "boxing", "dance" };
 	int i = 0;
@@ -55,7 +54,7 @@
 		
 		sbFacilityBoardCountList.append("		<div class='col-lg-3 col-md-6 col-12 mb-4 mb-lg-5'> ");
 		sbFacilityBoardCountList.append("		<div class='custom-block custom-block-overlay'> ");
-		sbFacilityBoardCountList.append("			<a href='detail-page.html' class='custom-block-image-wrap'> "); 
+		sbFacilityBoardCountList.append("			<a href='/facility/list?category_seq=" + ( i + 1 ) + "' class='custom-block-image-wrap'> "); 
 		sbFacilityBoardCountList.append("				<img src='./resources/asset/images/main_view/main_category/" + imageArry[i] + ".jpg' class='custom-block-image img-fluid' alt=''> ");
 		sbFacilityBoardCountList.append("			</a> ");
 		sbFacilityBoardCountList.append("			<div class='custom-block-info custom-block-overlay-info'> ");
@@ -75,6 +74,7 @@
  	
  	StringBuilder sbWeeklyBoardList = new StringBuilder();
  	for( BoardTO to : weeklyBoardList) {
+ 		
 		String title = to.getTitle();
 		String topic = to.getTopic();
 		String nickname = to.getNickname();
@@ -84,7 +84,7 @@
 		String imageName = to.getImage_name();
 		
 		sbWeeklyBoardList.append( " <div class='col-lg-4 col-12 mb-4 mb-lg-0'> " );
-		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full'> " );
+		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full mb-5'> " );
 		sbWeeklyBoardList.append( "				<div class='custom-block-image-wrap'> " );
 		if( imageName != null ) {
 		sbWeeklyBoardList.append( "					<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/" + imageName + "' class='custom-block-image img-fluid' alt=''> " );
@@ -118,6 +118,35 @@
 		sbWeeklyBoardList.append( "			</div> " );
 		sbWeeklyBoardList.append( "		</div> " );
 	}
+ 	
+ 	for( i = 0; i < 6 - weeklyBoardList.size(); i++ ) {
+ 		
+		sbWeeklyBoardList.append( " <div class='col-lg-4 col-12 mb-4 mb-lg-0'> " );
+		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full mb-5'> " );
+		sbWeeklyBoardList.append( "				<div class='custom-block-image-wrap'> " );
+		sbWeeklyBoardList.append( "					<a> <img ' class='custom-block-image img-fluid' alt=''> " );
+		sbWeeklyBoardList.append( "					</a> " );
+		sbWeeklyBoardList.append( "				</div> " );
+		sbWeeklyBoardList.append( "				<div class='custom-block-info'> " );
+		sbWeeklyBoardList.append( "					<h5 class='mb-2'> " );
+		sbWeeklyBoardList.append( "						<a>아직 등록된 글이 없습니다.</a> " );
+		sbWeeklyBoardList.append( "					</h5> " );
+		sbWeeklyBoardList.append( "					<div class='profile-block d-flex'> " );
+		sbWeeklyBoardList.append( "						<p> " );
+		sbWeeklyBoardList.append( "						<strong></strong> " );
+		sbWeeklyBoardList.append( "						</p> " );
+		sbWeeklyBoardList.append( "					</div> " );
+		sbWeeklyBoardList.append( "					<div class='custom-block-bottom d-flex justify-content-between mt-3'> " );
+		sbWeeklyBoardList.append( "						<a href='#' class='bi bi-hand-index-thumb me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-heart me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-chat me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						</a> " );
+		sbWeeklyBoardList.append( "					</div> " ); 
+		sbWeeklyBoardList.append( "				</div> " );
+		sbWeeklyBoardList.append( "			</div> " );
+		sbWeeklyBoardList.append( "		</div> " );
+ 		
+ 	}
 	
 %>    
 		<div class="container">
@@ -129,7 +158,7 @@
 							마음가짐 회원이라면, 우주 최저가 혜택 받아야죠!
 							</h2>
 							<p class="text-dark">직접 방문한 것보다 더 저렴해요. 지금 둘러보세요.</p>
-							<a href="#section_2" class="btn custom-btn smoothscroll mt-3">보러가기</a>
+							<a href="/facility/list" class="btn custom-btn smoothscroll mt-3">보러가기</a>
 					</div>
 	
 					<div class="owl-carousel owl-theme">
@@ -146,7 +175,7 @@
 	
 					<div class="col-lg-12 col-12">
 						<div class="section-title-wrap mb-5">
-							<h4 class="section-title">운동 종류</h4>
+							<h4 class="section-title">운동시설 종류</h4>
 						</div>
 					</div>
 						<%= sbFacilityBoardCountList.toString() %>	
