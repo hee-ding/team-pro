@@ -148,6 +148,15 @@ CREATE TABLE `membership_hold` (
 	`register_seq` int NOT NULL
 );
 
+CREATE TABLE `news` (
+	`seq` int NOT NULL,
+	`req_member_seq` int NOT NULL,
+	`req_date` datetime NOT NULL,
+	`type` int NOT NULL,
+	`read_check` char(1) NOT NULL,
+	`board_seq` int NOT NULL
+);
+
 
 ALTER TABLE `board` ADD CONSTRAINT `PK_BOARD` PRIMARY KEY (
 	`seq`
@@ -217,6 +226,7 @@ ALTER TABLE `pay` ADD CONSTRAINT `PK_PAY` PRIMARY KEY (
 	`merchant_uid`
 );
 
+
 ALTER TABLE `membership_register` ADD CONSTRAINT `PK_MEMBERSHIP_REGISTER` PRIMARY KEY (
 	`seq`
 );
@@ -224,6 +234,11 @@ ALTER TABLE `membership_register` ADD CONSTRAINT `PK_MEMBERSHIP_REGISTER` PRIMAR
 ALTER TABLE `membership_hold` ADD CONSTRAINT `PK_MEMBERSHIP_HOLD` PRIMARY KEY (
 	`seq`
 );
+
+ALTER TABLE `news` ADD CONSTRAINT `PK_NEWS` PRIMARY KEY (
+	`seq`
+);
+
 
 ALTER TABLE board MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
@@ -258,6 +273,8 @@ ALTER TABLE cart MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE membership_register MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE membership_hold MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE news MODIFY seq INT(11) NOT NULL AUTO_INCREMENT;
 
 
 
@@ -419,6 +436,20 @@ ALTER TABLE `membership_hold` ADD CONSTRAINT `FK_membership_register_TO_membersh
 	`register_seq`
 )
 REFERENCES `membership_register` (
+	`seq`
+);
+
+ALTER TABLE `news` ADD CONSTRAINT `FK_member_TO_news_1` FOREIGN KEY (
+	`req_member_seq`
+)
+REFERENCES `member` (
+	`seq`
+);
+
+ALTER TABLE `news` ADD CONSTRAINT `FK_board_TO_news_1` FOREIGN KEY (
+	`board_seq`
+)
+REFERENCES `board` (
 	`seq`
 );
 

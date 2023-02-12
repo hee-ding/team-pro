@@ -35,7 +35,7 @@
 	            <%	
 	            	}  
 	            %>	                
-	                <li class="nav-item px-4"><a class="nav-link" onclick="location.href='./customerCenter_viewPage.jsp'">고객센터</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="'./customerCenter_viewPage.jsp'">고객센터</a></li>
 	            </ul>
 	            <%
 	            	if( id == null ) {
@@ -51,9 +51,18 @@
 	            		if( ( type.equals( "M" ) ) ) {
 	            %>
 	            
-	            <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
+	            <a class="navbar-brand ps-3" id="news" class="btn">
 	              <i class="bi bi-chat-left-dots"></i>
+	              <span style="position: relative; top: -15px; right: 5px; border: $white 1px solid; font-size: 13px;" class="badge badge-danger">2</span>
 	            </a>
+
+				<div style="display:none; font-size: 10px;" class="alert_list">
+				  <ul class="list-group list-group-flush">
+				    <li data-alert_id="1" class="list-group-item"><a href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert">몇초 전</a></li>
+				    <li data-alert_id="3"class="list-group-item"><a href="#">OOO님이 000글의 댓글을 달았습니다.</a> <br /><a href="#" class="turn_off_alert">10분 전</a></li>
+				  </ul>
+				</div>
+	            
 	            <a class="navbar-brand ps-3" href="/mypage/<%=id%>">
 	              <i class="bi bi-person"></i>
 	            </a>
@@ -63,8 +72,9 @@
 	            		} else {
 	            %>
 	            
-    	        <a class="navbar-brand ps-3" href="./searchIDPage.jsp">
+    	        <a class="navbar-brand ps-3" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">
 	              <i class="bi bi-chat-left-dots"></i>
+	              <span style="position: relative; top: -15px; right: 5px; border: $white 1px solid; font-size: 13px;" class="badge badge-danger">1</span>
 	            </a>
 	            <a class="navbar-brand ps-3" href="./facilityUserPage.jsp">
 	              <i class="bi bi-person"></i>
@@ -78,5 +88,4 @@
 	        </div>
 	    </div>
 	</nav>
-
 	<!-- /header navbar -->
