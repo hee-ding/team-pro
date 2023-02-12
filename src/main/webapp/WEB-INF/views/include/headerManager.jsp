@@ -18,11 +18,11 @@
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-	                <li class="nav-item px-4 "><a class="nav-link" href="./managerMainPage.jsp">홈</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="./managerFacilityBoardPage.jsp">운동시설관리</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="./managerBoardPage.jsp">게시물관리</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="./managerCommentPage.jsp">댓글관리</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="./managerMemberPage.jsp">회원관리</a></li>
+	                <li class="nav-item px-4 "><a class="nav-link" href="/manager/main">홈</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="/manager/facilityboard">운동시설관리</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="/manager/board">게시물관리</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="/manager/comment">댓글관리</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="/manager/member">회원관리</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li>
 	            </ul>
 	         <%--    <%
