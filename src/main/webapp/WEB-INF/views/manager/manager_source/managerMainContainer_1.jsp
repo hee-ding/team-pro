@@ -87,7 +87,7 @@
 					<div class="card">
 						<div class="card-header">
 							<h4 class="card-title">
-								공지/이벤트・커뮤니티 최근게시물<a href="./managerBoardPage.jsp"><i
+								공지/이벤트・커뮤니티 최근게시물 <a href="./managerBoardPage.jsp"><i
 									class="bi bi-box-arrow-in-up-right text-nowrap text-end"></i></a>
 							</h4>
 						</div>
@@ -118,3 +118,4 @@
 
 	</div>
 </div>
+

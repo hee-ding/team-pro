@@ -11,16 +11,7 @@
 
 	
 	StringBuilder sbBoard = new StringBuilder();
-			 /*
-			 					BoardTO to = new BoardTO();
-					to.setSeq(rs.getInt("b.seq"));
-					to.setCategory(rs.getString("c.category"));
-					to.setTopic(rs.getString("c.topic"));
-					to.setTitle(rs.getString("b.title"));
-					to.setNickname(rs.getString("m.nickname"));
-					to.setWrite_date(rs.getString("b.write_date"));
-					boardLists.add(to);
-			 */
+			
 			 for( BoardTO to : boardLists){
 				int seq = to.getSeq();
 				String category = to.getCategory();
