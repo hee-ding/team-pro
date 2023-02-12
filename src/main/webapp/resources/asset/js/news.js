@@ -42,6 +42,10 @@ $(document).ready(function(data){
 			}
 		}
 		
+		if( result.data.length == 0 ) {
+			$('.alert_list').append( "아직 알림이 없습니다." );
+		}
+		
 		$('#news').popover({
 		  'title' : '알림', 
 		  'html' : true,
