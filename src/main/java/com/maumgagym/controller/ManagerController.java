@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.BoardDAO;
+import com.maumgagym.dao.CommentDAO;
 import com.maumgagym.dao.MemberDAO;
 import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.CommentTO;
 import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.PayTO;
@@ -38,6 +40,8 @@ public class ManagerController {
 	private BoardDAO bdao;
 	@Autowired
 	private MemberDAO mdao;
+	@Autowired
+	private CommentDAO cdao;
 	
 	@RequestMapping("/manager/board")
 	public ModelAndView boardlist( ) { 
@@ -75,17 +79,17 @@ public class ManagerController {
 		return modelAndView;
 		
 	}
-//	@RequestMapping("/manager/comment")
-//	public ModelAndView commentList( ) { 
-//		ArrayList<BoardTO> facilityBoardLists = dao.facilityBoardList();
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName("managerCommentPage");
-//		modelAndView.addObject("facilityBoardList", facilityBoardLists);
-//		
-//		return modelAndView;
-//		
-//	}
+	@RequestMapping("/manager/comment")
+	public ModelAndView commentList( ) { 
+		ArrayList<CommentTO> commentLists = cdao.commentList();
+		
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("managerCommentPage");
+		modelAndView.addObject("commentList", commentLists);
+		
+		return modelAndView;
+
+	}
 	
 	@RequestMapping("/manager/member")
 	public ModelAndView member(){ 
@@ -103,6 +107,21 @@ public class ManagerController {
 	public Map<String, Object> boardDelete( HttpServletRequest request, @RequestParam int seq) {
 		int result = bdao.boardDelete(seq);
 		log.debug("boardDelete");
+		Map<String, Object> param = new HashMap<>();
+		
+		if(result > 0) {
+			param.put("msg", "success");
+		}else {
+			param.put("msg", "fail...");
+		}
+		return param;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/manager/facilityBoardDelete")
+	public Map<String, Object> facilityBoardDelete( HttpServletRequest request, @RequestParam int seq) {
+		int result = bdao.facilityBoardDelete(seq);
+		log.debug("facilityBoardDelete");
 		Map<String, Object> param = new HashMap<>();
 		
 		if(result > 0) {

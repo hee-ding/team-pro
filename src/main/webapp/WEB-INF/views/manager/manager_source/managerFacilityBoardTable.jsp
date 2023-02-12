@@ -29,16 +29,36 @@
 				sbFacility.append("</td>");
 				sbFacility.append("<td>" + name + "</td>");
 				sbFacility.append("<td>" + date + "</td>");
-				sbFacility.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
+				sbFacility.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\" id=\"delete\">삭제</span></a></td>");
 				sbFacility.append("</tr>");
 			 }
-%>    
-<hr/>
+%> 
+<hr/>   
 <script type="text/javascript">
 function deleteboard(deleteSeq) {
-	alert(deleteSeq);
-	
-	//ajax 삭제 쿼리
+//	alert(deleteSeq);
+var param = {
+		seq : deleteSeq
+}
+	$("#delete").click(function () {
+		var ans = confirm("선택하신 글을 삭제하시겠습니까?");
+		console.log('click!!!!!');
+		if(ans === true){
+	        $.ajax({
+	            url: "/manager/facilityBoardDelete",
+	            method: "GET",
+	            dataType: "json",
+	            data:param,
+	            success: function (data) {
+	                console.log(data);
+	                location.reload();
+	               	alert('삭제되었습니다.');
+	            }
+	        });
+		}else{
+			return false;
+		}
+	});
 }
 </script>
 		<div class="container mt-5">

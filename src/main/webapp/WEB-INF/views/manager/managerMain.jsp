@@ -39,8 +39,8 @@
 	
 
 	<jsp:include page="./manager_source/managerMainContainer_1.jsp"/>
-	<jsp:include page="./manager_source/managerMainContainer_2.jsp"/>
-
+<%-- 	<jsp:include page="./manager_source/managerMainContainer_2.jsp"/>
+ --%>
 	
     
 	</body>

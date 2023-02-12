@@ -20,9 +20,15 @@
 			
 	    <link rel="stylesheet" href="../resources/manager/css/perfect-scrollbar.css">
 	    <link rel="stylesheet" href="../resources/manager/css/app.css">
-	    
 	    <link rel="stylesheet" href="../resources/manager/css/style.css">
 
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+	   	<!-- Bootstrap core JS-->
+	    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
+	    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
+	    <script src="../resources/manager/js/simple-datatables.js"></script>
+	    <script src="../resources/manager/js/main.js"></script>
 	</head>
 	
 	<body>
@@ -34,15 +40,6 @@
 	<jsp:include page="./manager_source/managerFacilityBoardTable.jsp"/>
 
 	
-   	<!-- Bootstrap core JS-->
-    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
-    
-
-    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
-
-    <script src="../resources/manager/js/simple-datatables.js"></script>
-    
-    <script src="../resources/manager/js/main.js"></script>
     
     <script>
        // Simple Datatable

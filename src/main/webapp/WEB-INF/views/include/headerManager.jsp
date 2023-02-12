@@ -2,14 +2,18 @@
     pageEncoding="UTF-8"%>
 
 <%
+		
+	request.setCharacterEncoding( "utf-8" );
 	
 	String id = null;
+	String type = null;
+	// get id	
+	if( session.getAttribute("id") != null ) {
+		id = ( String ) session.getAttribute("id");
+	}
 	
-	if( request.getParameter( "id" ) != null && !"null".equals( request.getParameter( "id" ) ) ) {
-		id = request.getParameter( "id" );
-	} 
 	
-%>       
+%>      
     <!-- header navbar -->
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-white text-black">
@@ -25,25 +29,7 @@
 	                <li class="nav-item px-4"><a class="nav-link" href="/manager/member">회원관리</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li>
 	            </ul>
-	         <%--    <%
-	            	if( id == null ) {
-	            %> --%>
-	     <!--        <a class="navbar-brand ps-3 navbar_992_none" href="#">
-	              <button type="button" class="btn btn-primary rounded-pill"><span style="font-size:smaller;">로그인</span></button>
-	            </a>
-	            <a class="navbar-brand ps-3 navbar_992_none" href="#">
-	              <button type="button" class="btn btn-light rounded-pill"><span style="font-size:smaller;">회원가입</span></button>
-	            </a> -->
-       	     <%--    <%
-	            	} else { 
-            		 %> --%>
-	     	            
-	     	            <a class="navbar-brand ps-3 navbar_992_none" href="/home">
-	     	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='./member/Action/logout.jsp'"><span style="font-size:smaller;">로그아웃</span></button>
-	     	            </a>
-           	      <%--   <%
-	            	}
-	            %> --%>
+	     	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>
 	        </div>
 	    </div>
 	</nav>

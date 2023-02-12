@@ -15,12 +15,15 @@
 	if( session.getAttribute("id") != null ) {
 		id = ( String ) session.getAttribute("id");
 	}
-	
-	if( session.getAttribute("type") != null ) {
+
+ 	 if( session.getAttribute("type") != null ) {
 		type = ( String ) session.getAttribute( "type" );
-	}
+		if(type.equals("A")) {
+			pageContext.forward("/manager/main");
+		}
+	}   
 	
-%>       
+%>  
 	<nav class="navbar navbar-expand-lg navbar-light bg-white text-black">
 	    <div class="container px-3 px-lg-5">
 	        <a class="navbar-brand" href="/home"><img src="../resources/asset/images/logo_1.jpg" height="36"></a>

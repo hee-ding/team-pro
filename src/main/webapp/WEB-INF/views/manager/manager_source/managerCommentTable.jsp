@@ -1,5 +1,42 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.maumgagym.dto.CommentTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.maumgagym.dao.CommentDAO"%> 
+<%
+	
+	ArrayList<CommentTO> commentLists = (ArrayList) request.getAttribute("commentList");
+	
+	int totalRecord = commentLists.size(); //총데이터갯수
+	
+	StringBuilder cmto = new StringBuilder();
+			 
+			 for( CommentTO to : commentLists){
+				int seq = to.getSeq();
+				String category = to.getCategory();
+				String topic = to.getTopic();
+				String title = to.getTitle();
+				String content = to.getContent();
+				String nickname = to.getNickname();
+				String date = to.getWrite_date();
+				 
+				cmto.append("<tr>");
+				cmto.append("<td scope='row'>" + seq + "</td>");
+				cmto.append("<td>" + category + "</td>");
+				cmto.append("<td>" + topic + "</td>");
+				cmto.append("<td class='text-start fw-bold'>");
+				cmto.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				cmto.append("</td>");
+				cmto.append("<td>" + content + "</td>");
+				cmto.append("<td>" + nickname + "</td>");
+				cmto.append("<td>" + date + "</td>");
+				cmto.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\" id=\"delete\">삭제</span></a></td>");
+				cmto.append("</tr>");
+			 }
+%>     
+    
+    
+    
 <hr/>    
 
 		<div class="container mt-5">
@@ -23,376 +60,10 @@
                                         <th>댓글(리뷰) 내용</th>
                                         <th>작성자</th>
                                         <th>작성일</th>
-                                        <th>조회수</th>
                                         <th>기능</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>운동시설</td>
-                                        <td>피트니스</td>
-                                        <td>제목1</td>
-                                        <td>댓글1</td>
-                                        <td>회원1</td>
-                                        <td>2022-05-21 16:59:19</td>
-                                        <td>60</td>
-                                        <td>
-                                            <a href=""><span class="badge bg-success">수정</span></a>
-                                            <a ><span class="badge bg-danger">삭제</span></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                                <%= cmto.toString() %>
                             </table>
                         </div>
                     </div>
