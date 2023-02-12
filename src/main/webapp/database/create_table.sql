@@ -59,13 +59,6 @@ CREATE TABLE `comment` (
 	`board_seq` int NOT NULL
 );
 
-CREATE TABLE `group` (
-	`gcm` int NOT NULL,
-	`gcms` int NOT NULL,
-	`gcml` int NOT NULL,
-	`board_seq` int NOT NULL
-);
-
 CREATE TABLE `comment_modify` (
 	`seq` int NOT NULL,
 	`modify_date` datetime NOT NULL,
@@ -98,7 +91,7 @@ CREATE TABLE `member` (
 	`name` varchar(20) NULL,
 	`birthday` date NULL,
 	`phone` varchar(20) NULL,
-	`email` varchar(20) NULL,
+	`email` varchar(1000) NULL,
 	`type` varchar(1) NULL,
 	`zipcode` varchar(100) NULL,
 	`address` varchar(100) NULL,
@@ -189,10 +182,6 @@ ALTER TABLE `review` ADD CONSTRAINT `PK_REVIEW` PRIMARY KEY (
 
 ALTER TABLE `comment` ADD CONSTRAINT `PK_COMMENT` PRIMARY KEY (
 	`seq`
-);
-
-ALTER TABLE `group` ADD CONSTRAINT `PK_GROUP` PRIMARY KEY (
-	`gcm`
 );
 
 ALTER TABLE `comment_modify` ADD CONSTRAINT `PK_COMMENT_MODIFY` PRIMARY KEY (
@@ -343,13 +332,6 @@ REFERENCES `member` (
 );
 
 ALTER TABLE `comment` ADD CONSTRAINT `FK_board_TO_comment_1` FOREIGN KEY (
-	`board_seq`
-)
-REFERENCES `board` (
-	`seq`
-);
-
-ALTER TABLE `group` ADD CONSTRAINT `FK_board_TO_group_1` FOREIGN KEY (
 	`board_seq`
 )
 REFERENCES `board` (
