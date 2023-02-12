@@ -7,9 +7,9 @@
 	MemberTO to1 = (MemberTO)request.getAttribute( "result" );
 
 	if( to1.getFlag() == 1  ) {
-		//session.setAttribute("id", to1.getId());
-		//session.setAttribute("type", to.getType() );
-		//session.setAttribute("nickname", to.getNickname());
+		session.setAttribute("id", to1.getId());
+		session.setAttribute("type", to1.getType() );
+		session.setAttribute("nickname", to1.getNickname());
 		
 		out.println( "<script>" );
 		out.println( "alert( '로그인에 성공하셨습니다.' );" );
