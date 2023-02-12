@@ -1,5 +1,9 @@
 package com.maumgagym.dto;
 
+import lombok.Getter;
+import lombok.Setter;
+@Setter
+@Getter
 public class CommentTO {
 
 	int gcm;
@@ -7,6 +11,10 @@ public class CommentTO {
 	int gcml;
 	
 	int seq;
+	String category;
+	String topic;			//토픽
+	String title;
+	String nickname;
 	String content;
 	int writer_seq;
 	String write_date;

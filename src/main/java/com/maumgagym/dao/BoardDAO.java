@@ -56,7 +56,6 @@ public class BoardDAO {
 			
 		conn = this.dataSource.getConnection();
 		
-		//String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
 		String sql = "select b.seq\n"
 				+ "     , c.category\n"
 				+ "     , c.topic\n"
@@ -104,7 +103,6 @@ public class BoardDAO {
 				
 				conn = this.dataSource.getConnection();
 				
-				//String sql =  "select b.seq, c.seq, b.title, b.content, m.seq , b.write_date, r.like_count from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
 				String sql = "select b.seq\n"
 						+ "     , c.category\n"
 						+ "     , c.topic\n"
@@ -167,6 +165,31 @@ public class BoardDAO {
 			}
 		    return result;
 		}
+	  
+	  public int facilityBoardDelete(int seq) {
+		  
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null; 
+		  int result = 0;
+		  
+		  try {
+			  conn = this.dataSource.getConnection();
+			  
+			  String  sql = "delete from board where seq = ?";
+			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setInt(1, seq);
+			  result = pstmt.executeUpdate();
+			  
+		  }catch(SQLException e) {
+			  System.out.println( "[에러] " +  e.getMessage());
+		  } finally {
+			  if(conn != null) try {conn.close();} catch(SQLException e) {}
+			  if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			  if(rs != null) try {rs.close();} catch(SQLException e) {}
+		  }
+		  return result;
+	  }
 
 	  
 	  
