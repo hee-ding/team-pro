@@ -1,15 +1,23 @@
 package com.maumgagym.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +28,9 @@ import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.PayTO;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class ManagerController {
 	
@@ -90,11 +100,18 @@ public class ManagerController {
 	
 	@ResponseBody
 	@RequestMapping("/manager/boardDelete")
-	public ArrayList<BoardTO> boardDelete( HttpServletRequest request ) {
-		String seq = request.getParameter("seq");
-		ArrayList<BoardTO> boardLists = bdao.boardList();
+	public Map<String, Object> boardDelete( HttpServletRequest request, @RequestParam int seq) {
+		int result = bdao.boardDelete(seq);
+		log.debug("boardDelete");
+		Map<String, Object> param = new HashMap<>();
 		
-		return boardLists;
+		if(result > 0) {
+			param.put("msg", "success");
+		}else {
+			param.put("msg", "fail...");
+		}
+		return param;
 	}
+	
 	
 }
