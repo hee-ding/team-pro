@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.MypageDAO;
+import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.PayTO;
@@ -27,7 +29,9 @@ public class MypageController {
 	private MypageDAO dao;
 	
 	@RequestMapping(value = "/mypage/{id}", method = RequestMethod.GET)
-	public ModelAndView showMypage( HttpServletRequest request, @PathVariable("id") String id  ) { 
+	public ModelAndView showMypage(  HttpSession session, HttpServletRequest request, @PathVariable("id") String id  ) { 
+		
+		System.out.println( session.getAttribute("id") );
 		
 		MemberTO mto = new MemberTO();
 		mto.setId( id );
@@ -93,7 +97,13 @@ public class MypageController {
 	
 	@ResponseBody
 	@RequestMapping( value = "/membership/request", method = RequestMethod.POST )
-	public HashMap<String, Integer> insertRequestMembership( HttpServletRequest request ) { 
+	public HashMap<String, Integer> insertRequestMembership( HttpServletRequest request ) {
+		
+		MemberTO mto = new MemberTO();
+		mto.setSeq( Integer.valueOf( request.getParameter( "req_member_seq" ) ) );
+		
+		BoardTO bto = new BoardTO();
+		bto.setSeq( Integer.valueOf( request.getParameter( "board_seq" ) ) );
 		
 		PayTO pto = new PayTO();
 		pto.setMerchant_uid( request.getParameter( "merchant_uid" ) );
@@ -101,9 +111,7 @@ public class MypageController {
 		int flag = dao.InsertRequestMembership(pto);
 		
 		if( flag == 0 ) {
-			//flag = dao.InsertNews( mto, bto );
-		} else {
-			//break;
+			flag = dao.InsertNews( mto, bto );
 		}
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();

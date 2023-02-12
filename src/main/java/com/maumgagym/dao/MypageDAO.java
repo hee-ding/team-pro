@@ -461,7 +461,7 @@ public class MypageDAO {
 				
 			conn = dataSource.getConnection();
 			
-			String sql = "insert into news values ( 0, ?, now(), 3, 'N', ? ) ";
+			String sql = "insert into news values ( 0, ?, now(), 3, 'N', 'Y', ? ) ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mto.getSeq() );

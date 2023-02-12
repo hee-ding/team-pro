@@ -99,8 +99,8 @@
 				sbPurchaseList.append( "					<div class='d-grid gap-2'> ");
 				if( membership_register_status.equals( "0" )) {
 					sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
-					sbPurchaseList.append( "						<input type='hidden' id='reqMemberSeq' value='" + mto.getSeq() + "'");
-					sbPurchaseList.append( "						<input type='hidden' id='boardSeq' value='" + boardSeq + "'");
+					sbPurchaseList.append( "						<input type='hidden' id='reqMemberSeq' value='" + mto.getSeq() + "' >");
+					sbPurchaseList.append( "						<input type='hidden' id='boardSeq' value='" + boardSeq + "' >");
 				} else if (membership_register_status.equals( "1" ) ) {
 					sbPurchaseList.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
 				}
@@ -130,6 +130,7 @@
 				int membershipPeriod = msto.getMembership_period();	//
 				
 				BoardTO bto = (BoardTO) map.get("bto");
+				int boardSeq = bto.getSeq();			//
 				String title = bto.getTitle();			//
 				String imageName = bto.getImage_name();	//
 				
@@ -180,6 +181,8 @@
 				sbBeforeRegister.append( "					<div class='d-grid gap-2'> ");
 				if( membership_register_status.equals( "0" )) {
 					sbBeforeRegister.append( "						<button id='membershipRegister' class='btn btn-primary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "'> 등록하기 </button>");
+					sbBeforeRegister.append( "						<input type='hidden' id='reqMemberSeq' value='" + mto.getSeq() + "' >");
+					sbBeforeRegister.append( "						<input type='hidden' id='boardSeq' value='" + boardSeq + "' >");
 				} else if (membership_register_status.equals( "1" ) ) {
 					sbBeforeRegister.append( "						<button id='membershipRegister' class='btn btn-secondary mt-1' type='button' onclick='membershipRegister(this)' value='" + merchantUid + "' disabled='disabled'> 승인 대기 중입니다. 취소를 원하시면 운동시설에 연락하세요. </button>");		
 				}

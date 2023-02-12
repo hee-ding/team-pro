@@ -154,6 +154,7 @@ CREATE TABLE `news` (
 	`req_date` datetime NOT NULL,
 	`type` int NOT NULL,
 	`read_check` char(1) NOT NULL,
+	`view_check` char(1) NOT NULL,
 	`board_seq` int NOT NULL
 );
 

@@ -2,9 +2,6 @@
 // [일반 회원] 멤버쉽 승인 요청
 function membershipRegister( data ){ 
 	
-		console.log( $('#reqMemberSeq').val() );
-		console.log($('#boardSeq').val() ); 
-	/*
 	$.ajax({
 	url: '/membership/request',
 	type: 'post',
@@ -32,7 +29,6 @@ function membershipRegister( data ){
 		alert( '[에러] ' + err.status);
 	}
 });
-*/
 	
 }
 
