@@ -2,11 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%
-	String id = "id1";
-	String type = "M";
-	String nickname = "닉네임";
+	String id = null;
 	
-/* 	if( session.getAttribute("id") != null ) {
+ 	if( session.getAttribute("id") != null ) {
 		id = ( String ) session.getAttribute("id");
 	} else {
 		id = null;
@@ -26,11 +24,7 @@
 		nickname = ( String ) session.getAttribute("nickname");
 	} else {
 		nickname = null;
-	} */
-	
-	//System.out.println( id );
-	//System.out.println( type );
-	//System.out.println( nickname );
+	} 
 	
 	
 	

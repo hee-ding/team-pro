@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.HomeDAO;
+import com.maumgagym.dao.NewsDAO;
 import com.maumgagym.dto.BoardTO;
 
 
@@ -27,7 +28,7 @@ public class HomeController {
 		ArrayList<BoardTO> recommendedList = dao.selectRecommendedList( bto );
 		ArrayList<BoardTO> FacilityBoardCountList = dao.selectFacilityBoardCountList();
 		ArrayList<BoardTO> weeklyBoardList = dao.selectWeeklyBoardList();
-
+		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("homePage");
 		modelAndView.addObject("recommendedList", recommendedList);

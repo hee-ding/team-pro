@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.BoardDAO;
+import com.maumgagym.dao.NewsDAO;
 import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.ReviewTO;
@@ -23,6 +24,9 @@ public class BoardController {
 	
 	@Autowired
 	private BoardDAO dao;
+	
+	@Autowired
+	private NewsDAO ndao;
 	
 	@RequestMapping(value = "/facility/{seq}", method = RequestMethod.GET)
 	public ModelAndView list( HttpServletRequest request, @PathVariable("seq") int seq ) { 
