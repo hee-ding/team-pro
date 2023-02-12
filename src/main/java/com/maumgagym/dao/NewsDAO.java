@@ -50,7 +50,7 @@ public class NewsDAO {
 			sb.append( "SELECT ");
 			sb.append( "	b.title AS '글', "); 
 			sb.append( "		req_m.nickname '보낸회원이름', ");
-			sb.append( "			TIMESTAMPDIFF( SECOND, NOW(), n.req_date ) AS '시간차이', ");
+			sb.append( "			TIMESTAMPDIFF( minute, n.req_date, NOW() ) AS '시간차이', ");
 			sb.append( "				case ");
 			sb.append( "					when n.type = 1 then '댓글' ");
 			sb.append( "					when n.type = 2 then '리뷰' ");
