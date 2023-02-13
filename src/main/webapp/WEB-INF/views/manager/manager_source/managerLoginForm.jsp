@@ -5,7 +5,7 @@
 	<div id = "logoContainer">
 		<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 	<form action="/manager/loginAction" method="post" id="loginForm" >
-	<input type="hidden" name=type value="M"/>
+	<input type="hidden" name=type/>
 		<div class="int-area">
 			<input type="text" name="id" id="id" autocomplete="off" required>
 			<label for="id">아이디</label>
@@ -23,13 +23,4 @@
 	<div class="caption">
 		<a href="/member/searchid">아이디 찾기</a> | <a href="/member/searchpassword">비밀번호 찾기</a>
 		</div><br/>
-		<div class="kakao-login">
-			<form id="form-kakao-login" method="post" action="/member/kakaologin">
-				<input type="image" src="../resources/asset/images/kakao_login_medium_wide.png" style width="300px;" name="button" onclick="javascript:kakaoLogin();return false;">
-				<input type="hidden" name="email"/>
-				<input type="hidden" name="nickname"/>
-				<input type="hidden" name="type" value="M"/>
-			</form>	
-		</div>
-	
 </div>
