@@ -132,5 +132,35 @@ public class ManagerController {
 		return param;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/manager/commentDelete")
+	public Map<String, Object> commentDelete( HttpServletRequest request, @RequestParam int seq) {
+		int result = cdao.commentDelete(seq);
+		log.debug("commentDelete");
+		Map<String, Object> param = new HashMap<>();
+		
+		if(result > 0) {
+			param.put("msg", "success");
+		}else {
+			param.put("msg", "fail...");
+		}
+		return param;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/manager/memberDelete")
+	public Map<String, Object> memberDelete( HttpServletRequest request, @RequestParam int seq) {
+		int result = mdao.memberDelete(seq);
+		log.debug("memberDelete");
+		Map<String, Object> param = new HashMap<>();
+		
+		if(result > 0) {
+			param.put("msg", "success");
+		}else {
+			param.put("msg", "fail...");
+		}
+		return param;
+	}
+	
 	
 }

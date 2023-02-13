@@ -343,5 +343,29 @@ public class MemberDAO {
 			
 			return memberLists;
 		}
+	 public int memberDelete(int seq) {
+		  
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+		  ResultSet rs = null; 
+		  int result = 0;
+		  
+		  try {
+			  conn = this.dataSource.getConnection();
+			  
+			  String  sql = "delete from member where seq = ?";
+			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setInt(1, seq);
+			  result = pstmt.executeUpdate();
+			  
+		  }catch(SQLException e) {
+			  System.out.println( "[에러] " +  e.getMessage());
+		  } finally {
+			  if(conn != null) try {conn.close();} catch(SQLException e) {}
+			  if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			  if(rs != null) try {rs.close();} catch(SQLException e) {}
+		  }
+		  return result;
+	  }
 	}
 

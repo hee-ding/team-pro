@@ -20,6 +20,7 @@
 	    <link rel="stylesheet" href="../resources/manager/css/perfect-scrollbar.css">
 	    <link rel="stylesheet" href="../resources/manager/css/app.css">
 	    <link rel="stylesheet" href="../resources/manager/css/style.css">
+		  	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	   	<!-- Bootstrap core JS-->
 	    <script src="../resources/manager/js/bootstrap.bundle.min.js" ></script>
