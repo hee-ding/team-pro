@@ -74,10 +74,15 @@
 	            		} else {
 	            %>
 	            
-    	        <a class="navbar-brand ps-3" data-bs-toggle="popover" title="Popover Header" data-bs-content="Some content inside the popover">
+	            <a class="navbar-brand ps-3" id="news" class="btn">
 	              <i class="bi bi-chat-left-dots"></i>
-	              <span style="position: relative; top: -15px; right: 5px; border: $white 1px solid; font-size: 13px;" class="badge badge-danger">1</span>
+	              <span id="unreadNews" style="position: relative; top: -15px; right: 5px; font-size: 13px;" class="badge bg-primary rounded-pill">0</span>
 	            </a>
+
+				<div id="" style="display:none; font-size: 10px;" class="alert_list">
+				  <ul id="newsList" class="list-group"> </ul>
+				</div>
+	            
 	            <a class="navbar-brand ps-3" href="./facilityUserPage.jsp">
 	              <i class="bi bi-person"></i>
 	            </a>

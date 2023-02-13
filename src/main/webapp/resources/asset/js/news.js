@@ -1,4 +1,4 @@
-$(document).ready(function(data){
+$(document).ready(function( ){
 	
 	$.ajax({
 	url: '/news',
@@ -46,12 +46,8 @@ $(document).ready(function(data){
 			$('.alert_list').append( "아직 알림이 없습니다." );
 		}
 		
-		$('#news').popover({
-		  'title' : '알림', 
-		  'html' : true,
-		  'placement' : 'bottom',
-		  'content' : $('.alert_list').html()
-		});
+		newsList();
+		
 	},
 	error: function(err) {
 		alert( '[에러] ' + err.status);
@@ -59,3 +55,14 @@ $(document).ready(function(data){
 })
 
 });
+
+	function newsList( ) { 
+	
+		$('#news').popover({
+		  'title' : '알림', 
+		  'html' : true,
+		  'placement' : 'bottom',
+		  'content' : $('.alert_list').html()
+		});
+	
+	};

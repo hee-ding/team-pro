@@ -83,6 +83,7 @@ public class FacilityDAO {
 				bto.setTitle(rs.getString( "b.title" ));
 				bto.setTag(rs.getString( "t.tag" ));
 				bto.setCategory_seq(rs.getInt( "b.category_seq" ));
+				bto.setImage_name( rs.getString( "i.name" ) );
 			
 				MemberTO mto = new MemberTO();
 				mto.setAddress(rs.getString("m.address"));
