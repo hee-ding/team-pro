@@ -191,7 +191,7 @@ public class ManagerController {
 		to.setId(id);
 		ManagerTO result = mmdao.managerLogin(to);
 		model.addAttribute("result" , result);
-		return "managerloginOK";
+		return "managerLoginOK";
 	}
 	
 	

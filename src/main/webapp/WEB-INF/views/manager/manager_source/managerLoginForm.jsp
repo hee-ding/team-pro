@@ -31,12 +31,5 @@
 				<input type="hidden" name="type" value="M"/>
 			</form>	
 		</div>
-		<!-- 
-	<form id="form-kakao-login" action="./member/Action/loginKakaoAction.jsp" method="post">
-		<img src="./member/login_source/kakao_login_medium_wide.png" style width="100%;"> 
-		<input type="hidden" name="email"/>
-		<input type="hidden" name="name"/>
-		<a href="javascript:kakaoLogin();"><img src="./member/login_source/kakao_login_medium_wide.png" style width="100%;"></a>
-	</form> 
-	-->
+	
 </div>

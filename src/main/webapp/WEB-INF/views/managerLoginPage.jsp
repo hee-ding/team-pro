@@ -8,4 +8,4 @@
 		userID = "tester1";
 	}
 %>    
-<jsp:include page="./managerLogin.jsp" />
+<jsp:include page="./manager/managerLogin.jsp" />

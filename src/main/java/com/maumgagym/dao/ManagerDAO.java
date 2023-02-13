@@ -45,7 +45,7 @@ public class ManagerDAO {
 			try {
 				 conn = this.dataSource.getConnection();
 				 
-				 String sql = "select password from manager where id = ? " ;
+				 String sql = "select password from admin where id = ? " ;
 				 pstmt = conn.prepareStatement(sql);
 				 pstmt.setString(1, to.getId() );
 				 rs = pstmt.executeQuery();
