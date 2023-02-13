@@ -17,7 +17,7 @@
 	<body>
 
 	<jsp:include page="./manager_source/managerLoginForm.jsp"/>
-
+	
     <script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
    	<!-- Bootstrap core JS-->
     <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>

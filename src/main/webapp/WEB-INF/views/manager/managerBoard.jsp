@@ -41,8 +41,10 @@
 	
 
 	<jsp:include page="./manager_source/managerBoardTable.jsp"/>
-
+	<jsp:include page="../include/footer.jsp" />
+	
 	<script src="../resources/manager/js/main.js"></script>
+	
     
     <script>
        // Simple Datatable

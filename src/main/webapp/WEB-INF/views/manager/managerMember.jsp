@@ -36,7 +36,8 @@
 	
 
 	<jsp:include page="./manager_source/managerMemberTable.jsp"/>
-
+	<jsp:include page="../include/footer.jsp" />
+	 
 	
     
     <script>

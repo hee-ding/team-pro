@@ -32,20 +32,21 @@
 	</head>
 	
 	<body>
-	<jsp:include page="../include/headerManager.jsp">
-		<jsp:param name="userID" value="<%= userID %>"/>
-	</jsp:include>	
+		<jsp:include page="../include/headerManager.jsp">
+			<jsp:param name="userID" value="<%= userID %>"/>
+		</jsp:include>	
+		
 	
-
-	<jsp:include page="./manager_source/managerFacilityBoardTable.jsp"/>
-
-	
-    
-    <script>
-       // Simple Datatable
-        let table1 = document.querySelector('#table1');
-        let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
+		<jsp:include page="./manager_source/managerFacilityBoardTable.jsp"/>
+		<jsp:include page="../include/footer.jsp" />
+		
+		
+	    
+	    <script>
+	       // Simple Datatable
+	        let table1 = document.querySelector('#table1');
+	        let dataTable = new simpleDatatables.DataTable(table1);
+	    </script>
     
 	</body>
 </html>
