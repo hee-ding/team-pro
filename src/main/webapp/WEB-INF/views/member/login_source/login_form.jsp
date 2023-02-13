@@ -3,7 +3,7 @@
     
 <div class="login_form">
 	<div id = "logoContainer">
-		<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
+		<a href="/home"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 	<form action="/member/loginAction" method="post" id="loginForm" >
 	<input type="hidden" name=type value="M"/>
 		<div class="int-area">
