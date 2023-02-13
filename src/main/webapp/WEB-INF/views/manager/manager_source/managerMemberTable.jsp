@@ -25,39 +25,37 @@ for( MemberTO to : memberLists){
 	sbHtml.append("<td>" + id + "</td>");
 	sbHtml.append("<td>" + email + "</td>");
 	sbHtml.append("<td>" + birthday + "</td>");
-	sbHtml.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\" id=\"delete\">삭제</span></a></td>");
+	sbHtml.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
 	sbHtml.append("</tr>");
  }
-%>    
-<hr/>
+%> 
+<hr/>   
 	<script type="text/javascript">
 		function deleteboard(deleteSeq) {
-		//alert(deleteSeq);
+		//	alert(deleteSeq);
 		var param = {
-		seq : deleteSeq
-			}
-			$("#delete").click(function () {
-			var ans = confirm("선택하신 글을 삭제하시겠습니까?");
-			console.log('click!!!!!');
-			if(ans === true){
-			$.ajax({
-			    url: "/manager/memberDelete",
-			    method: "GET",
-			    dataType: "json",
-			    data:param,
-			    success: function (data) {
-			        console.log(data);
-			        location.reload();
-			       	alert('삭제되었습니다.');
-			    }
-			});
-		}else{
-			return false;
+				seq : deleteSeq
 		}
-	});
-}
+				var ans = confirm("선택하신 회원을 삭제하시겠습니까?");
+				console.log('click!!!!!');
+				if(ans === true){
+			        $.ajax({
+			            url: "/manager/facilityBoardDelete",
+			            method: "GET",
+			            dataType: "json",
+			            data:param,
+			            success: function (data) {
+			                console.log(data);
+			                location.reload();
+			               	alert('삭제되었습니다.');
+			            }
+				      });
+				   }else {
+				      return false;
+				}
+
+			}
 </script>
-<hr/>    
 		<div class="container mt-5">
 			<div class="row">
 

@@ -30,36 +30,34 @@
 				cmto.append("<td>" + content + "</td>");
 				cmto.append("<td>" + nickname + "</td>");
 				cmto.append("<td>" + date + "</td>");
-				cmto.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\" id=\"delete\">삭제</span></a></td>");
+				cmto.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
 				cmto.append("</tr>");
 			 }
 %>    
-<hr/>
 <script type="text/javascript">
 function deleteboard(deleteSeq) {
-//	alert(deleteSeq);
-var param = {
-		seq : deleteSeq
-}
-	$("#delete").click(function () {
-		var ans = confirm("선택하신 글을 삭제하시겠습니까?");
-		console.log('click!!!!!');
-		if(ans === true){
-	        $.ajax({
-	            url: "/manager/commentdDelete",
-	            method: "GET",
-	            dataType: "json",
-	            data:param,
-	            success: function (data) {
-	                console.log(data);
-	                location.reload();
-	               	alert('삭제되었습니다.');
-	            }
-	        });
-		}else{
-			return false;
-		}
-	});
+	   var param = {
+	      seq : deleteSeq
+	   }
+	   
+	   var ans = confirm("선택하신 글을 삭제하시겠습니까?");
+	   console.log('click!!!!!');
+	   if(ans === true) {
+	      $.ajax({
+	         url: "/manager/boardDelete",
+	         method: "GET",
+	         dataType: "json",
+	         data:param,
+	         success: function(data) {
+	            console.log(data);
+	            location.reload();
+	            alert("삭제되었습니다.");
+	         }
+	      });
+	   }else {
+	      return false;
+	}
+
 }
 </script>
 <hr/>    
