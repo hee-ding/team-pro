@@ -10,12 +10,13 @@
 <% 
 
 	session.removeAttribute("id"); 
+	session.removeAttribute("type"); 
 	
 %>
 
 <script>
 
-	location.href='/';
+	location.href='/home';
 	
 </script>
 </body>
