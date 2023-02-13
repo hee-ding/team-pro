@@ -66,4 +66,35 @@ public class ReviewDAO {
 		}
 		return rvto;
 	}
+	
+	// [일반 회원] update 멤버쉽 승인 요청 후 news 테이블 insert
+	// flag 0 정상
+	// flag 8 비정상 실행
+	// flag 9 서버 오류
+	public int InsertNews( MemberTO mto, BoardTO bto ) {
+		int flag = 9;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+				
+			conn = dataSource.getConnection();
+			
+			String sql = "insert into news values ( 0, ?, now(), 3, 'N', 'Y', ? ) ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mto.getSeq() );
+			pstmt.setInt(2, bto.getSeq() );
+			
+			if( pstmt.executeUpdate() == 1) { flag = 0; } else { flag = 8; }
+			
+			} catch( SQLException e) {
+				System.out.println( e.getMessage());
+			} finally {
+				if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if( conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		
+		return flag;
+	
+	}
 }

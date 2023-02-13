@@ -96,7 +96,6 @@ public class MypageController {
 		return map;
 	}
 	
-	@Transactional
 	@ResponseBody
 	@RequestMapping( value = "/membership/request", method = RequestMethod.POST )
 	public HashMap<String, Integer> insertRequestMembership( HttpServletRequest request ) {
