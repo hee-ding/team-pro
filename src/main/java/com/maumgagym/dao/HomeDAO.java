@@ -54,7 +54,7 @@ public class HomeDAO {
 			sb.append( " 						WHERE c.seq < 13 AND tag LIKE ? " );
 			sb.append( " 							group BY b.seq " );
 			sb.append( " 								ORDER by b.seq desc " );
-			sb.append( " 									limit 0, 5  " );
+			sb.append( " 									limit 0, 6  " );
 	 		String sql = sb.toString();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString( 1, "%" + to.getTag() + "%" );
@@ -128,9 +128,9 @@ public class HomeDAO {
 			sb.append( " 			    	ON( b.seq = ra.board_seq ) LEFT OUTER JOIN comment cm ");
 			sb.append( " 			        	ON( b.seq = cm.board_seq ) LEFT OUTER JOIN image i ");
 			sb.append( " 			            	ON( b.seq = i.board_seq ) "); 
-			sb.append( " 			                	WHERE (b.status = 1 or b.status = 2) AND b.write_date > DATE_ADD( NOW(), INTERVAL -7 DAY ) AND c.seq BETWEEN 10 AND 12 ");
+			sb.append( " 			                	WHERE (b.status = 1 or b.status = 2) and c.seq BETWEEN 10 AND 12 ");
 			sb.append( " 			                    	group BY b.seq ");
-			sb.append( " 			                       		LIMIT 0, 3; ");
+			sb.append( " 			                       		LIMIT 0, 6; ");
 	 		String sql = sb.toString();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

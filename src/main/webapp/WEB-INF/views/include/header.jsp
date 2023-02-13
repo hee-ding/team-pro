@@ -24,17 +24,17 @@
 	        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-	                <li class="nav-item px-4 "><a class="nav-link" href="/home">홈</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="./notificationPage.jsp">공지 / 이벤트</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="/community/list">커뮤니티</a></li>
+	                <li class="nav-item px-4 "><a class="nav-link text-truncate" style="max-width: 100px;" href="/home">홈</a></li>
+	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 150px;" href="./notificationPage.jsp">공지 / 이벤트</a></li>
+	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="/community/list">커뮤니티</a></li>
 				<%	
 					if( type == null || !( type.equals( "C" ) ) ) { 
 				%>                
-	                <li class="nav-item px-4"><a class="nav-link" href="./cartPage.jsp">회원권 만들기</a></li>
+	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="./cartPage.jsp">회원권 만들기</a></li>
 	            <%	
 	            	}  
 	            %>	                
-	                <li class="nav-item px-4"><a class="nav-link" href="/customerCenter">고객센터</a></li>
+	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="/customerCenter">고객센터</a></li>
 	            </ul>
 	            <%
 	            	if( id == null ) {
@@ -62,7 +62,7 @@
 	            <a class="navbar-brand ps-3" href="/mypage/<%=id%>">
 	              <i class="bi bi-person"></i>
 	            </a>
-	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span class="text-truncate" style="max-width: 100px; font-size:smaller;">로그아웃</span></button>
 	          
     
        	        <%
@@ -81,7 +81,7 @@
 	            <a class="navbar-brand ps-3" href="/mypage/<%=id%>">
 	              <i class="bi bi-person"></i>
 	            </a>
-	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span style="font-size:smaller;">로그아웃</span></button>
+	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/member/logout'"><span class="text-truncate" style="max-width: 100px; font-size:smaller;">로그아웃</span></button>
 	            
 	            <%
 	            			}

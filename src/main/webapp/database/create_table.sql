@@ -151,7 +151,6 @@ CREATE TABLE `news` (
 	`board_seq` int NOT NULL
 );
 
-
 ALTER TABLE `board` ADD CONSTRAINT `PK_BOARD` PRIMARY KEY (
 	`seq`
 );
@@ -437,3 +436,8 @@ REFERENCES `board` (
 );
 
 
+CREATE TABLE `admin` (
+	`seq` int NOT NULL,
+	`id` varchar(100) NULL,
+	`password` varchar(100) NULL
+);
