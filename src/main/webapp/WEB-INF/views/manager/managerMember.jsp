@@ -23,7 +23,7 @@
 		  	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 	   	<!-- Bootstrap core JS-->
-	    <script src="../resources/manager/js/bootstrap.bundle.min.js" ></script>
+	    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
 	    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
 	    <script src="../resources/manager/js/simple-datatables.js"></script>
 	    <script src="../resources/manager/js/main.js"></script>

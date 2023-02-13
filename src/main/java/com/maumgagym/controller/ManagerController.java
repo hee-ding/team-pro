@@ -10,11 +10,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +27,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.BoardDAO;
 import com.maumgagym.dao.CommentDAO;
+import com.maumgagym.dao.ManagerDAO;
 import com.maumgagym.dao.MemberDAO;
 import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.CommentTO;
 import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
+import com.maumgagym.dto.ManagerTO;
 import com.maumgagym.dto.PayTO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +48,8 @@ public class ManagerController {
 	private MemberDAO mdao;
 	@Autowired
 	private CommentDAO cdao;
+	@Autowired
+	private ManagerDAO mmdao;
 	
 	@RequestMapping("/manager/board")
 	public ModelAndView boardlist( ) { 
@@ -160,6 +168,30 @@ public class ManagerController {
 			param.put("msg", "fail...");
 		}
 		return param;
+	}
+	
+		
+	@RequestMapping("/manager/login" )
+	public ModelAndView manageLoginPage() {
+	      
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("managerLoginPage");
+		
+		return modelAndView;
+	   }
+	
+	@PostMapping("/manager/loginAction")
+	public String loginAction(@ModelAttribute ManagerTO to, HttpServletRequest request, Model model, HttpSession session) {
+		//센션값 주고 전달
+		
+		String id = request.getParameter("id");
+		
+		session.setAttribute("id", id);          
+		
+		to.setId(id);
+		ManagerTO result = mmdao.managerLogin(to);
+		model.addAttribute("result" , result);
+		return "managerloginOK";
 	}
 	
 	
