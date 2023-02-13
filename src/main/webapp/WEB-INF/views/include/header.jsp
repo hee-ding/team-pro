@@ -34,7 +34,7 @@
 	            <%	
 	            	}  
 	            %>	                
-	                <li class="nav-item px-4"><a class="nav-link" href="'./customerCenter_viewPage.jsp'">고객센터</a></li>
+	                <li class="nav-item px-4"><a class="nav-link" href="/customerCenter">고객센터</a></li>
 	            </ul>
 	            <%
 	            	if( id == null ) {
