@@ -50,12 +50,13 @@ public class ReviewDAO {
 		rvto.setFlag(9);
 		try {
 			conn = dataSource.getConnection();
-			String sql = "insert into review values ( 0, ?, now(), ?, ?, 1, ? ) ";
+			String sql = "insert into review values ( 0, ?, now(), ?, ?, 1, ?, ? ) ";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, rvto.getContent() );
 			pstmt.setInt(2, rvto.getWriter_seq() );
 			pstmt.setFloat(3, rvto.getStar_score() );
 			pstmt.setInt(4, rvto.getBoard_seq() );
+			pstmt.setString(5, rvto.getMerchant_uid() );
 			if( pstmt.executeUpdate() == 1) { rvto.setFlag(0); } else { rvto.setFlag(8); }
 		} catch(SQLException e) {
 			System.out.println( "[에러] " +  e.getMessage());
@@ -67,7 +68,7 @@ public class ReviewDAO {
 		return rvto;
 	}
 	
-	// [일반 회원] update 멤버쉽 승인 요청 후 news 테이블 insert
+	// [일반 회원] update 리뷰 작성 후 news 테이블 insert
 	// flag 0 정상
 	// flag 8 비정상 실행
 	// flag 9 서버 오류
@@ -79,7 +80,7 @@ public class ReviewDAO {
 				
 			conn = dataSource.getConnection();
 			
-			String sql = "insert into news values ( 0, ?, now(), 3, 'N', 'Y', ? ) ";
+			String sql = "insert into news values ( 0, ?, now(), 2, 'N', 'Y', ? ) ";
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, mto.getSeq() );
