@@ -15,10 +15,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.maumgagym.dao.CommunityDAO;
 import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
 
 
@@ -127,5 +130,18 @@ public class CommunityController {
 		model.addAttribute("flag" , flag); 
 		
 		return "community_deleteok";
+	}
+	
+	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
+	@GetMapping("/community/like")
+	@ResponseBody
+	public Object communitylike(HttpServletRequest request, int seq) { 
+		
+		LikeDTO to = new LikeDTO();
+		to.setBoard_seq(seq);
+		
+		int flag = dao.communityLike(to);
+		
+		return flag;
 	}
 }

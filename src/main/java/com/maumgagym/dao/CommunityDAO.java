@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
+import com.maumgagym.dto.ReactionDTO;
 
 @Repository
 public class CommunityDAO {
@@ -96,7 +98,8 @@ public class CommunityDAO {
 			
 		conn = this.dataSource.getConnection();
 		
-		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by b.seq desc";
 		pstmt = conn.prepareStatement(sql); 
 		
 		rs = pstmt.executeQuery();
@@ -301,6 +304,40 @@ public class CommunityDAO {
 		      
 		   }
 		return flag;
-}
+	}
+	
+	public int communityLike(LikeDTO to) {
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			int flag =0;
+			try {
+				
+				System.out.println("db연결성공");
+				
+				conn = this.dataSource.getConnection();
+				
+				//insert 
+				String sql = "insert into reaction values(0, 0, 0, ?  )";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, to.getBoard_seq());
+				pstmt.executeUpdate();
+				
+				// view_count +1
+				sql = "update reaction r left join board b on r.board_seq = b.seq set view_count=view_count+1 where r.board_seq = ?";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, to.getBoard_seq());
+				pstmt.executeUpdate();
+				
+				} catch (SQLException e){
+					System.out.println( "[에러] " +  e.getMessage());
+				} finally {
+					if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+					if(conn != null) try {conn.close();} catch(SQLException e) {}
+				}
+			System.out.println("반환성공");
+			return flag;
+		}
 	
 }
