@@ -86,22 +86,18 @@
 		sbWeeklyBoardList.append( " <div class='col-lg-4 col-12 mb-4 mb-lg-0'> " );
 		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full mb-5'> " );
 		sbWeeklyBoardList.append( "				<div class='custom-block-image-wrap'> " );
-		if( imageName != null ) {
-		sbWeeklyBoardList.append( "					<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/" + imageName + "' class='custom-block-image img-fluid' alt=''> " );
-		} else {
-			if( topic.equals("운동") ) {
-				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/fitness.jpg' class='custom-block-image img-fluid'>" );
-			} else if ( topic.equals("건강") ) {
-				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/health.jpg' class='custom-block-image img-fluid'" );
-			} else if ( topic.equals("수다") ) {
-				sbWeeklyBoardList.append( "	<a href='detail-page.html'> <img src='./resources/asset/images/main_view/main_hot_weekly/chat.jpg' class='custom-block-image img-fluid'" );
-			}
+		if( topic.equals("운동") ) {
+			sbWeeklyBoardList.append( " <a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/fitness.jpg' class='custom-block-image img-fluid'></a>" );
+		} else if ( topic.equals("건강") ) {
+			sbWeeklyBoardList.append( "	<a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/health.jpg' class='custom-block-image img-fluid'></a>" );
+		} else if ( topic.equals("수다") ) {
+			sbWeeklyBoardList.append( "	<a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/chat.jpg' class='custom-block-image img-fluid'></a>" );
 		}
 		sbWeeklyBoardList.append( "					</a> " );
 		sbWeeklyBoardList.append( "				</div> " );
 		sbWeeklyBoardList.append( "				<div class='custom-block-info'> " );
 		sbWeeklyBoardList.append( "					<h5 class='mb-2'> " );
-		sbWeeklyBoardList.append( "						<a href='detail-page.html'> " + title + " </a> " );
+		sbWeeklyBoardList.append( "						<a class='text-truncate' style='max-width: 300px;' href='detail-page.html'> " + title + " </a> " );
 		sbWeeklyBoardList.append( "					</h5> " );
 		sbWeeklyBoardList.append( "					<div class='profile-block d-flex'> " );
 		sbWeeklyBoardList.append( "						<p> " );
@@ -189,7 +185,7 @@
 	
 					<div class="col-lg-12 col-12">
 						<div class="section-title-wrap mb-5">
-							<h4 class="section-title">금주의 인기글</h4>
+							<h4 class="section-title">최신글</h4>
 						</div>
 					</div>
 						<%= sbWeeklyBoardList.toString() %>	

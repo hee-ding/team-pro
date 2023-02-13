@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String id = (String) session.getAttribute("id");
+%>
 
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html lang="ko">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -23,7 +24,7 @@
                 <p class="lead">
                  	<span class="text-success fw-bold">결제가</span> 정상적으로 처리되었습니다.
                   </p>
-                <a href="../homePage.jsp" class="btn btn-primary">메인으로 가기</a>
+                <a href="/mypage/<%= id %>" class="btn btn-primary">메인으로 가기</a>
             </div>
         </div>
     </body>

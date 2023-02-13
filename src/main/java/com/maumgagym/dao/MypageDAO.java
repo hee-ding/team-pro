@@ -143,7 +143,7 @@ public class MypageDAO {
 			sb.append( "											ON( b.seq = i.board_seq) LEFT OUTER JOIN member wm");
 			sb.append( "												ON( b.write_seq = wm.seq ) LEFT OUTER JOIN membership_register msr ");
 			sb.append( "													ON ( p.merchant_uid = msr.merchant_uid )  LEFT OUTER JOIN review rv ");
-			sb.append( "														ON ( m.seq = rv.writer_seq ) ");
+			sb.append( "														ON ( p.merchant_uid = rv.merchant_uid)" );
 			sb.append( "															WHERE m.id = ?");
 			sb.append( "																group BY p.merchant_uid");
 			sb.append( "																	ORDER BY p.pay_date desc");
