@@ -25,7 +25,7 @@
 				sbBoard.append("<td>" + category + "</td>");
 				sbBoard.append("<td>" + topic + "</td>");
 				sbBoard.append("<td class='text-start fw-bold'>");
-				sbBoard.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbBoard.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbBoard.append("</td>");
 				sbBoard.append("<td>" + nickname + "</td>");
 				sbBoard.append("<td>" + date + "</td>");
