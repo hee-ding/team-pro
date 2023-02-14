@@ -78,6 +78,22 @@
 					<th class="fs-bold fw-4 bg-light">제목</th>
 					<td><input type="text" name="subject" id="subject" value="" class="form-control" /></td>
 				</tr>
+				<tr>
+					<th class="fs-bold fw-4 bg-light" >회원권(1개월)</th>
+					<td><input type="text" name="membership1" id="membership1" value="" class="form-control" /></td>
+				</tr>
+				<tr>
+					<th class="fs-bold fw-4 bg-light">회원권(3개월)</th>
+					<td><input type="text" name="membership3" id="membership3" value="" class="form-control" /></td>
+				</tr>	
+				<tr>
+					<th class="fs-bold fw-4 bg-light">회원권(6개월)</th>
+					<td><input type="text" name="membership6" id="membership6" value="" class="form-control" /></td>
+				</tr>	
+				<tr>
+					<th class="fs-bold fw-4 bg-light">회원권(12개월)</th>
+					<td><input type="text" name="membership12" id="membership12" value="" class="form-control" /></td>
+				</tr>										
 				<!--  
 				<tr>
 					<th class="fs-bold fw-4">비밀번호</th>

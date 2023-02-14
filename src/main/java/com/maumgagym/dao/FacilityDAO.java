@@ -1,5 +1,6 @@
 package com.maumgagym.dao;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -105,7 +106,7 @@ public class FacilityDAO {
 	}
 	
 	
-	public int writeOk(BoardTO bto, MemberTO mto) {
+	public int writeOk(BoardTO bto, MemberTO mto, ArrayList<BoardTO> arry ) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -151,7 +152,6 @@ public class FacilityDAO {
 			
 			System.out.println( "글쓰기 flag : " + flag );
 			
-			// 파일 첨부
 			sql  = "select seq from board where write_seq=? order by write_date desc";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setInt( 1, bto.getWrite_seq() );
@@ -164,13 +164,38 @@ public class FacilityDAO {
 			
 			pstmt.close();
 			System.out.println( "board_seq:" + bto.getSeq() );
+			System.out.println( "m_seq:" + bto.getWrite_seq() );
 			
-			sql = "insert into image values(0, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bto.getImage_name() );
-			pstmt.setDouble( 2, bto.getImage_size() );
-			pstmt.setInt(3, bto.getSeq() );
+			System.out.println( "테스트 : " + arry );
+			System.out.println( "사이즈 : " + arry.size() );
 			
+
+			if( arry.size() != 0 ) {
+
+				sql = "insert into membership values(0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, bto.getWrite_seq());
+				pstmt.setString(2, arry.get(0).getMembership_name());
+				pstmt.setInt(3, arry.get(0).getMembership_price());
+				pstmt.setInt(4, arry.get(0).getMembership_period());
+				pstmt.setInt(5, bto.getSeq());
+				pstmt.setInt(6, bto.getWrite_seq());
+				pstmt.setString(7, arry.get(1).getMembership_name());
+				pstmt.setInt(8, arry.get(1).getMembership_price());
+				pstmt.setInt(9, arry.get(1).getMembership_period());
+				pstmt.setInt(10, bto.getSeq());
+				pstmt.setInt(11, bto.getWrite_seq());
+				pstmt.setString(12, arry.get(2).getMembership_name());
+				pstmt.setInt(13, arry.get(2).getMembership_price());
+				pstmt.setInt(14, arry.get(2).getMembership_period());
+				pstmt.setInt(15, bto.getSeq());
+				pstmt.setInt(16, bto.getWrite_seq());
+				pstmt.setString(17, arry.get(3).getMembership_name());
+				pstmt.setInt(18, arry.get(3).getMembership_price());
+				pstmt.setInt(19, arry.get(3).getMembership_period());
+				pstmt.setInt(20, bto.getSeq());
+			}
+			System.out.println( "회원권 board_seq:" + bto.getSeq() );
 			
 			int result2 = pstmt.executeUpdate();
 			
@@ -179,6 +204,23 @@ public class FacilityDAO {
 			}
 			pstmt.close();
 			
+			
+			
+			// 파일 첨부
+			sql = "insert into image values(0, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bto.getImage_name() );
+			pstmt.setDouble( 2, bto.getImage_size() );
+			pstmt.setInt(3, bto.getSeq() );
+			
+			
+			int result3 = pstmt.executeUpdate();
+			
+			while( result3 == 1 ) {
+				flag = 0;
+			}
+			pstmt.close();
+			System.out.println( "파일첨부 board_seq:" + bto.getSeq() );
 			System.out.println( "파일첨부 flag : " + flag );
 			
 

@@ -87,25 +87,68 @@ public class FacilityController {
 		System.out.println( "category : " + req.getParameter( "category" ));
 		System.out.println( "seq : " + bto.getSeq());
 		
+		//회원권
+		ArrayList<BoardTO> membershipLists = new ArrayList<BoardTO>();
+		//BoardTO bto2 = new BoardTO();
+		// #dhadahuad123
+		
+		if( req.getParameter( "membership1" ) != null ) {
+			BoardTO bto2 = new BoardTO();// #dhadahuad123
+			bto2.setMembership_name( "1개월권" );
+			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership1" )));
+			bto2.setMembership_period(1);
+			membershipLists.add(bto2);
+			System.out.println("1 : " + membershipLists);
+		} 
+		
+		if( req.getParameter( "membership3" ) != null ) {
+			BoardTO bto2 = new BoardTO();// #dhadahuad12323
+			bto2.setMembership_name( "3개월권" );
+			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership3" )));
+			bto2.setMembership_period(3);
+			membershipLists.add(bto2);
+			System.out.println("2 : " + membershipLists);
+		} 
+		
+		if( req.getParameter( "membership6" ) != null ) {
+			BoardTO bto2 = new BoardTO();// #dhadahuad123534
+			bto2.setMembership_name( "6개월권" );
+			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership6" )));
+			bto2.setMembership_period(6);
+			membershipLists.add(bto2);
+			System.out.println("3 : " + membershipLists);
+		} 
+		
+		if( req.getParameter( "membership12" ) != null ) {
+			BoardTO bto2 = new BoardTO();// #dhadahuad1237866
+			bto2.setMembership_name( "12개월권" );
+			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership12" )));
+			bto2.setMembership_period(12);
+			membershipLists.add(bto2);
+			System.out.println("4 : " + membershipLists);
+		} 
+		
+		//파일
 		String saveFileName = UUID.randomUUID().toString() + upload.getOriginalFilename().substring( upload.getOriginalFilename().indexOf(".") );
 		System.out.println( "파일 이름 : " + upload.getOriginalFilename() );
 		try {
-		if( !upload.isEmpty() ) {
-			bto.setImage_name( saveFileName );
-			bto.setImage_size( upload.getSize() );
+			if( !upload.isEmpty() ) {
+				bto.setImage_name( saveFileName );
+				bto.setImage_size( upload.getSize() );
 		}
 		upload.transferTo(  new File( saveFileName ) );
 		
 		System.out.println( "이미지 : " + saveFileName );
-	} catch (IllegalStateException e) {
-		// TODO Auto-generated catch block
-		System.out.println( "[에러] : " + e.getMessage() );
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		System.out.println( "[에러] : " + e.getMessage() );
-	}
 		
-		int flag = dao.writeOk(bto, mto);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " + e.getMessage() );
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " + e.getMessage() );
+		}
+		
+		int flag = dao.writeOk(bto , mto, membershipLists);
 		model.addAttribute("flag", flag);
 		
 		return "facility_writeOkPage";
