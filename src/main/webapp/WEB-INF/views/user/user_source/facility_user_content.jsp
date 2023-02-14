@@ -43,15 +43,22 @@
 		String payDate = pto.getPay_date();
 		String merchantUid = pto.getMerchant_uid();
 		
-		
 		sbPurchaseList.append( "	<tr class='h-100'> ");
 		sbPurchaseList.append( "		<td>" + (1 + i) +"</td> ");
 		sbPurchaseList.append( "		<td>" + fullCategoryString + "</td> ");
 		sbPurchaseList.append( "		<td>" + fullMembershipName + "</td> ");
 		sbPurchaseList.append( "		<td>" + name + "</td> ");
 		sbPurchaseList.append( "		<td>" + phone + "</td> ");
-		sbPurchaseList.append( "		<td>" + membershipRegisterDate + "</td> ");
-		sbPurchaseList.append( "		<td>" + membershipExpiryDate + "</td> ");
+		if( membershipRegisterStatus.equals( "환불")) {
+		sbPurchaseList.append( "		<td class='text-decoration-line-through'>" + membershipRegisterDate + "</td> ");
+		} else {
+		sbPurchaseList.append( "		<td >" + membershipRegisterDate + "</td> ");			
+		}
+		if( membershipRegisterStatus.equals( "환불")) {
+		sbPurchaseList.append( "		<td class='text-decoration-line-through'>" + membershipExpiryDate + "</td> ");
+		} else {
+		sbPurchaseList.append( "		<td>" + membershipExpiryDate + "</td> ");			
+		}
 		if( membershipRegisterStatus.equals( "승인 대기")) {
 		sbPurchaseList.append( "	    	<td><span class='badge bg-secondary'>" + membershipRegisterStatus + "</span></td>");
 		} else if ( membershipRegisterStatus.equals( "승인 완료")) {
@@ -71,7 +78,7 @@
 		sbPurchaseList.append( "	    	<button id='" + name + "' onclick='registerConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-success'>승인</button> ");
 		}
 		if( membershipRegisterStatus.equals( "승인 대기")) {
-		sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>반려</span></a> ");
+		//sbPurchaseList.append( "	    	<a ><span class='badge bg-warning text-dark'>반려</span></a> ");
 		}
 		if( membershipRegisterStatus.equals( "승인 대기") || membershipRegisterStatus.equals( "승인 완료") ) {
 		sbPurchaseList.append( "	    	<button id='" + name + "' onclick='refundConfirm(this);' value='" + merchantUid +"' class='border-0 badge bg-danger'>환불</button> ");
@@ -166,7 +173,7 @@
 								
 								<div class="mb-3">
 									<label class="small mb-1" for="inputAddress">주소</label> <input
-										class="form-control" id="inputAddress" type="text" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
+										class="form-control" id="inputAddress" type="text" value="<%= mto.getFullAddress() %>">
 								</div>
 							
 								<!-- Form Row-->

@@ -41,7 +41,7 @@ String id = (String) session.getAttribute("id");
 	</jsp:include>
 	
 	<!--  search  -->
-	<jsp:include page="./community_source/main_search.jsp"/>
+	<jsp:include page="../main/main_source/main_search.jsp" />
 	
 	<!-- view 페이지 -->
 	<jsp:include page="./community_source/community_view_container1.jsp"/>

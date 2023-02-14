@@ -169,7 +169,6 @@ function restartOk( data ) {
 			alert( '[에러] ' + err.status);
 		}
 	});
-	
 }
 
 // 환불 관련 

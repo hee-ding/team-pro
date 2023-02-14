@@ -58,6 +58,7 @@
 		<!-- iamport.payment.js -->
 		<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 		
+		<link href="/resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
 		<!--  header news -->
 		<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 	        
