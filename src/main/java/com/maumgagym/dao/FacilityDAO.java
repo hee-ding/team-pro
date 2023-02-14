@@ -105,190 +105,146 @@ public class FacilityDAO {
 		return datas;
 	}
 	
-	
-	public int writeOk(BoardTO bto, MemberTO mto, ArrayList<BoardTO> arry ) {
+	public BoardTO selectfacilityBoard( BoardTO to ) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		int flag = 1;	// 0 : 성공 / 1 : 실패
+		try {
+			
+		conn = dataSource.getConnection();
 		
+		String sql = "select seq from board "
+				+ "		WHERE write_seq = ? "
+				+ "			ORDER BY write_date DESC "
+				+ "				LIMIT 0,1";
+		
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, to.getWrite_seq());
+		
+		rs = pstmt.executeQuery();
+		
+		if( rs.next() ) {
+			to.setSeq( rs.getInt("seq") );
+		}
+		
+		} catch( SQLException e) {
+			System.out.println( "[에러]" + e.getMessage());
+		} finally {
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		
+		return to;
+	}
+	
+	public int insertfacilityBoard( BoardTO to ) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int flag = 1;
 		
 		try {
-			conn = this.dataSource.getConnection();
 			
-			System.out.println( "db연결 성공" );
-			String sql  = "select seq from member where nickname=?";
-			pstmt = conn.prepareStatement( sql );
-			pstmt.setString( 1, mto.getNickname() );
-			
-			rs = pstmt.executeQuery();
-			
-			if( rs.next() ){
-				bto.setWrite_seq(rs.getInt( "seq"));
-			}
-			
-			pstmt.close();
-			
-			//System.out.println( "닉네임 : " + mto.getNickname());
-			
-			sql = "insert into board values(0, ?, ?, ?, ?, now(), 1)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bto.getCategory_seq());
-			pstmt.setString( 2, bto.getTitle() );
-			pstmt.setString( 3, bto.getContent() );
-			pstmt.setInt( 4, bto.getWrite_seq() );
-			
-			//System.out.println( "w_seq:" + bto.getWrite_seq() );
-			
-			int result = pstmt.executeUpdate();
-			
-			if( result == 1 ) {
-				flag = 0;
-			}
-			
-			pstmt.close();
-			
-			System.out.println( "글쓰기 flag : " + flag );
-			
-			sql  = "select seq from board where write_seq=? order by write_date desc";
-			pstmt = conn.prepareStatement( sql );
-			pstmt.setInt( 1, bto.getWrite_seq() );
-			
-			rs = pstmt.executeQuery();
-			
-			if( rs.next() ){
-				bto.setSeq(rs.getInt( "seq"));
-			}
-			
-			pstmt.close();
-			System.out.println( "board_seq:" + bto.getSeq() );
-			System.out.println( "m_seq:" + bto.getWrite_seq() );
-			
-			System.out.println( "테스트 : " + arry );
-			System.out.println( "사이즈 : " + arry.size() );
-			
-
-			if( arry.size() != 0 ) {
-
-				sql = "insert into membership values(0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?), (0, ?, ?, ?, ?, ?)";
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, bto.getWrite_seq());
-				pstmt.setString(2, arry.get(0).getMembership_name());
-				pstmt.setInt(3, arry.get(0).getMembership_price());
-				pstmt.setInt(4, arry.get(0).getMembership_period());
-				pstmt.setInt(5, bto.getSeq());
-				pstmt.setInt(6, bto.getWrite_seq());
-				pstmt.setString(7, arry.get(1).getMembership_name());
-				pstmt.setInt(8, arry.get(1).getMembership_price());
-				pstmt.setInt(9, arry.get(1).getMembership_period());
-				pstmt.setInt(10, bto.getSeq());
-				pstmt.setInt(11, bto.getWrite_seq());
-				pstmt.setString(12, arry.get(2).getMembership_name());
-				pstmt.setInt(13, arry.get(2).getMembership_price());
-				pstmt.setInt(14, arry.get(2).getMembership_period());
-				pstmt.setInt(15, bto.getSeq());
-				pstmt.setInt(16, bto.getWrite_seq());
-				pstmt.setString(17, arry.get(3).getMembership_name());
-				pstmt.setInt(18, arry.get(3).getMembership_price());
-				pstmt.setInt(19, arry.get(3).getMembership_period());
-				pstmt.setInt(20, bto.getSeq());
-			}
-			System.out.println( "회원권 board_seq:" + bto.getSeq() );
-			
-			int result2 = pstmt.executeUpdate();
-			
-			if( result2 == 1 ) {
-				flag = 0;
-			}
-			pstmt.close();
-			
-			
-			
-			// 파일 첨부
-			sql = "insert into image values(0, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, bto.getImage_name() );
-			pstmt.setDouble( 2, bto.getImage_size() );
-			pstmt.setInt(3, bto.getSeq() );
-			
-			
-			int result3 = pstmt.executeUpdate();
-			
-			while( result3 == 1 ) {
-				flag = 0;
-			}
-			pstmt.close();
-			System.out.println( "파일첨부 board_seq:" + bto.getSeq() );
-			System.out.println( "파일첨부 flag : " + flag );
-			
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] " + e.getMessage() );
+		conn = dataSource.getConnection();
+		
+		String sql = "insert into board values (0, ?, ?, ?, ?, now(), 1)";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, to.getCategory_seq() );
+		pstmt.setString(2, to.getTitle() );
+		pstmt.setString(3, to.getContent() );
+		pstmt.setInt(4, to.getWrite_seq() );
+		
+		if( pstmt.executeUpdate() == 1) {
+			flag = 0;
+		}
+		
+		} catch( SQLException e) {
+			System.out.println( "[에러]" + e.getMessage());
 		} finally {
-			if(rs != null) try {rs.close();} catch(SQLException e) {}
-			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-			if(conn != null) try {conn.close();} catch(SQLException e) {}
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		
+		return flag;
+	}
+	
+	public int insertfacilityImage( BoardTO to ) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int flag = 1;
+		
+		try {
+			
+		conn = dataSource.getConnection();
+		
+		String sql = "insert into image values (0, ?, ?, ?)";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setString(1, to.getImage_name() );
+		pstmt.setDouble(2, to.getImage_size() );
+		pstmt.setInt(3, to.getSeq() );
+		
+		if( pstmt.executeUpdate() == 1) {
+			flag = 0;
+		} else {
+			flag = 1;
+		}
+		
+		} catch( SQLException e) {
+			System.out.println( "[에러]" + e.getMessage());
+		} finally {
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		
+		return flag;
+	}
+	
+	public int insertfacilityMembership( BoardTO bto, MemberShipTO msto ) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int flag = 1;
+		
+		try {
+			
+		conn = dataSource.getConnection();
+		
+		String sql = "insert into membership values (0, ?, ?, ?, ?, ?)";
+		
+		pstmt = conn.prepareStatement(sql);
+		
+		pstmt.setInt(1, bto.getWrite_seq() );
+		pstmt.setString(2, msto.getMembership_name()  );
+		pstmt.setInt(3, msto.getMembership_price() );
+		pstmt.setInt(4, msto.getMembership_period() );
+		pstmt.setInt(5, bto.getSeq() );
+		
+		if( pstmt.executeUpdate() == 1) {
+			flag = 0;
+		} else {
+			flag = 1;
+		}
+		
+		} catch( SQLException e) {
+			System.out.println( "[에러]" + e.getMessage());
+		} finally {
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
 		}
 		
 		return flag;
 	}
 
-//	public int uploadOk(BoardTO bto) {
-//		
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		
-//		int flag = 1;	// 0 : 성공 / 1 : 실패
-//		
-//		
-//		try {
-//			conn = this.dataSource.getConnection();
-//			
-//			System.out.println( "db연결 성공22222" );
-//			String sql  = "select seq from board where seq like ?";
-//			pstmt = conn.prepareStatement( sql );
-//			pstmt.setInt( 1, bto.getSeq() );
-//			
-//			rs = pstmt.executeQuery();
-//			
-//			if( rs.next() ){
-//				bto.setSeq(rs.getInt( "seq"));
-//			}
-//			
-//			pstmt.close();
-//			
-//			System.out.println( "글번호 : " + bto.getSeq() );
-//			
-//			sql = "insert into image values(0, ?, ?, ?)";
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1, bto.getImage_name() );
-//			pstmt.setDouble( 2, bto.getImage_size() );
-//			pstmt.setInt(3, bto.getSeq() );
-//			
-//			System.out.println( "board_seq:" + bto.getSeq() );
-//			
-//			int result = pstmt.executeUpdate();
-//			pstmt.close();
-//			
-//			if( result == 1 ) {
-//				flag = 0;
-//			}
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println( "[에러] " + e.getMessage() );
-//		} finally {
-//			if(rs != null) try {rs.close();} catch(SQLException e) {}
-//			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-//			if(conn != null) try {conn.close();} catch(SQLException e) {}
-//		}
-//		
-//		return flag;
-//	}
 
 }
 

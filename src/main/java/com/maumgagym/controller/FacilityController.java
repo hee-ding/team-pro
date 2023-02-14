@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
 import com.maumgagym.dao.FacilityDAO;
+import com.maumgagym.dao.MypageDAO;
 import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
 
 @Controller
@@ -30,6 +33,11 @@ public class FacilityController {
 	
 	@Autowired
 	private FacilityDAO dao;
+	
+	@Autowired
+	private MypageDAO mydao;
+	
+	private String uploadPath = "C:\\java2\\teamproject-workspace\\SpringBoot_Maumgagym\\src\\main\\webapp\\upload";
 	
 	// 지도
 	@RequestMapping(value="/facility/loc", method=RequestMethod.GET)
@@ -72,180 +80,110 @@ public class FacilityController {
 	}
 	
 	@RequestMapping(value="/facility/writeOK", method=RequestMethod.POST)
-	public String facilityWriteOk(HttpServletRequest req, Model model, MultipartFile upload) {
-
-		BoardTO bto = new BoardTO();
-		bto.setTitle( req.getParameter( "subject" ));
-		bto.setContent( req.getParameter( "content" ));
-		bto.setCategory_seq(Integer.parseInt(req.getParameter( "category" )) );
+	public String facilityWriteOk(HttpServletRequest req, Model model, MultipartFile upload, HttpSession session ) {
 		
-		MemberTO mto = new MemberTO();
-		mto.setNickname( req.getParameter( "nickname" ));
-		
-		System.out.println( "title : " + req.getParameter( "subject" ));
-		System.out.println( "content : " + req.getParameter( "content" ));
-		System.out.println( "category : " + req.getParameter( "category" ));
-		System.out.println( "seq : " + bto.getSeq());
-		
-		//회원권
-		ArrayList<BoardTO> membershipLists = new ArrayList<BoardTO>();
-		//BoardTO bto2 = new BoardTO();
-		// #dhadahuad123
-		
-		if( req.getParameter( "membership1" ) != null ) {
-			BoardTO bto2 = new BoardTO();// #dhadahuad123
-			bto2.setMembership_name( "1개월권" );
-			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership1" )));
-			bto2.setMembership_period(1);
-			membershipLists.add(bto2);
-			System.out.println("1 : " + membershipLists);
-		} 
-		
-		if( req.getParameter( "membership3" ) != null ) {
-			BoardTO bto2 = new BoardTO();// #dhadahuad12323
-			bto2.setMembership_name( "3개월권" );
-			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership3" )));
-			bto2.setMembership_period(3);
-			membershipLists.add(bto2);
-			System.out.println("2 : " + membershipLists);
-		} 
-		
-		if( req.getParameter( "membership6" ) != null ) {
-			BoardTO bto2 = new BoardTO();// #dhadahuad123534
-			bto2.setMembership_name( "6개월권" );
-			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership6" )));
-			bto2.setMembership_period(6);
-			membershipLists.add(bto2);
-			System.out.println("3 : " + membershipLists);
-		} 
-		
-		if( req.getParameter( "membership12" ) != null ) {
-			BoardTO bto2 = new BoardTO();// #dhadahuad1237866
-			bto2.setMembership_name( "12개월권" );
-			bto2.setMembership_price(Integer.parseInt(req.getParameter( "membership12" )));
-			bto2.setMembership_period(12);
-			membershipLists.add(bto2);
-			System.out.println("4 : " + membershipLists);
-		} 
-		
-		//파일
+		// 1. 사진을 저장합니다.
 		String saveFileName = UUID.randomUUID().toString() + upload.getOriginalFilename().substring( upload.getOriginalFilename().indexOf(".") );
-		System.out.println( "파일 이름 : " + upload.getOriginalFilename() );
-		try {
-			if( !upload.isEmpty() ) {
-				bto.setImage_name( saveFileName );
-				bto.setImage_size( upload.getSize() );
+		try { upload.transferTo( new File( saveFileName ) ); } catch (IOException e) { System.out.println( "[에러] :" + e.getMessage()); }	
+		
+		
+		// 2. 세션을 통해 얻은 아이디로 member_seq을 가져옵니다. MypageDAO 사용
+		MemberTO mto = new MemberTO();
+		mto.setId( (String) session.getAttribute("id") );
+		mto = mydao.selectMember(mto);
+		
+		
+		// 3. 게시글을 작성합니다.
+		BoardTO bto = new BoardTO();
+		bto.setCategory_seq( Integer.parseInt( req.getParameter("category") ) );
+		bto.setTitle( req.getParameter("title") );
+		bto.setContent( req.getParameter("content") );
+		bto.setWrite_seq( mto.getSeq() );
+		int flag = dao.insertfacilityBoard(bto);
+		
+		System.out.println( "게시글 flag " +  flag );
+		
+		
+		//4. 저장된 게시글의 seq를 가져옵니다.
+		bto = dao.selectfacilityBoard(bto);
+		
+		int boardSeq = bto.getSeq();
+		
+		System.out.println( "boardSeq" + boardSeq );
+		
+		// 5. 게시글이 정상적으로 작성이 되었다면, 사진의 정보를 DB에 insert 합니다.
+		// 그게 아니라면 500eroor 페이지로 이동시킵니다.
+		if( flag == 0) {
+			bto.setImage_name(saveFileName);
+			bto.setImage_size(upload.getSize());
+			flag = dao.insertfacilityImage(bto);
+		}  else {
+			return "redirect:/500error";
 		}
-		upload.transferTo(  new File( saveFileName ) );
 		
-		System.out.println( "이미지 : " + saveFileName );
 		
-		} catch (IllegalStateException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] : " + e.getMessage() );
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] : " + e.getMessage() );
+		System.out.println( "사진 정보 flag " +  flag );
+		
+		// 6. 사진의 정보를 DB에 정상적으로 insert 했다면, 회원권을 등록합니다.
+		// 그게 아니라면 500eroor 페이지로 이동시킵니다.
+		if( flag == 0) {
+		
+			if ( req.getParameter("membership1") != null || !"null".equals( req.getParameter("membership1") ) ) {
+				
+				MemberShipTO msto = new MemberShipTO();
+				msto.setMembership_name("1개월권");
+				msto.setMembership_price( Integer.parseInt( req.getParameter("membership1") ) );
+				msto.setMembership_period(1);
+				
+				flag = dao.insertfacilityMembership(bto, msto);
+				
+				System.out.println( "멤버쉽1 flag " +  flag );
+			}
+			
+			if ( req.getParameter("membership3") != null || !"null".equals( req.getParameter("membership3") ) ) {
+				
+				MemberShipTO msto = new MemberShipTO();
+				msto.setMembership_name("3개월권");
+				msto.setMembership_price( Integer.parseInt( req.getParameter("membership3") ) );
+				msto.setMembership_period(3);
+				
+				flag = dao.insertfacilityMembership(bto, msto);
+				
+				System.out.println( "멤버쉽3 flag " +  flag );
+				
+			}
+			
+			if ( req.getParameter("membership6") != null || !"null".equals( req.getParameter("membership6") ) ) {
+				
+				MemberShipTO msto = new MemberShipTO();
+				msto.setMembership_name("6개월권");
+				msto.setMembership_price( Integer.parseInt( req.getParameter("membership6") ) );
+				msto.setMembership_period(6);
+				
+				flag = dao.insertfacilityMembership(bto, msto);
+				
+				System.out.println( "멤버쉽6 flag " +  flag );
+				
+			}
+			
+			if ( req.getParameter("membership12") != null || !"null".equals( req.getParameter("membership12") ) ) {
+				
+				MemberShipTO msto = new MemberShipTO();
+				msto.setMembership_name("12개월권");
+				msto.setMembership_price( Integer.parseInt( req.getParameter("membership12") ) );
+				msto.setMembership_period(12);
+				
+				flag = dao.insertfacilityMembership(bto, msto);
+				
+				System.out.println( "멤버쉽12 flag " +  flag );
+				
+			}
+		
+		}  else {
+			return "redirect:/500error";
 		}
-		
-		int flag = dao.writeOk(bto , mto, membershipLists);
-		model.addAttribute("flag", flag);
-		
-		return "facility_writeOkPage";
+			
+		return "redirect:/facility/" + boardSeq;
 	}
-
-//	@RequestMapping(value="/facility/uploadOk", produces = "application/json; charset=utf8", method = RequestMethod.POST)
-//	@ResponseBody
-//	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request ) throws Exception {
-//		JsonObject jsonObject = new JsonObject();
-//		
-//        /*
-//		 * String fileRoot = "C:\\summernote_image\\"; // 외부경로로 저장을 희망할때.
-//		 */
-//		
-//		// 내부경로로 저장
-//		String contextRoot = new HttpServletRequestWrapper(request).getServletContext().getRealPath("/");
-//		String fileRoot = contextRoot+"/upload/";
-//		System.out.println( "*******" + contextRoot );
-//		String originalFileName = multipartFile.getOriginalFilename();	//오리지날 파일명
-//		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));	//파일 확장자
-//		String savedFileName = UUID.randomUUID() + extension;	//저장될 파일 명
-//		
-//		BoardTO bto = new BoardTO();
-//		bto.setImage_name(savedFileName);
-//		bto.setImage_size(multipartFile.getSize());
-//		
-//		
-//		File targetFile = new File(fileRoot + savedFileName);	
-//		try {
-//			InputStream fileStream = multipartFile.getInputStream();
-//			FileUtils.copyInputStreamToFile(fileStream, targetFile);	//파일 저장
-//			jsonObject.addProperty("url", "/upload"+savedFileName); // contextroot + resources + 저장할 내부 폴더명
-//			jsonObject.addProperty("responseCode", "success");
-//				
-//		} catch (IOException e) {
-//			FileUtils.deleteQuietly(targetFile);	//저장된 파일 삭제
-//			jsonObject.addProperty("responseCode", "error");
-//			e.printStackTrace();
-//		}
-//		String a = jsonObject.toString();
-//		//int flag = dao.uploadOk(bto);
-//		
-//		return a;
-//	}
-	
-	
-//	@RequestMapping(value="/facility/writeOK", method=RequestMethod.POST)
-//	public String facilityWriteOk(HttpServletRequest req, Model model) {
-//
-//		BoardTO bto = new BoardTO();
-//		bto.setTitle( req.getParameter( "subject" ));
-//		bto.setContent( req.getParameter( "content" ));
-//		bto.setCategory_seq(Integer.parseInt(req.getParameter( "category" )) );
-//		
-//		MemberTO mto = new MemberTO();
-//		mto.setNickname( req.getParameter( "nickname" ));
-//		
-//		System.out.println( "title : " + req.getParameter( "subject" ));
-//		System.out.println( "content : " + req.getParameter( "content" ));
-//		System.out.println( "category : " + req.getParameter( "category" ));
-//		//System.out.println( "nickname : " + req.getParameter( "nickname" ));
-//		
-//		int flag = dao.writeOk(bto, mto);
-//		model.addAttribute("flag", flag);
-//		
-//		return "facility_writeOkPage";
-//	}
-	
-	
-//	@RequestMapping( value="/facility/uploadOK", method=RequestMethod.POST)
-//	public ModelAndView facilityUploadOk( HttpServletRequest request, MultipartFile upload ) {
-//		
-//		BoardTO bto = new BoardTO();
-//		
-//		try {
-//			if( !upload.isEmpty() ) {
-//				bto.setImage_name( upload.getOriginalFilename() );
-//				bto.setImage_size( upload.getSize() );
-//			}
-//			upload.transferTo( new File(upload.getOriginalFilename() ) );
-//			
-//			System.out.println( "이미지 : " + upload.getOriginalFilename());
-//		} catch (IllegalStateException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println( "[에러] : " + e.getMessage() );
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println( "[에러] : " + e.getMessage() );
-//		}
-//
-//		int flag = dao.uploadOk(bto);
-//		
-//		ModelAndView modelAndView = new ModelAndView();
-//		modelAndView.setViewName( "facility_writeOkPage" );
-//		modelAndView.addObject( "write", flag );
-//		
-//		return modelAndView;
-//	}
 
 }

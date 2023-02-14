@@ -38,9 +38,6 @@
 	}
 	
 	
-	
-	
-	
 
 </script>
 
@@ -57,26 +54,24 @@
 				<tr>
 					<th class="fs-bold fw-4 bg-light" width="15%">카테고리</th>
 					<td>
-						<input type="hidden" name="c_seq" id="c_seq" value=""></input>
-							<select class="form-select" role="button" id="category" name="category" onchange="selectseq()">
-				  				<option selected>카테고리를 선택해 주세요.</option>
-				  				<option value="1">피트니스</option>
-								<option value="2">요가</option>
-								<option value="3">수영</option>
-								<option value="4">테니스</option>
-								<option value="5">타바타</option>
-								<option value="6">필라테스</option>
-								<option value="7">골프</option>
-								<option value="8">복싱</option>
-								<option value="9">댄스</option>
+						<select class="form-select" role="button" id="category" name="category" onchange="selectseq()">
+			  				<option selected>카테고리를 선택해 주세요.</option>
+			  				<option value="1">피트니스</option>
+							<option value="2">요가</option>
+							<option value="3">수영</option>
+							<option value="4">테니스</option>
+							<option value="5">타바타</option>
+							<option value="6">필라테스</option>
+							<option value="7">골프</option>
+							<option value="8">복싱</option>
+							<option value="9">댄스</option>
 						</select>
 						<input type="hidden" id="nickname" name="nickname" value="<%=nickname%>"/>
-						<input type="hidden" name="w_seq" id="w_seq" value=""></input>
 					</td>
 				</tr>
 				<tr>
 					<th class="fs-bold fw-4 bg-light">제목</th>
-					<td><input type="text" name="subject" id="subject" value="" class="form-control" /></td>
+					<td><input type="text" name="title" id="title" value="" class="form-control" /></td>
 				</tr>
 				<tr>
 					<th class="fs-bold fw-4 bg-light" >회원권(1개월)</th>
