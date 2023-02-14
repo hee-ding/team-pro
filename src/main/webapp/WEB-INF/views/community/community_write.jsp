@@ -39,7 +39,7 @@
 	</jsp:include>
 	
 	<!--  search  -->
-	<jsp:include page="./community_source/main_search.jsp"/>
+	<jsp:include page="../main/main_source/main_search.jsp" />>
 	
 	<!-- write 페이지 -->
 	<jsp:include page="./community_source/community_write_container1.jsp">

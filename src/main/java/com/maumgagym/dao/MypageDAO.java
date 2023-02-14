@@ -241,7 +241,7 @@ public class MypageDAO {
 			sb.append( "													INNER JOIN pay p ");
 			sb.append( "														ON ( ms.seq = p.membership_seq ) ");
 			sb.append( "															LEFT OUTER JOIN member m ");
-			sb.append( "																ON ( p.membership_seq = m.seq ) ");
+			sb.append( "																ON ( p.member_seq = m.seq ) ");
 			sb.append( "																	LEFT OUTER JOIN membership_register msr ");
 			sb.append( "																		ON( p.merchant_uid = msr.merchant_uid ) ");
 			sb.append( "																			WHERE member.id = ? AND  c.seq < 9 ");

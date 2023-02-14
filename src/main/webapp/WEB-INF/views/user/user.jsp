@@ -50,6 +50,7 @@
 	<!-- review css -->
 	<link href="../resources/asset/css/review.css" rel="stylesheet" />
 	
+	<link href="/resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
 	<!--  header news -->
 	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 	

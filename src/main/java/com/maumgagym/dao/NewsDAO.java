@@ -34,7 +34,7 @@ public class NewsDAO {
 		}
 	
 	
-	// [알림] id와 type을 통해서 가져오기
+	// [알림 메시지 가져오기] id와 type을 통해서 가져오기
 	public ArrayList<NewsTO> selectAllNews( MemberTO mto ) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -48,7 +48,7 @@ public class NewsDAO {
 			StringBuilder sb = new StringBuilder();
 			
 			sb.append( "SELECT ");
-			sb.append( "	b.title AS '글', "); 
+			sb.append( "	b.seq AS '글번호', b.title AS '글', "); 
 			sb.append( "		req_m.nickname '보낸회원이름', ");
 			sb.append( "			TIMESTAMPDIFF( minute, n.req_date, NOW() ) AS '시간차이', ");
 			sb.append( "				case ");
@@ -57,7 +57,7 @@ public class NewsDAO {
 			sb.append( "					when n.type = 3 then '승인요청' ");
 			sb.append( "					when n.type = 4 then '승인완료' ");
 			sb.append( "				END AS '알림내용', ");
-			sb.append( "						n.read_check AS '읽음여부', n.view_check AS '유지여부' ");
+			sb.append( "						n.seq AS '뉴스번호' ,n.read_check AS '읽음여부', n.view_check AS '유지여부' ");
 			sb.append( "							FROM news n LEFT OUTER JOIN board b ");
 			sb.append( "								ON( n.board_seq = b.seq ) ");
 			sb.append( "									LEFT OUTER JOIN member req_m ");
@@ -78,6 +78,8 @@ public class NewsDAO {
 			
 			while( rs.next() ) {
 				NewsTO nto = new NewsTO();
+				nto.setSeq( rs.getInt( "뉴스번호" ) );
+				nto.setBoardSeq( rs.getInt( "글번호" ) );
 				nto.setTitle( rs.getString( "글" ) );
 				nto.setNickname( rs.getString("보낸회원이름") );
 				nto.setTIMESTAMPDIFF( rs.getInt("시간차이") );
@@ -98,7 +100,7 @@ public class NewsDAO {
 	
 	}
 	
-	// [알림] id와 type을 통해서 가져오기
+	// [읽지 않은 알림 갯수] id와 type을 통해서 가져오기
 	public NewsTO selectUnReadNewsCount( MemberTO mto ) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -114,7 +116,7 @@ public class NewsDAO {
 			sb.append( "			ON( n.board_seq = b.seq ) ");
 			sb.append( "				LEFT OUTER JOIN member rsp_m ");
 			sb.append( "					ON( b.write_seq = rsp_m.seq ) ");
-			sb.append( "						WHERE rsp_m.id = ? AND n.view_check = 'Y' ");
+			sb.append( "						WHERE rsp_m.id = ? AND n.read_check = 'N' ");
 			String sql = sb.toString();
 			
 			pstmt = conn.prepareStatement(sql);
@@ -134,6 +136,42 @@ public class NewsDAO {
 			if(rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 		return nto;
+	
+	}
+	
+	
+	
+	// [일반 회원, 기업 회원] update 해당 news 읽음 처리
+	// flag 0 정상
+	// flag 8 비정상 오류
+	// flag 9 서버 오류
+	public int updateReadNews( NewsTO nto ) {
+		int flag = 9;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+				
+			conn = this.dataSource.getConnection();
+			
+			String sql = "update news SET read_check = 'Y' where seq = ? ";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, nto.getSeq() );
+			
+			if( pstmt.executeUpdate() == 1) {
+				flag = 0;
+			} else {
+				flag = 8;
+			}
+			
+			} catch( SQLException e) {
+				System.out.println( e.getMessage());
+			} finally {
+				if( pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if( conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		
+		return flag;
 	
 	}
 	

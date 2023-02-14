@@ -14,6 +14,7 @@
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     
+    <link href="/resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
     <!--  header news -->
 	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
       

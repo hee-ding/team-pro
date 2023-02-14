@@ -49,9 +49,9 @@
   		sbMembershipPriceInfo.append( "		<td height='30' align='left'>" );
   		sbMembershipPriceInfo.append( "		<br>" );
   		sbMembershipPriceInfo.append( "			<p class='text-primary'>" );
-  		sbMembershipPriceInfo.append( "				마음가짐 회원가&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span class='fw-bold'>" + String.format("%,d 원", msto.getMembership_price()) + "</span>" );
+  		sbMembershipPriceInfo.append( "				마음가짐 회원가&emsp;&emsp;&emsp;&emsp;<span class='fw-bold'>" + String.format("%,d 원", msto.getMembership_price()) + "</span>" );
   		sbMembershipPriceInfo.append( "			</p>" );
-  		sbMembershipPriceInfo.append( "			<hr><br></td>" );
+  		sbMembershipPriceInfo.append( "		<hr></td>" );
   		sbMembershipPriceInfo.append( "	</tr>" );
   	}
   	
@@ -73,7 +73,7 @@
   		
 		sbReviewInfo.append( "	 	<div class='d-flex justify-content-between mb-2'>");
 		sbReviewInfo.append( "  		<div class='d-flex flex-row align-items-center'>");
-		sbReviewInfo.append( "    			<span class='small mb-0 ms-2'><i class='material-icons'>account_circle</i>&nbsp;" + nickname +"1</span> <span class='text-end'></span>");
+		sbReviewInfo.append( "    			<span class='small mb-0 ms-2'><i class='material-icons'>account_circle</i>&nbsp;" + nickname +"</span> <span class='text-end'></span>");
 		sbReviewInfo.append( "	  		</div>");
 		sbReviewInfo.append( "	  		<div class='d-flex flex-row align-items-center'>");
 		sbReviewInfo.append( "	    		<small>&nbsp;" + writeDate +"</small>");
@@ -170,9 +170,9 @@
 								</div>
 							</div>
 							<div class="text-end mb-5">
-							    <i class="bi-heart" style="font-size:25px; color: red; cursor: pointer;"></i>
+							    <!--  <i class="bi-heart" style="font-size:25px; color: red; cursor: pointer;"></i> -->
 								&nbsp;
-								<span class="material-symbols-outlined"> share </span>
+								 <!-- <span class="material-symbols-outlined"> share </span>  -->
 							</div>
 							<div class="mb-2 pb-3">
 							<div class="mb-2 pb-3">
@@ -211,21 +211,20 @@
 								<a href="./view.jsp?%<%=btoNotice.getSeq()%>"><br>- <%=btoNotice.getTitle() %></a>
 							<% 	} %>
 						</div>
-						<hr>
+						</br>
 						<h6 class="mb-lg-5">운영시간 및 운동시설 소개</h6>
 						<div class="card">
-							<div class="card-body mb-3">
-								<p class="text-center">
+							<div class="card-body">
+								<p class="mt-3 text-center fw-bold">
 								<%= bto.getContent() %>
 								</p>
 							</div>
 						</div>
-						<hr>
-						<h6 class="mb-lg-3">사진</h6>
+						</br>
+						<h6 class="mb-lg-3 mt-3">사진</h6>
 						<div class="row">
 							<div class="table-responsive">
-								<table
-									class="table text-center border-light table-borderless table-sm">
+								<table class="table text-center border-light table-borderless table-sm">
 									<thead class="border-light">
 										<tr>
 										<th scope="col">
@@ -238,15 +237,15 @@
 												</div>
 											</div> 
 											<% 	} %>
-											<br>
 										</tr>
 									</thead>
 								</table>
 							</div>
 						</div>
 						<hr>
-						<br>
+						</br>
 						<h6>지도</h6>
+						</br>
 						<div class="row">
 						<div class="custom-block-icon-wrap mb-5">
 							<div class="custom-block-image-wrap custom-block-image-detail-page">
@@ -258,11 +257,9 @@
 					<div class="card-footer text-muted" id="review">
 						<div class="card-body">
 							<h6>이용후기</h6>
-
+							<br>
 							<div class="row">
-
 								<div class="table-responsive">
-								
 										<div class="card mb-4 card-comment">
 						                  <div class="card-body">
 											<%=sbReviewInfo.toString() %> 
@@ -282,17 +279,14 @@
 				<div class="card sticky-top" style="width: 20rem;">
 					<div class="card-header">예상결제가격</div>
 					<ul class="list-group list-group-flush text-center">
-
-								<table width="320" border="0" cellpadding="0">
-								<%= sbMembershipPriceInfo.toString() %>
-								</table>
-
+							<table width="320" border="0" cellpadding="0">
+							<%= sbMembershipPriceInfo.toString() %>
+							</table>
 								<!-- 장바구니 결제버튼 -->
 						<li class="list-group-item">
 							<div class="d-grid gap-3">
-								<button type="button" class="btn btn-outline-primary btn-block">카트담기</button>
+								<!--  <button type="button" class="btn btn-outline-primary btn-block">카트담기</button> -->
 							</div>
-							<p></p>
 							<div class="d-grid gap-3">
 							<button id="payBtn" type="button" class="btn btn-primary btn-block">결제하기</button>
 							</div>

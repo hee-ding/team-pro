@@ -432,13 +432,13 @@
 	<ul class="nav nav-tabs" id="myTab" role="tablist">
 	
 		<li class="nav-item" role="presentation">
-			<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+			<button class="nav-link" id="home-tab" data-bs-toggle="tab"
 				data-bs-target="#home-tab-pane" type="button" role="tab"
 				aria-controls="home-tab-pane" aria-selected="true">내 정보</button>
 		</li>
 		
 		<li class="nav-item" role="presentation">
-			<button class="nav-link" id="purchase-list-tab" data-bs-toggle="tab"
+			<button class="nav-link active" id="purchase-list-tab" data-bs-toggle="tab"
 				data-bs-target="#purchase-list-tab-pane" type="button" role="tab"
 				aria-controls="purchase-list-tab-pane" aria-selected="false">전체 결제 목록</button>
 		</li>
@@ -475,7 +475,7 @@
 		
 	</ul>
 	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="home-tab-pane"
+		<div class="tab-pane fade show" id="home-tab-pane"
 			role="tabpanel" aria-labelledby="home-tab" tabindex="0">
 
 			<!-- 내 정보 -->
@@ -536,7 +536,7 @@
 								
 								<div class="mb-3">
 									<label class="small mb-1" for="inputAddress">주소</label> <input
-										class="form-control" id="inputAddress" type="text" value="<%= "[" + mto.getZipcode() +"] " + mto.getFullAddress() %>">
+										class="form-control" id="inputAddress" type="text" value="<%= mto.getFullAddress() %>">
 								</div>
 							
 								<!-- Form Row-->
@@ -566,7 +566,7 @@
 			</div>
 		</div>
 		
-		<div class="tab-pane fade" id="purchase-list-tab-pane" role="tabpanel"
+		<div class="tab-pane fade show active" id="purchase-list-tab-pane" role="tabpanel"
 			aria-labelledby="purchase-list-tab-pane-tab" tabindex="1">
 
 			<%= sbPurchaseList.toString() %>

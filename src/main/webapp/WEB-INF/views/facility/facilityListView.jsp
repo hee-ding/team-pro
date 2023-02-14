@@ -32,6 +32,7 @@
 	<!-- script -->
 	<script src="../resources/asset/script/jquery-1.11.1.min.js"></script>
 	
+	<link href="/resources/asset/css/templatemo-pod-talk.css" rel="stylesheet"/>
 	<!--  header news -->
 	<link rel="stylesheet" href="/resources/asset/css/news.css"/>
 	

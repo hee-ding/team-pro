@@ -106,9 +106,9 @@
 		sbWeeklyBoardList.append( "						</p> " );
 		sbWeeklyBoardList.append( "					</div> " );
 		sbWeeklyBoardList.append( "					<div class='custom-block-bottom d-flex justify-content-between mt-3'> " );
-		sbWeeklyBoardList.append( "						<a href='#' class='bi bi-hand-index-thumb me-1'> <span>" + viewCount + "</span> " );
-		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-heart me-1'> <span>" + likeCount + "</span> " );
-		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-chat me-1'> <span>" + commentCount + "</span> " );
+		sbWeeklyBoardList.append( "						<a class='bi bi-hand-index-thumb me-1'> <span>" + viewCount + "</span> " );
+		sbWeeklyBoardList.append( "						</a> <a class='bi-heart me-1'> <span>" + likeCount + "</span> " );
+		sbWeeklyBoardList.append( "						</a> <a class='bi-chat me-1'> <span>" + commentCount + "</span> " );
 		sbWeeklyBoardList.append( "						</a> " );
 		sbWeeklyBoardList.append( "					</div> " ); 
 		sbWeeklyBoardList.append( "				</div> " );
@@ -134,9 +134,9 @@
 		sbWeeklyBoardList.append( "						</p> " );
 		sbWeeklyBoardList.append( "					</div> " );
 		sbWeeklyBoardList.append( "					<div class='custom-block-bottom d-flex justify-content-between mt-3'> " );
-		sbWeeklyBoardList.append( "						<a href='#' class='bi bi-hand-index-thumb me-1'> <span></span> " );
-		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-heart me-1'> <span></span> " );
-		sbWeeklyBoardList.append( "						</a> <a href='#' class='bi-chat me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						<a class='bi bi-hand-index-thumb me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						</a> <a class='bi-heart me-1'> <span></span> " );
+		sbWeeklyBoardList.append( "						</a> <a class='bi-chat me-1'> <span></span> " );
 		sbWeeklyBoardList.append( "						</a> " );
 		sbWeeklyBoardList.append( "					</div> " ); 
 		sbWeeklyBoardList.append( "				</div> " );
@@ -155,7 +155,7 @@
 							마음가짐 회원이라면, 우주 최저가 혜택 받아야죠!
 							</h2>
 							<p class="text-dark">직접 방문한 것보다 더 저렴해요. 지금 둘러보세요.</p>
-							<a href="/facility/list" class="btn custom-btn smoothscroll mt-3">보러가기</a>
+							<a href="/facility" class="btn custom-btn smoothscroll mt-3">보러가기</a>
 					</div>
 	
 					<div class="owl-carousel owl-theme">
