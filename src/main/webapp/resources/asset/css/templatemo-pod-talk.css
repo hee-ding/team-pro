@@ -108,7 +108,8 @@ p {
 
 ul li {
   color: var(--p-color);
-  font-size: var(--p-font-size);
+  /* font-size: var(--p-font-size); */
+  font-size: 13px;
   font-weight: var(--font-weight-light);
 }
 

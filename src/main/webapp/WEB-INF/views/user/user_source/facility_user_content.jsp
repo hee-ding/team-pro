@@ -13,6 +13,8 @@
 
 	MemberTO mto = (MemberTO)request.getAttribute("mto");
 	
+	String beforeChangeNickname = mto.getNickname();
+	
 	ArrayList< Map<String, Object> > arryList = (ArrayList) request.getAttribute("arryList");
 	
 	Map<String, Object> map = null;
@@ -42,6 +44,8 @@
 		String pdayStatus = pto.getPay_status();
 		String payDate = pto.getPay_date();
 		String merchantUid = pto.getMerchant_uid();
+		
+		//System.out.println( pdayStatus );
 		
 		sbPurchaseList.append( "	<tr class='h-100'> ");
 		sbPurchaseList.append( "		<td>" + (1 + i) +"</td> ");
@@ -194,7 +198,7 @@
 								</div>
 								<!-- Save changes button-->
 								<div class="d-grid gap-2">
-									<button onclick='memberModify("<%=mto.getId() %>")' class="btn btn-primary mt-3" type="button"> 변경하기 </button>
+									<button onclick='memberModify("<%=mto.getId() %>", "<%= beforeChangeNickname %>")' class="btn btn-primary mt-3" type="button"> 변경하기 </button>
 								</div>
 							</form>
 						</div>

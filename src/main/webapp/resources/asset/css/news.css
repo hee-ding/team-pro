@@ -2,7 +2,7 @@
 #news{margin : 10px 0px 0px 150px}
 .alert_list{font-size: 11px; color:grey}
 li.alert_li {
-  font-size: 11px; 
+  font-size: 8px;
   color:grey;
   padding:10px 0px 2px 0px;
   border-bottom: thin solid #c0c0c0;
@@ -11,3 +11,8 @@ li.alert_li:hover{background-color:#eee}
 .turn_off_alert{float:right;margin-bottom :1px}
 a.alert_message{color : grey}
 a.alert_message:hover{color : grey}
+
+.popover-body {
+	height: 350px;
+	overflow-y: auto;
+	}

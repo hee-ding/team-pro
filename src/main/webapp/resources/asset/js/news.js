@@ -87,6 +87,7 @@ $(document).ready(function( ){
 		  'html' : true,
 		  'placement' : 'bottom',
 		  'content' : $('.alert_list').html()
+
 		});
-	
+		
 	};

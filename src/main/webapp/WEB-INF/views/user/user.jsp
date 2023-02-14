@@ -70,6 +70,7 @@
 	<jsp:include page="./user_modal/memberModify_modal.jsp" />
 	<jsp:include page="./user_modal/review_modal.jsp" />
 	<jsp:include page="./user_modal/register_modal.jsp" />
+	<jsp:include page="./user_modal/mypage_modify_modal.jsp" />
 	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />

@@ -102,7 +102,7 @@ public class MypageDAO {
 			if( pstmt.executeUpdate() == 1) {
 				flag = 0;
 			} else {
-				flag = 8;
+				flag = 1;
 			}
 			
 			} catch( SQLException e) {

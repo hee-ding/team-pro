@@ -30,7 +30,6 @@ public class PayController {
 	public HashMap<String, Object> selectRegisterMembership( HttpServletRequest request ) {
 		int flag = 9;
 		MemberTO mto = new MemberTO();
-		System.out.println( request.getParameter("buyer_nickname") );
 		mto.setNickname( request.getParameter("buyer_nickname") );
 		MemberShipTO msto = new MemberShipTO();
 		msto.setMembership_seq( Integer.valueOf( request.getParameter("membership_seq") ) );

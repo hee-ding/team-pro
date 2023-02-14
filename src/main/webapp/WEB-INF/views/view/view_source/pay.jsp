@@ -56,7 +56,7 @@
 				dataType: 'json',
 				success: function( jsonData ) {
 					if( jsonData.flag == 0 ) {
-					    console.log( jsonData.flag );
+					    //console.log( jsonData.flag );
 						merchant_uid = jsonData.merchant_uid;
 						name = jsonData.name;
 						amount = jsonData.amount;

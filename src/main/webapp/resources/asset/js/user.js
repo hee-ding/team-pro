@@ -269,7 +269,7 @@ function memberModify( id, nickname ) {
 		success: function( jsonData ) {
 			if( jsonData.flag == 0 ) {
 				
-				console.log( '중복 없음 성공' );
+					console.log( '중복 없음 성공' );
 				
 					$('#memberModifyConfirmMessage').text( id +" 님 작성하신 내용으로 정말로 수정 하시겠습니까?" );
 	
@@ -321,8 +321,9 @@ function memberModifyOk( ) {
 	dataType: 'json',
 	success: function( jsonData ) {
 		if( jsonData.flag == 0 ) {
-			
-			location.reload();
+						
+			$('#mypageModifyModal').modal("show");
+			//location.reload();
 			
 		} else if ( jsonData.flag == 1) {
 			alert( '비밀번호 오류' );

@@ -74,7 +74,7 @@
 	              <span id="unreadNews" style="position: relative; top: -15px; right: 5px; font-size: 13px;" class="badge bg-primary rounded-pill">0</span>
 	            </a>
 
-				<div id="" style="display:none; font-size: 10px;" class="alert_list">
+				<div style="display:none; font-size: 10px;" class="alert_list">
 				  <ul id="newsList" class="list-group"> </ul>
 				</div>
 	            
