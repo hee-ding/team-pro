@@ -25,7 +25,7 @@
 	<!-- 내 주변 운동시설-->
 	<div class="container md-5" style="padding-left: 60px">
 		<div class="current-menu container-xl">
-			<a href="./homePage.jsp">홈</a> &gt; 내 주변 운동시설
+			<a href="/home">홈</a> &gt; 내 주변 운동시설
 		</div>
 		<div class="current-location container-xl">
 			<div class="desktop-location-view ng-star-inserted">
@@ -45,7 +45,7 @@
 				<a href="./facilityPage.jsp?" class="btn btn-warning2 btn-lg">이 근처 운동시설 찾기</a>
 			</div>
 			-->
-			<form class="d-grid gap-2 col-6 mx-auto px-5 py-5" action="/facility/list/address" method="GET" id="facility"> 
+			<form class="d-grid gap-2 col-6 mx-auto px-5 py-5" action="/facility/address" method="GET" id="facility"> 
 				<input type="hidden" id="dongAddr" name="dongAddr" value="" />
 				<input class="btn btn-warning2 btn-lg" id="link1" type="button" value="이 근처 운동시설 찾기" onclick="link1_click();" />
 			</form>
@@ -160,7 +160,7 @@ kakao.maps.event.addListener(map, 'center_changed', function() {
 		var data = $("#centerAddr").text();  // 지도에서 받은 행정동 주소를 data로 넣고 
 		if( data != null ) {	// dat가 null이 아니면
 			//location.href="./facilityPage.jsp?dongAddr="+data;  // 링크 이동 
-			location.href="/facility/list?q="+data;  // 링크 이동 
+			location.href="/facility?address="+data;  // 링크 이동 
 			
 		}
 	}

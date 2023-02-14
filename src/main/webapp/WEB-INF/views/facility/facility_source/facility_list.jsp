@@ -9,7 +9,7 @@
  	request.setCharacterEncoding("utf-8");
 	
 	ArrayList facilityLists = (ArrayList) request.getAttribute("facilityLists");
-	System.out.println( facilityLists.size() );
+	//System.out.println( facilityLists.size() );
 	
 	String data = null;
 	String[] dongAddr = null;
@@ -47,12 +47,13 @@
 		//System.out.println(bto.getTitle());
 		
 		mto = (MemberTO) map0.get("mto"+(i+1));
-		System.out.println( "list.jsp : " + mto.getAddress());
+		//System.out.println( "list.jsp : " + mto.getAddress());
 		
 		msto = (MemberShipTO) map0.get("msto"+(i+1));
 		//System.out.println(msto.getMembership_price());
 		
 		String tag = bto.getTag();
+		int seq = bto.getSeq();
 		String title = bto.getTitle();
 		String imageName = bto.getImage_name();
 		String address = mto.getAddress();
@@ -64,14 +65,14 @@
 		if( ( dongAddr == null ) && ( categorySeq == 0 ) ){
 			sb.append("	<div class='col'>");
 			sb.append("		<div class='card shadow-sm'>");
-			sb.append("			<a href='#'>");
+			sb.append("			<a href='/facility/" + seq + "'>");
 			sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...' /></a>");
 			sb.append("			<span class='label-top'>" + tag + "</span>");
 			sb.append("			<div class='card-body'>");
 			sb.append("				<div class='clearfix mb-3'>");
 			sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
 			sb.append("					<span class='float-end'>");
-			sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+			sb.append("						<a href='/facility/" + seq + "#review' class='small text-muted'>Reviews</a>");
 			sb.append("					</span>");
 			sb.append("				</div>");
 			sb.append("				<h5 class='card-title'>" + title + "</h5>");
@@ -89,14 +90,14 @@
 			if( categorySeq == bto.getCategory_seq() ) {
 				sb.append("	<div class='col'>");
 				sb.append("		<div class='card shadow-sm'>");
-				sb.append("			<a href='#'>");
+				sb.append("			<a href='/facility/" + seq + "'>");
 				sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...' /></a>");
 				sb.append("			<span class='label-top'>" + tag + "</span>");
 				sb.append("			<div class='card-body'>");
 				sb.append("				<div class='clearfix mb-3'>");
 				sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
 				sb.append("					<span class='float-end'>");
-				sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+				sb.append("						<a href='/facility/" + seq + "#review' class='small text-muted'>Reviews</a>");
 				sb.append("					</span>");
 				sb.append("				</div>");
 				sb.append("				<h5 class='card-title'>" + title + "</h5>");
@@ -114,14 +115,14 @@
 			if( dongAddr[2].contains( facilityAddress[2] ) ) {
 				sb.append("	<div class='col'>");
 				sb.append("		<div class='card shadow-sm'>");
-				sb.append("			<a href='#'>");
+				sb.append("			<a href='/facility/" + seq + "'>");
 				sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...' /></a>");
 				sb.append("			<span class='label-top'>" + tag + "</span>");
 				sb.append("			<div class='card-body'>");
 				sb.append("				<div class='clearfix mb-3'>");
 				sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
 				sb.append("					<span class='float-end'>");
-				sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+				sb.append("						<a href='/facility/" + seq + "#review' class='small text-muted'>Reviews</a>");
 				sb.append("					</span>");
 				sb.append("				</div>");
 				sb.append("				<h5 class='card-title'>" + title + "</h5>");
@@ -139,14 +140,14 @@
 			if( dongAddr[2].equals( facilityAddress[2] ) && categorySeq == bto.getCategory_seq() ) {
 				sb.append("	<div class='col'>");
 				sb.append("		<div class='card shadow-sm'>");
-				sb.append("			<a href='#'>");
+				sb.append("			<a href='/facility/" + seq + "'>");
 				sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...' /></a>");
 				sb.append("			<span class='label-top'>" + tag + "</span>");
 				sb.append("			<div class='card-body'>");
 				sb.append("				<div class='clearfix mb-3'>");
 				sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
 				sb.append("					<span class='float-end'>");
-				sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+				sb.append("						<a href='/facility/" + seq + "#review' class='small text-muted'>Reviews</a>");
 				sb.append("					</span>");
 				sb.append("				</div>");
 				sb.append("				<h5 class='card-title'>" + title + "</h5>");
@@ -160,14 +161,17 @@
 			}
 		}
 	}
+	
+	System.out.println( "type : " + request.getParameter( "type" ) );
 
 %>
 
 <hr />
+<% if( request.getParameter( "type" ) == null || !request.getParameter("type").equals( "C" ) ) {%>
 <!-- 내 주변 운동시설-->
 <div class="container md-5" style="padding-left: 60px">
 	<div class="current-menu container-xl">
-		<a href="./homePage.jsp">홈</a> &gt; 내 주변 운동시설
+		<a href="/home">홈</a> &gt; 내 주변 운동시설
 	</div>
 	<div class="current-location container-xl">
 		<div class="desktop-location-view ng-star-inserted">
@@ -178,8 +182,15 @@
 		</div>
 	</div>
 </div>
-
 <hr />
+
+<%} else if( request.getParameter("type").equals( "C" ) ) { %>
+<!-- 글쓰기 버튼 -->
+<div class="col text-end">
+  <a class="btn btn-secondary me-md-5 px-3 mb-4" type="button" href="/facility/write">글쓰기</a>
+</div>
+
+<%} %>
 
 <!-- side navbar -->
 <div class="container" style="padding-left: 60px">
@@ -250,28 +261,28 @@ $(document).ready(function() {
 		//console.log( "urlParams : " + urlParams);
 		
 		// dongAddr 파라미터 확인
-		//console.log( "dongAddr파라미터 : " + urlParams.has( "q") ); 
+		//console.log( "dongAddr파라미터 : " + urlParams.has( "address") ); 
 		
 		//위치(dongAddr)X / 카테고리(category_seq) X   ==>   카테고리 번호 파라미터 추가
-		if( !( urlParams.has( "q" ) ) && !( urlParams.has( "category_seq" ) ) ) {
+		if( !( urlParams.has( "address" ) ) && !( urlParams.has( "category_seq" ) ) ) {
 			
 			urlParams.append( "category_seq", categorySeq );
 			location.href = url;
 		
 		// dongAddr X / category_seq O			  ==>		카테고리 번호 파라미터 변경
-		} else if( !( urlParams.has( "q" ) ) && ( urlParams.has( "category_seq" ) ) ) {
+		} else if( !( urlParams.has( "address" ) ) && ( urlParams.has( "category_seq" ) ) ) {
 			
 			urlParams.set( "category_seq", categorySeq );
 			location.href = url;
 			
 		// dongAddr O / category_seq X	  	  ==> 		  카테고리 번호 파라미터 추가
-		} else if( urlParams.has( "q" ) && !( urlParams.has( "category_seq" ) ) ){ 
+		} else if( urlParams.has( "address" ) && !( urlParams.has( "category_seq" ) ) ){ 
 			
 			urlParams.append( "category_seq", categorySeq );
 			location.href = url
 			
 		// dongAddr O / category_seq O	  	  ==> 		  카테고리 번호 파라미터 변경
-		} else if( urlParams.has( "q" ) && ( urlParams.has( "category_seq" ) ) ) {
+		} else if( urlParams.has( "address" ) && ( urlParams.has( "category_seq" ) ) ) {
 			
 			urlParams.set( "category_seq", categorySeq );
 			location.href = url; 
