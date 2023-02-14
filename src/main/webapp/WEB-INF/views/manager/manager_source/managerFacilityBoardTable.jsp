@@ -25,13 +25,14 @@
 				sbFacility.append("<td class='text-muted'>" + category + "</td>");
 				sbFacility.append("<td>" + topic + "</td>");
 				sbFacility.append("<td class='text-start fw-bold'>");
-				sbFacility.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbFacility.append("<a href='/facility/" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbFacility.append("</td>");
 				sbFacility.append("<td>" + name + "</td>");
 				sbFacility.append("<td>" + date + "</td>");
 				sbFacility.append("<td><a onclick=\"deleteboard('"+seq+"');\"><span class=\"badge bg-danger\">삭제</span></a></td>");
 				sbFacility.append("</tr>");
 			 }
+			 
 %> 
 <hr/>   
 	<script type="text/javascript">

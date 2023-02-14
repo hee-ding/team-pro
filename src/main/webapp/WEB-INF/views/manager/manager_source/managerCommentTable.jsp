@@ -25,7 +25,7 @@
 				cmto.append("<td>" + category + "</td>");
 				cmto.append("<td>" + topic + "</td>");
 				cmto.append("<td class='text-start fw-bold'>");
-				cmto.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				cmto.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
 				cmto.append("</td>");
 				cmto.append("<td>" + content + "</td>");
 				cmto.append("<td>" + nickname + "</td>");

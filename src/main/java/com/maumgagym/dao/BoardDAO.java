@@ -65,7 +65,8 @@ public class BoardDAO {
 				+ "  from board b \n"
 				+ "  inner join category c on b.category_seq = c.seq\n"
 				+ "  inner join `member` m on b.write_seq = m.seq\n"
-				+ " where c.seq BETWEEN 10 and 14";
+				+ " where c.seq BETWEEN 10 and 14"
+				+ " limit 0, 20";
 		
 		pstmt = conn.prepareStatement(sql);
 		
@@ -112,7 +113,8 @@ public class BoardDAO {
 						+ "  from board b \n"
 						+ "  inner join category c on b.category_seq = c.seq\n"
 						+ "  inner join `member` m on b.write_seq = m.seq\n"
-						+ " where c.seq BETWEEN 1 and 9";
+						+ " where c.seq BETWEEN 1 and 9"
+						+ " limit 0, 20";
 				
 				pstmt = conn.prepareStatement(sql);
 				
