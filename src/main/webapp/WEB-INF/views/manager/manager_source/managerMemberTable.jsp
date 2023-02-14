@@ -40,7 +40,7 @@ for( MemberTO to : memberLists){
 				console.log('click!!!!!');
 				if(ans === true){
 			        $.ajax({
-			            url: "/manager/facilityBoardDelete",
+			            url: "/manager/memberDelete",
 			            method: "GET",
 			            dataType: "json",
 			            data:param,

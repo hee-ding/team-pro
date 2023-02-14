@@ -44,7 +44,7 @@ function deleteboard(deleteSeq) {
 	   console.log('click!!!!!');
 	   if(ans === true) {
 	      $.ajax({
-	         url: "/manager/boardDelete",
+	         url: "/manager/commentDelete",
 	         method: "GET",
 	         dataType: "json",
 	         data:param,

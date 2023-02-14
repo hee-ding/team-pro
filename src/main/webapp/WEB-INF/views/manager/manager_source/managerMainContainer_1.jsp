@@ -18,7 +18,7 @@
 				 
 				sbBoard.append("<tr>");
 				sbBoard.append("<td>");
-				sbBoard.append("<a href='community_viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbBoard.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbBoard.append("</td>");
 
 				sbBoard.append("<td class='w-25 text-end'>" + nickname + "</td>");
@@ -35,7 +35,7 @@
 				 
 				sbFacility.append("<tr>");
 				sbFacility.append("<td>");
-				sbFacility.append("<a href='viewPage.jsp?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbFacility.append("<a href='/facility/" + seq + "'>" + title + "</a>&nbsp;"); 
 				sbFacility.append("</td>");
 
 				sbFacility.append("<td class='w-25 text-end'>" + name + "</td>");
