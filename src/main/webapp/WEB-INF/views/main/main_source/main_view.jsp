@@ -54,7 +54,7 @@
 		
 		sbFacilityBoardCountList.append("		<div class='col-lg-3 col-md-6 col-12 mb-4 mb-lg-5'> ");
 		sbFacilityBoardCountList.append("		<div class='custom-block custom-block-overlay'> ");
-		sbFacilityBoardCountList.append("			<a href='/facility/list?category_seq=" + ( i + 1 ) + "' class='custom-block-image-wrap'> "); 
+		sbFacilityBoardCountList.append("			<a href='/facility?category_seq=" + ( i + 1 ) + "' class='custom-block-image-wrap'> "); 
 		sbFacilityBoardCountList.append("				<img src='./resources/asset/images/main_view/main_category/" + imageArry[i] + ".jpg' class='custom-block-image img-fluid' alt=''> ");
 		sbFacilityBoardCountList.append("			</a> ");
 		sbFacilityBoardCountList.append("			<div class='custom-block-info custom-block-overlay-info'> ");
