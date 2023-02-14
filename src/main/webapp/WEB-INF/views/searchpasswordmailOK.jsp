@@ -13,7 +13,7 @@
 	if( temporaryPW != null  ) {
 		out.println("<script>");
 		out.println("alert('임시비밀번호를 메일에서 확인해주세요.')");
-		out.println("location.href='/';");
+		out.println("location.href='/home';");
 		out.println("</script>");
 	} 
 	else {
