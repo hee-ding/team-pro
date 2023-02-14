@@ -1,3 +1,4 @@
+<%@page import="com.maumgagym.dto.MemberShipTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maumgagym.dto.MemberTO"%>
 <%@page import="com.maumgagym.dao.FacilityDAO"%>
@@ -9,9 +10,11 @@
 		//System.out.println( flag );
 	BoardTO bto = new BoardTO();
 	FacilityDAO dao = new FacilityDAO();
-	MemberTO mto = new MemberTO();
+	MemberShipTO msto = new MemberShipTO();
 	ArrayList<BoardTO> arry = new ArrayList<>();
-	dao.writeOk(bto, mto, arry);
+	dao.insertfacilityBoard(bto);
+	dao.insertfacilityImage(bto);
+	dao.insertfacilityMembership(bto, msto);
 	int seq = bto.getSeq();
 	System.out.println( "writeOk seq : " + seq );
 	out.println( "<script type='text/javascript'>" );
