@@ -13,13 +13,13 @@
 		
 		out.println("<script>");
 		out.println("alert('로그인 되었습니다.')");
-		out.println("location.href='/';");
+		out.println("location.href='/home';");
 		out.println("</script>");
 		
 	}else {
 		out.println("<script>");
 		out.println("alert('[서버오류] 관리자에게 문의하세요.')");
-		out.println("location.href='/';");
+		out.println("location.href='/home';");
 		out.println("</script>");
 	} 
 	
