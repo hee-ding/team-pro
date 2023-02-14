@@ -30,7 +30,7 @@
 	                <li class="nav-item px-4"><a class="nav-link" href="/manager/board">게시물관리</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="/manager/comment">댓글관리</a></li>
 	                <li class="nav-item px-4"><a class="nav-link" href="/manager/member">회원관리</a></li>
-	                <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li>
+	       <!--          <li class="nav-item px-4"><a class="nav-link" href="#!">접속통계</a></li> -->
 	            </ul>
 	     	          	<button type="button" class="btn btn-light rounded-pill" onclick="location.href='/manager/login'"><span style="font-size:smaller;">로그아웃</span></button>
 	        </div>
