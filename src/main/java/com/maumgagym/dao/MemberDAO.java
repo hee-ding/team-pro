@@ -103,7 +103,7 @@ public class MemberDAO {
 					try {
 						 conn = this.dataSource.getConnection();
 						 
-						 String sql = "insert into kakao_login values ( 0,0,?,? )";
+						 String sql = "insert into kakao_login values ( 0,?,? )";
 						 pstmt = conn.prepareStatement(sql);
 						 pstmt.setString(1, to.getNickname());
 						 pstmt.setString(2, to.getEmail());
