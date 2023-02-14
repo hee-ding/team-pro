@@ -64,9 +64,11 @@ public class SearchDAO {
 				
 				BoardTO bto = new BoardTO();
 				bto.setTitle(rs.getString( "b.title" ));
+				bto.setSeq(rs.getInt( "b.seq" ));
 				bto.setTag(rs.getString( "t.tag" ));
 				bto.setCategory_seq(rs.getInt( "b.category_seq" ));
 				bto.setTopic(rs.getString( "c.topic" ) );
+				bto.setImage_name(rs.getString("i.name"));
 				
 				MemberTO mto = new MemberTO();
 				mto.setAddress(rs.getString("m.address"));

@@ -9,6 +9,7 @@
 <%
 	request.setCharacterEncoding("utf-8");
 	
+
 	int categorySeq = 0;
 	
 	String search = null;
@@ -43,9 +44,11 @@
 		//System.out.println("price : " + msto.getMembership_price());
 		
 		String title = bto.getTitle();
+		int seq = bto.getSeq();
 		String address = mto.getAddress();
 		int price =  msto.getMembership_price(); 
 		String tag = bto.getTag();
+		String imageName = bto.getImage_name();
 		//System.out.println( "tag : " + tag );
 		String category = bto.getTopic();
 		//System.out.println( "topic : " + topic );
@@ -54,14 +57,14 @@
 			if( bto.getTitle().contains(search) || mto.getAddress().contains(search) || bto.getTopic().contains(search)  ) {
 				sb.append("	<div class='col'>");
 				sb.append("		<div class='card shadow-sm'>");
-				sb.append("			<a href='#'>");
-				sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
+				sb.append("			<a href='/facility/" + seq + "'>");
+				sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...'></a>");
 				sb.append("			<span class='label-top'>" + tag + "</span>");
 				sb.append("			<div class='card-body'>");
 				sb.append("				<div class='clearfix mb-3'>");
 				sb.append("					<span class='float-start badge rounded-pill bg'>" + String.format("￦%,d", price) + "</span>" );
 				sb.append("					<span class='float-end'>");
-				sb.append("						<a href='#' class='small text-muted'>Reviews</a>");
+				sb.append("						<a href='/facility/" + seq + "#review' class='small text-muted'>Reviews</a>");
 				sb.append("					</span>");
 				sb.append("				</div>");
 				sb.append("				<h5 class='card-title'>" + title + "</h5>");
@@ -78,8 +81,8 @@
 			if( ( categorySeq == bto.getCategory_seq() ) && ( bto.getTitle().contains(search) || mto.getAddress().contains(search) || bto.getTopic().contains(search) ) ) {
 				sb.append("	<div class='col'>");
 				sb.append("		<div class='card shadow-sm'>");
-				sb.append("			<a href='#'>");
-				sb.append("			<img src='https://s3.ap-northeast-2.amazonaws.com/stone-i-dagym-centers/images/gyms/16016b1fe47123af04/Small)Xpine.jpg'class='card-img-top' alt='...'></a>");
+				sb.append("			<a href='/facility/" + seq + "'>");
+				sb.append("			<img src='../upload/" + imageName + "' class='card-img-top' alt='...'></a>");
 				sb.append("			<span class='label-top'>" + tag + "</span>");
 				sb.append("			<div class='card-body'>");
 				sb.append("				<div class='clearfix mb-3'>");

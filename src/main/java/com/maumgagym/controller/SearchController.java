@@ -19,7 +19,7 @@ public class SearchController {
 	private SearchDAO dao;
 	
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
-	public ModelAndView facilityLocList( HttpServletRequest req) {
+	public ModelAndView searchList( HttpServletRequest req) {
 		//System.out.println( "컨트롤러 /search/list" );
 		
 		String data = null;
