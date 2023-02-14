@@ -61,7 +61,8 @@ public class CommentDAO {
 				+ "from comment c1 \n"
 				+ "inner join board b on c1.board_seq = b.seq \n"
 				+ "inner join category c2 on c2.seq = c1.seq \n"
-				+ "inner join `member` m ON b.write_seq = m.seq \n";
+				+ "inner join `member` m ON b.write_seq = m.seq \n"
+				+ "limit 0, 20";
 		
 		pstmt = conn.prepareStatement(sql);
 		
