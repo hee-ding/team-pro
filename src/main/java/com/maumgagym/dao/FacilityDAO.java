@@ -26,19 +26,8 @@ public class FacilityDAO {
 	@Autowired
 	private DataSource dataSource;
 	
-	public FacilityDAO() {
-		// TODO Auto-generated constructor stub
-		try {
-			Context init = new InitialContext();
-			Context env = (Context)init.lookup( "java:comp/env" );
-			
-			this.dataSource = (DataSource)env.lookup( "jdbc/mariadb1" );
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			System.out.println( "[에러] : " + e.getMessage() );
-		}
-	}
-	
+	private String uploadPath = "C:/eGovFrameDev-4.0.0-64bit/project/SpringBoot_Maumgagym/src/main/webapp/upload";
+
 	
 	public ArrayList facility() {
 		//System.out.println( "FacilityDAO()호출" );
@@ -80,6 +69,7 @@ public class FacilityDAO {
 				 i++;
 				
 				BoardTO bto = new BoardTO();
+				bto.setSeq(rs.getInt( "b.seq" ));
 				bto.setTitle(rs.getString( "b.title" ));
 				bto.setTag(rs.getString( "t.tag" ));
 				bto.setCategory_seq(rs.getInt( "b.category_seq" ));
@@ -91,9 +81,9 @@ public class FacilityDAO {
 				MemberShipTO msto = new MemberShipTO();
 				msto.setMembership_price( rs.getInt( "ms.price" ) );
 				
-//					  System.out.println( bto.getTitle()); 
-//					  System.out.println ( "dao : " + mto.getAddress());
-//					  System.out.println( msto.getMembership_price());
+//				System.out.println( bto.getTitle()); 
+//				System.out.println ( "dao : " + mto.getAddress());
+//				System.out.println( msto.getMembership_price());
 				
 				map.put("bto" + i, bto);
 				map.put("mto" + i, mto);
@@ -123,23 +113,26 @@ public class FacilityDAO {
 		
 		int flag = 1;	// 0 : 성공 / 1 : 실패
 		
+		
 		try {
 			conn = this.dataSource.getConnection();
 			
-			//System.out.println( "db연결 성공" );
-			String sql  = "select seq from member where nickname like ?";
+			System.out.println( "db연결 성공" );
+			String sql  = "select seq from member where nickname=?";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setString( 1, mto.getNickname() );
 			
 			rs = pstmt.executeQuery();
+			
 			if( rs.next() ){
 				bto.setWrite_seq(rs.getInt( "seq"));
 			}
 			
 			pstmt.close();
-			//System.out.println( "sql닉네임 : " + mto.getNickname());
 			
-			sql = "insert into board values(0, ?, ?, ?, ?, now(), 3)";
+			//System.out.println( "닉네임 : " + mto.getNickname());
+			
+			sql = "insert into board values(0, ?, ?, ?, ?, now(), 1)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, bto.getCategory_seq());
 			pstmt.setString( 2, bto.getTitle() );
@@ -149,10 +142,46 @@ public class FacilityDAO {
 			//System.out.println( "w_seq:" + bto.getWrite_seq() );
 			
 			int result = pstmt.executeUpdate();
+			
 			if( result == 1 ) {
 				flag = 0;
 			}
-	
+			
+			pstmt.close();
+			
+			System.out.println( "글쓰기 flag : " + flag );
+			
+			// 파일 첨부
+			sql  = "select seq from board where write_seq=? order by write_date desc";
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setInt( 1, bto.getWrite_seq() );
+			
+			rs = pstmt.executeQuery();
+			
+			if( rs.next() ){
+				bto.setSeq(rs.getInt( "seq"));
+			}
+			
+			pstmt.close();
+			System.out.println( "board_seq:" + bto.getSeq() );
+			
+			sql = "insert into image values(0, ?, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bto.getImage_name() );
+			pstmt.setDouble( 2, bto.getImage_size() );
+			pstmt.setInt(3, bto.getSeq() );
+			
+			
+			int result2 = pstmt.executeUpdate();
+			
+			if( result2 == 1 ) {
+				flag = 0;
+			}
+			pstmt.close();
+			
+			System.out.println( "파일첨부 flag : " + flag );
+			
+
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			System.out.println( "[에러] " + e.getMessage() );
@@ -164,6 +193,60 @@ public class FacilityDAO {
 		
 		return flag;
 	}
+
+//	public int uploadOk(BoardTO bto) {
+//		
+//		Connection conn = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//		
+//		int flag = 1;	// 0 : 성공 / 1 : 실패
+//		
+//		
+//		try {
+//			conn = this.dataSource.getConnection();
+//			
+//			System.out.println( "db연결 성공22222" );
+//			String sql  = "select seq from board where seq like ?";
+//			pstmt = conn.prepareStatement( sql );
+//			pstmt.setInt( 1, bto.getSeq() );
+//			
+//			rs = pstmt.executeQuery();
+//			
+//			if( rs.next() ){
+//				bto.setSeq(rs.getInt( "seq"));
+//			}
+//			
+//			pstmt.close();
+//			
+//			System.out.println( "글번호 : " + bto.getSeq() );
+//			
+//			sql = "insert into image values(0, ?, ?, ?)";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, bto.getImage_name() );
+//			pstmt.setDouble( 2, bto.getImage_size() );
+//			pstmt.setInt(3, bto.getSeq() );
+//			
+//			System.out.println( "board_seq:" + bto.getSeq() );
+//			
+//			int result = pstmt.executeUpdate();
+//			pstmt.close();
+//			
+//			if( result == 1 ) {
+//				flag = 0;
+//			}
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			System.out.println( "[에러] " + e.getMessage() );
+//		} finally {
+//			if(rs != null) try {rs.close();} catch(SQLException e) {}
+//			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+//			if(conn != null) try {conn.close();} catch(SQLException e) {}
+//		}
+//		
+//		return flag;
+//	}
 
 }
 
