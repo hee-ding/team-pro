@@ -75,6 +75,7 @@
  	StringBuilder sbWeeklyBoardList = new StringBuilder();
  	for( BoardTO to : weeklyBoardList) {
  		
+ 		int seq =to.getSeq();
 		String title = to.getTitle();
 		String topic = to.getTopic();
 		String nickname = to.getNickname();
@@ -87,17 +88,17 @@
 		sbWeeklyBoardList.append( "			<div class='custom-block custom-block-full mb-5'> " );
 		sbWeeklyBoardList.append( "				<div class='custom-block-image-wrap'> " );
 		if( topic.equals("운동") ) {
-			sbWeeklyBoardList.append( " <a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/fitness.jpg' class='custom-block-image img-fluid'></a>" );
+			sbWeeklyBoardList.append( " <a href='/community/view?seq=" + seq +"'><img src='./resources/asset/images/main_view/main_hot_weekly/fitness.jpg' class='custom-block-image img-fluid'></a>" );
 		} else if ( topic.equals("건강") ) {
-			sbWeeklyBoardList.append( "	<a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/health.jpg' class='custom-block-image img-fluid'></a>" );
+			sbWeeklyBoardList.append( "	<a href='/community/view?seq=" + seq +"'><img src='./resources/asset/images/main_view/main_hot_weekly/health.jpg' class='custom-block-image img-fluid'></a>" );
 		} else if ( topic.equals("수다") ) {
-			sbWeeklyBoardList.append( "	<a href='detail-page.html'><img src='./resources/asset/images/main_view/main_hot_weekly/chat.jpg' class='custom-block-image img-fluid'></a>" );
+			sbWeeklyBoardList.append( "	<a href='/community/view?seq=" + seq +"'><img src='./resources/asset/images/main_view/main_hot_weekly/chat.jpg' class='custom-block-image img-fluid'></a>" );
 		}
-		sbWeeklyBoardList.append( "					</a> " );
+		sbWeeklyBoardList.append( "		</a> " );
 		sbWeeklyBoardList.append( "				</div> " );
 		sbWeeklyBoardList.append( "				<div class='custom-block-info'> " );
 		sbWeeklyBoardList.append( "					<h5 class='mb-2'> " );
-		sbWeeklyBoardList.append( "						<a class='text-truncate' style='max-width: 300px;' href='detail-page.html'> " + title + " </a> " );
+		sbWeeklyBoardList.append( "						<a class='text-truncate' style='max-width: 300px;' href='/community/view?seq=" + seq +"'> " + title + " </a> " );
 		sbWeeklyBoardList.append( "					</h5> " );
 		sbWeeklyBoardList.append( "					<div class='profile-block d-flex'> " );
 		sbWeeklyBoardList.append( "						<p> " );

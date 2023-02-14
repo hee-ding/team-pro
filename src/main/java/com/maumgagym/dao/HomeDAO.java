@@ -121,7 +121,7 @@ public class HomeDAO {
 		try {
 			conn = this.dataSource.getConnection();
 			StringBuilder sb = new StringBuilder();
-			sb.append( "	SELECT b.title, c.topic, m.nickname, ra.view_count, ra.like_count, COUNT( cm.seq ), i.name ");
+			sb.append( "	SELECT b.seq, b.title, c.topic, m.nickname, ra.view_count, ra.like_count, COUNT( cm.seq ), i.name ");
 			sb.append( " 		FROM board b LEFT OUTER JOIN category c ");
 			sb.append( " 			ON( b.category_seq = c.seq ) LEFT OUTER JOIN member m ");
 			sb.append( " 				ON( b.write_seq = m.seq ) LEFT OUTER JOIN reaction ra ");
@@ -137,6 +137,7 @@ public class HomeDAO {
 			arryList = new ArrayList<>();
 			while( rs.next()) {
 				BoardTO bto = new BoardTO();
+				bto.setSeq( rs.getInt( "b.seq") );
 				bto.setTitle( rs.getString( "b.title") );
 				bto.setTopic( rs.getString( "c.topic") );
 				bto.setNickname( rs.getString( "m.nickname") );

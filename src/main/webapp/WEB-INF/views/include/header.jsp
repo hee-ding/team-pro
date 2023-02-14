@@ -25,12 +25,12 @@
 	        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
 	                <li class="nav-item px-4 "><a class="nav-link text-truncate" style="max-width: 100px;" href="/home">홈</a></li>
-	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 150px;" href="./notificationPage.jsp">공지 / 이벤트</a></li>
+	                <!--  <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 150px;" href="./notificationPage.jsp">공지 / 이벤트</a></li> -->
 	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="/community/list">커뮤니티</a></li>
 				<%	
 					if( type == null || !( type.equals( "C" ) ) ) { 
 				%>                
-	                <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="./cartPage.jsp">회원권 만들기</a></li>
+	               <!-- <li class="nav-item px-4"><a class="nav-link text-truncate" style="max-width: 100px;" href="./cartPage.jsp">회원권 만들기</a></li> -->
 	            <%	
 	            	}  
 	            %>	                
