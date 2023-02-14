@@ -317,7 +317,7 @@ public class MemberDAO {
 				
 				conn = this.dataSource.getConnection();
 				
-				String sql = "select seq, name, id, email, birthday from member order by seq desc";
+				String sql = "select seq, name, id, email, birthday from member order by seq desc  limit 0, 20 ";
 				pstmt = conn.prepareStatement( sql );
 				
 				rs = pstmt.executeQuery();
