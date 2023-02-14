@@ -22,16 +22,6 @@
 	    <link rel="stylesheet" href="../resources/manager/css/app.css">
 	    <link rel="stylesheet" href="../resources/manager/css/Chart.min.css">
 
-	</head>
-	
-	<body>
-	<jsp:include page="../include/headerManager.jsp">
-		<jsp:param name="userID" value="<%= userID %>"/>
-	</jsp:include>	
-	<jsp:include page="./manager_source/managerMainContainer_1.jsp"/>
-	<jsp:include page="./manager_source/managerMainContainer_2.jsp"/>
- 	<jsp:include page="../include/footer.jsp" />
-	
 	   	<!-- Bootstrap core JS-->
 	    <script src="../resources/asset/js/bootstrap.bundle.min.js" ></script>
 	    <script src="../resources/manager/js/perfect-scrollbar.min.js"></script>
@@ -40,6 +30,15 @@
 	    <script src="../resources/manager/js/main.js"></script>
 	   	<script src="../resources/manager/js/Chart.min.js"></script>
 	    <script src="../resources/manager/js/custom_ui-chartjs.js"></script>
+	</head>
+	
+	<body>
+	<jsp:include page="../include/headerManager.jsp">
+		<jsp:param name="userID" value="<%= userID %>"/>
+	</jsp:include>	
+	<jsp:include page="./manager_source/managerMainContainer_1.jsp"/>
+<%-- 	<jsp:include page="./manager_source/managerMainContainer_2.jsp"/> --%>
+	
 	
     
 	</body>
