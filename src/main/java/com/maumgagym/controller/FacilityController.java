@@ -72,7 +72,6 @@ public class FacilityController {
 	//쓰기
 	@RequestMapping(value="/facility/write", method=RequestMethod.GET)
 	public ModelAndView facilityWrite( HttpServletRequest req) {
-		System.out.println( "쓰기 페이지" );
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName( "facilityWritePage" );
 		
@@ -80,7 +79,9 @@ public class FacilityController {
 	}
 	
 	@RequestMapping(value="/facility/writeOK", method=RequestMethod.POST)
-	public String facilityWriteOk(HttpServletRequest req, Model model, MultipartFile upload, HttpSession session ) {
+	public ModelAndView facilityWriteOk(HttpServletRequest req, Model model, MultipartFile upload, HttpSession session ) {
+		
+		ModelAndView mav = new ModelAndView();
 		
 		// 1. 사진을 저장합니다.
 		String saveFileName = UUID.randomUUID().toString() + upload.getOriginalFilename().substring( upload.getOriginalFilename().indexOf(".") );
@@ -101,15 +102,11 @@ public class FacilityController {
 		bto.setWrite_seq( mto.getSeq() );
 		int flag = dao.insertfacilityBoard(bto);
 		
-		System.out.println( "게시글 flag " +  flag );
-		
 		
 		//4. 저장된 게시글의 seq를 가져옵니다.
 		bto = dao.selectfacilityBoard(bto);
 		
 		int boardSeq = bto.getSeq();
-		
-		System.out.println( "boardSeq" + boardSeq );
 		
 		// 5. 게시글이 정상적으로 작성이 되었다면, 사진의 정보를 DB에 insert 합니다.
 		// 그게 아니라면 500eroor 페이지로 이동시킵니다.
@@ -118,17 +115,16 @@ public class FacilityController {
 			bto.setImage_size(upload.getSize());
 			flag = dao.insertfacilityImage(bto);
 		}  else {
-			return "redirect:/500error";
+			mav.setViewName( "error/500error" );
+			return mav;
 		}
 		
-		
-		System.out.println( "사진 정보 flag " +  flag );
 		
 		// 6. 사진의 정보를 DB에 정상적으로 insert 했다면, 회원권을 등록합니다.
 		// 그게 아니라면 500eroor 페이지로 이동시킵니다.
 		if( flag == 0) {
 		
-			if ( req.getParameter("membership1") != null || !"null".equals( req.getParameter("membership1") ) ) {
+			if ( !req.getParameter("membership1").equals("") ) {
 				
 				MemberShipTO msto = new MemberShipTO();
 				msto.setMembership_name("1개월권");
@@ -136,11 +132,9 @@ public class FacilityController {
 				msto.setMembership_period(1);
 				
 				flag = dao.insertfacilityMembership(bto, msto);
-				
-				System.out.println( "멤버쉽1 flag " +  flag );
 			}
 			
-			if ( req.getParameter("membership3") != null || !"null".equals( req.getParameter("membership3") ) ) {
+			if ( !req.getParameter("membership3").equals("") ) {
 				
 				MemberShipTO msto = new MemberShipTO();
 				msto.setMembership_name("3개월권");
@@ -149,11 +143,9 @@ public class FacilityController {
 				
 				flag = dao.insertfacilityMembership(bto, msto);
 				
-				System.out.println( "멤버쉽3 flag " +  flag );
-				
 			}
 			
-			if ( req.getParameter("membership6") != null || !"null".equals( req.getParameter("membership6") ) ) {
+			if ( !req.getParameter("membership6").equals("") ) {
 				
 				MemberShipTO msto = new MemberShipTO();
 				msto.setMembership_name("6개월권");
@@ -161,12 +153,9 @@ public class FacilityController {
 				msto.setMembership_period(6);
 				
 				flag = dao.insertfacilityMembership(bto, msto);
-				
-				System.out.println( "멤버쉽6 flag " +  flag );
-				
 			}
 			
-			if ( req.getParameter("membership12") != null || !"null".equals( req.getParameter("membership12") ) ) {
+			if (  !req.getParameter("membership12").equals("") ) {
 				
 				MemberShipTO msto = new MemberShipTO();
 				msto.setMembership_name("12개월권");
@@ -175,15 +164,17 @@ public class FacilityController {
 				
 				flag = dao.insertfacilityMembership(bto, msto);
 				
-				System.out.println( "멤버쉽12 flag " +  flag );
-				
 			}
 		
 		}  else {
-			return "redirect:/500error";
+			mav.setViewName( "error/500error" );
+			return mav;
 		}
-			
-		return "redirect:/facility/" + boardSeq;
+		
+		mav.addObject( "flag", flag );
+		mav.addObject( "board_seq",  bto.getSeq() );
+		mav.setViewName( "facility_writeOkPage" );
+		return mav;
 	}
 
 }
