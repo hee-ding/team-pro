@@ -69,11 +69,21 @@
 				<div class="col-md-6">
 					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/list'" />
 				</div>
-				<div class="col-md-6 text-end">
-					<!-- <input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="" />
-					<input type="button" value="삭제" class="btn btn-outline-primary" style="cursor: pointer;" onclick="" />  -->
-					<input type="button" id="wbtn" value="작성하기" class="btn btn-outline-dark" style="cursor: pointer;"  />
-				</div> 
+				<% 
+					if( id == null || nickname == null ) {
+				%>
+					<div class="col-md-6 text-end">
+						<input type="hidden" id="wbtn" value="작성하기" class="btn btn-outline-dark" style="cursor: pointer;"  />
+					</div> 
+				<%
+					} else {
+				%> 
+					<div class="col-md-6 text-end">
+							<input type="button" id="wbtn" value="작성하기" class="btn btn-outline-dark" style="cursor: pointer;"  />
+					</div> 
+				<%
+					}
+				%>
 			</div>
 			 </form>
 			<!--//게시판-->
