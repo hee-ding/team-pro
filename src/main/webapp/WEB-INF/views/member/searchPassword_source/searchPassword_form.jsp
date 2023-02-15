@@ -3,7 +3,7 @@
     
 	<div class="forgetId_form">
 		<div id = "logoContainer">
-			<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
+			<a href="/home"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 		</div>
 		<form action="/passwordsearch/mailsender" id="fPwFrm" method="post" name="fPwFrm">
 			<div class="int-area">

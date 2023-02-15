@@ -9,7 +9,7 @@
 	<div class="member">
 	    <!-- 1. 로고 -->
 	   	<div id = "logoContainer">
-			<a href="/"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
+			<a href="/home"><img id = "logo" src="../resources/asset/images/logo_1.jpg"/></a>
 		</div>
 	
 	    <!-- 2. 필드 -->

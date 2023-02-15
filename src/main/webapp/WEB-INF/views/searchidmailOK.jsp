@@ -14,7 +14,7 @@
 		
 		out.println("<script>");
 		out.println("alert('id 확인이 완료되었습니다. 이메일을 확인 후 다시 로그인 해주세요.')");
-		out.println("location.href='/';");
+		out.println("location.href='/home';");
 		out.println("</script>");
 	}  else {
 		out.println("<script>");
