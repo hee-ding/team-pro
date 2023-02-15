@@ -6,7 +6,7 @@
 <%@page import="com.maumgagym.dao.CommunityDAO"%>
 
 <%
-	
+	String id = (String)session.getAttribute("id");
 	ArrayList<BoardTO> communityList = (ArrayList) request.getAttribute("communityList");
 	
 	int totalRecord = communityList.size();
@@ -106,11 +106,12 @@
 		
 		<%= sbHtml.toString() %>
 	</table>
+	<%if( id != null )  {%>
 			<div class="text-end">
 				   <input type="button" value="쓰기" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/write'"/>
 					<input type="hidden" type="nickname"/>
 			</div>
-	
+	<%} %>
 	<br/><br/><br/>
 			<ul class='pagination justify-content-center'>
 				<li class='page-item'><a class='page-link' href='#'> &lt; </a></li>
