@@ -1,17 +1,57 @@
 
+<%@page import="com.maumgagym.dto.CommentTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
+	String cmt_writer = (String)session.getAttribute( "nickname" );
 
-	BoardTO to = (BoardTO)request.getAttribute("to");
+	BoardTO to = (BoardTO)request.getAttribute("bto");
 	
 	int seq = to.getSeq();
 	String subject = to.getTitle();
 	String date = to.getWrite_date();
 	String writer = to.getWriter();
 	String content = to.getContent();
+	
+	System.out.println( "제목 : " + subject );
+	
+  	// 댓글
+	ArrayList<CommentTO> cmtList = (ArrayList)request.getAttribute( "commentList" );
+  	
+	System.out.println( "댓글 리스트 : " + cmtList.size() );
+ 	
+ 	StringBuilder sbCmt = new StringBuilder();
+ 	int size = cmtList.size();
+ 		
+ 	for( CommentTO cmtto : cmtList ) {
+ 		
+ 		String nickname = cmtto.getNickname();
+ 		String writeDate = cmtto.getWrite_date();
+ 		String comment = cmtto.getContent();
+ 		
+  		System.out.println( "내용 : " + cmtto.getContent() );
+		
+  		sbCmt.append( "	 	<div class='d-flex justify-content-between mb-2'>");
+		sbCmt.append( "  		<div class='d-flex flex-row align-items-center'>");
+		sbCmt.append( "    			<span class='small mb-0 ms-2 fs-6 fw-bold' id='writer'><i class='material-icons'></i>&nbsp;" + nickname +"</span> <span class='text-end'></span>");
+		sbCmt.append( "	  		</div>");
+		sbCmt.append( "	  		<div class='d-flex flex-row align-items-center'>");
+		sbCmt.append( "	    		<small>&nbsp;" + writeDate +"</small>");
+	 	sbCmt.append( " 		</div>");
+	 	sbCmt.append( "		</div>");
+		
+	 	sbCmt.append( "		<div class='d-flex justify-content-between mb-3'>");
+ 	 	sbCmt.append( "			<div class='d-flex flex-row align-items-center'>");
+	 	sbCmt.append( "				<p class='small mb-0 ms-2'> " + comment +" </p>");
+	 	sbCmt.append( "			</div>"); 
+	 	sbCmt.append( "			<div class='d-flex flex-row align-items-center'>");
+		sbCmt.append( "			</div>");
+	 	sbCmt.append( "		</div>");
+	 	sbCmt.append( "		<hr>");
+ 	}
 
 %>
 
@@ -54,7 +94,11 @@
 				<tr>
 				<td colspan="4">
 					<div class="card-header bg-light">
-					       <b>0 개의 댓글</b>&nbsp;<i class="fa-sharp fa-solid fa-comment"></i>
+						<b><%=size %> 개의 댓글</b>&nbsp;<i class="fa-sharp fa-solid fa-comment"></i>
+						<br/><br/>
+		                  <div class="card-body">
+							<%=sbCmt.toString() %> 
+		                  </div>
 					</div><br/>
 					<div class="container">
 						<ul class="list-group list-group-flush">
@@ -70,8 +114,8 @@
 							</div> 
 						    </div>-->
 							<div class="text-end">
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-							<button type="button" class="btn btn-dark mt-3" onClick="javascript:addReply();"><i class="fa-solid fa-floppy-disk"></i>&nbsp;댓글쓰기</button>
+							<textarea class="form-control" id="comment" rows="3"></textarea>
+							<button type="button" class="btn btn-dark mt-3" id="cmtbtn"><i class="fa-solid fa-floppy-disk"></i>&nbsp;댓글쓰기</button>
 						    </div>
 						    </li>
 						</ul>
@@ -97,3 +141,40 @@
 	<br/><br/><br/>
 	</div>	
 </div>
+<script>
+	$('#cmtbtn').click(function(){
+			
+			//JSON으로 변환할 파라미터 변수 선언
+			const cmt_seq = <%=to.getSeq() %>
+			const cmt_writer = <%= cmt_writer%>
+			const cmt_content = $('#comment').val();
+			
+			console.log( "cmt_seq : " + cmt_seq );
+			console.log( "cmt_writer : " + cmt_writer );
+			console.log( "cmt_content : " + cmt_content );
+			
+			if( cmt_writer == '' ){
+				alert('로그인 후 이용해 주세요.');
+				return;
+			} else if( cmt_content == '' ) {
+				alert('내용을 입력해 주세요.');
+				return;
+			}
+			
+			$.ajax({
+				type: 'post',
+				url: '/comment/write',
+				data:
+   					{
+   						"cmt_seq": cmt_seq,
+   						"cmt_writer": cmt_writer,
+   						"cmt_content": cmt_content
+   					},
+   				success:function(data){
+   					if(data == 1) {
+   						console.log( "data : " + data );
+   					}
+   				}
+			});
+		});
+</script>

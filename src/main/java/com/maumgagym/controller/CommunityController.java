@@ -4,23 +4,20 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.maumgagym.dao.CommentDAO;
 import com.maumgagym.dao.CommunityDAO;
 import com.maumgagym.dto.BoardTO;
+import com.maumgagym.dto.CommentTO;
 import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
 
@@ -30,6 +27,9 @@ public class CommunityController {
 	
 	@Autowired
 	private CommunityDAO dao;
+	
+	@Autowired
+	private CommentDAO cmtdao;
 	
 	@RequestMapping("/community/list")
 	public ModelAndView communitylist( ) { 
@@ -73,14 +73,31 @@ public class CommunityController {
 	}
 	
 	@GetMapping("/community/view")
-	public String communityview(int seq, Model model) {
-		BoardTO to = new BoardTO();
-		to.setSeq(seq);
+	public ModelAndView communityview( Model model, HttpServletRequest req) {
 		
-		to = dao.boardView(to);
+		ModelAndView mv = new ModelAndView();
+		BoardTO bto = new BoardTO();
 		
-		model.addAttribute("to" , to); 
-		return "community_viewPage";
+		
+		//1. 원글 가져온다.
+		int b_seq = Integer.parseInt( req.getParameter( "seq" ) );
+		bto.setSeq(b_seq);
+		bto = dao.boardView(bto);
+		
+		// 2. 리뷰를 가져온다.
+		ArrayList<CommentTO> commentList = cmtdao.commentList(bto);
+		
+		for( CommentTO to : commentList ) {
+			System.out.println( to.getContent() );
+		}
+		
+		
+		
+		// 3. 원글과 리뷰를 addObject 한다.
+		mv.addObject( "bto", bto );
+		mv.addObject( "commentList", commentList );
+		mv.setViewName("community_viewPage");
+		return mv;
 	}
 	
 	@GetMapping("/community/modify")

@@ -89,7 +89,9 @@ public class ManagerController {
 	}
 	@RequestMapping("/manager/comment")
 	public ModelAndView commentList( ) { 
-		ArrayList<CommentTO> commentLists = cdao.commentList();
+		
+		BoardTO bto = new BoardTO();
+		ArrayList<CommentTO> commentLists = cdao.commentList(bto);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("managerCommentPage");

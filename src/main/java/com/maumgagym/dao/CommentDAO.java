@@ -14,7 +14,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.CommentTO;
+import com.maumgagym.dto.MemberTO;
 
 @Repository
 public class CommentDAO {
@@ -36,10 +38,8 @@ public class CommentDAO {
 			System.out.println( "[에러] " + e.getMessage() ); 
 		}
 	}
-	
-	
 
-	public ArrayList<CommentTO> commentList(){
+	public ArrayList<CommentTO> commentList(BoardTO to){
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -51,33 +51,25 @@ public class CommentDAO {
 			
 		conn = this.dataSource.getConnection();
 		
-		String sql = "select c1.seq\n"
-				+ "	 , c2.category\n"
-				+ "	 , c2.topic\n"
-				+ "	 , b.title\n"
-				+ "	 , c1.content\n"
-				+ "	 , m.nickname\n"
-				+ "	 , c1.write_date\n"
-				+ "from comment c1 \n"
-				+ "inner join board b on c1.board_seq = b.seq \n"
-				+ "inner join category c2 on c2.seq = c1.seq \n"
-				+ "inner join `member` m ON b.write_seq = m.seq \n"
-				+ "limit 0, 20";
+		StringBuilder sbDatas = new StringBuilder();   	
+		sbDatas.append( "SELECT c.seq, c.content, c.write_date, b.seq, m.nickname" );
+		sbDatas.append( "	FROM comment c LEFT JOIN board b ON b.seq = c.board_seq" );
+		sbDatas.append( "		LEFT JOIN member m ON m.seq = c.writer_seq" );
+		sbDatas.append( "			WHERE b.seq = ?" );
+		
+		String sql = sbDatas.toString(); 
 		
 		pstmt = conn.prepareStatement(sql);
-		
+		pstmt.setInt(1, to.getSeq() );
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-				CommentTO to = new CommentTO();
-				to.setSeq(rs.getInt("c1.seq"));
-				to.setCategory(rs.getString("c2.category"));
-				to.setTopic(rs.getString("c2.topic"));
-				to.setTitle(rs.getString("b.title"));
-				to.setContent(rs.getString("c1.content"));
-				to.setNickname(rs.getString("m.nickname"));
-				to.setWrite_date(rs.getString("c1.write_date"));
-				commentLists.add(to);
+			CommentTO cto = new CommentTO();
+			cto.setSeq(rs.getInt("c.seq"));
+			cto.setContent(rs.getString("c.content"));
+			cto.setWrite_date( rs.getString("c.write_date") );
+			cto.setNickname( rs.getString("m.nickname") );
+			commentLists.add(cto);
 			}
 		}catch(SQLException e) {
 			System.out.println( "[에러] " +  e.getMessage());
@@ -88,6 +80,37 @@ public class CommentDAO {
 		}
 		return commentLists;
 	}
+	
+	public int commentInsert(CommentTO cmtto) {
+		  Connection conn = null;
+		  PreparedStatement pstmt = null;
+
+		  MemberTO mto = new MemberTO();
+		  BoardTO bto = new BoardTO();
+		  
+		  int flag = 1;
+		  try {
+			conn = this.dataSource.getConnection();
+			  String sql = "insert into comment values(0, ?, ?, now(), 1, ?)";
+			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setString(1, cmtto.getContent());
+			  pstmt.setInt(2, mto.getSeq() );
+			  pstmt.setInt(3, bto.getSeq());
+			  
+			  if( pstmt.executeUpdate() == 1 ) {
+				  flag = 0;
+			  }
+			  
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println( "[에러] : " +  e.getMessage());		
+		} finally {
+			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
+			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+		}
+		  return flag;
+	}
+	
 	 public int commentDelete(int seq) {
 		  
 		  Connection conn = null;
