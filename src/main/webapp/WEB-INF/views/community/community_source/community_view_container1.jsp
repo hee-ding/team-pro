@@ -65,15 +65,15 @@
 	<div class="container px-3 px-lg-5">
 			<p class="h2" style="font-weight: bold;"><%= subject %></p>
 			<div class="text-end">
-				<table class="text-end">
+				<!-- <table class="text-end">
 					<th>
 					    <i class="bi-heart" style="font-size:30px; color: red; cursor: pointer;" id="heartimg"></i>
 						<input type="hidden" name="seq" id="seq" value="<%= seq %>" />
 					</th>
 						<td>
-						<b>좋아요 <span id="likenumber"></span></b>
+						  <b>좋아요 <span id="likenumber"></span></b> 
 						</td>
-				</table>
+				</table> -->
 			</div>
 	</div>
 	<div class="container px-3 px-lg-5">
