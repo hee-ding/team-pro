@@ -128,22 +128,34 @@ public class CommunityDAO {
 	
 	}
 	
-	public BoardTO boardView(BoardTO to) {
+	public BoardTO boardView(BoardTO to, MemberTO mto) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null; 
 		
+		String id = null;
+		
 		try{
 			conn = this.dataSource.getConnection();
 			
-			String sql = "select b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ";
+			String sql = "select m.id from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ";
+			pstmt = conn.prepareStatement( sql );
+			pstmt.setInt( 1, to.getSeq() );
+			
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				id = rs.getString("m.id");
+			}
+			
+			sql = "select m.id, b.title, b.write_date, m.name, b.content from board b left join member m on (b.write_seq = m.seq) where b.seq = ? ";
 			pstmt = conn.prepareStatement( sql );
 			pstmt.setInt( 1, to.getSeq() );
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()){
+				to.setId(id);
 				to.setTitle(rs.getString("b.title"));
 				to.setWrite_date(rs.getString("b.write_date"));
 				to.setWriter(rs.getString("m.name"));

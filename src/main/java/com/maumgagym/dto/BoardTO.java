@@ -20,6 +20,7 @@ public class BoardTO {
 	int write_seq;			//글번호
 	String write_date;		//글쓴날짜
 	
+	String id;
 	String status;
 	String tag;
 	int view_count;

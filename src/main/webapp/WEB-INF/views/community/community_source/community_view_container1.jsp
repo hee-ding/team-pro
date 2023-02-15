@@ -7,21 +7,25 @@
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
 	String cmt_writer = (String)session.getAttribute( "nickname" );
+	String id1 = (String)session.getAttribute( "id" );
+	System.out.println(id1);
 
 	BoardTO to = (BoardTO)request.getAttribute("bto");
 	
 	int seq = to.getSeq();
+	String id = to.getId();
+	System.out.println(to.getId());
 	String subject = to.getTitle();
 	String date = to.getWrite_date();
 	String writer = to.getWriter();
 	String content = to.getContent();
 	
-	System.out.println( "제목 : " + subject );
+	//System.out.println( "제목 : " + subject );
 	
   	// 댓글
 	ArrayList<CommentTO> cmtList = (ArrayList)request.getAttribute( "commentList" );
   	
-	System.out.println( "댓글 리스트 : " + cmtList.size() );
+	//System.out.println( "댓글 리스트 : " + cmtList.size() );
  	
  	StringBuilder sbCmt = new StringBuilder();
  	int size = cmtList.size();
@@ -32,7 +36,7 @@
  		String writeDate = cmtto.getWrite_date();
  		String comment = cmtto.getContent();
  		
-  		System.out.println( "내용 : " + cmtto.getContent() );
+  		//System.out.println( "내용 : " + cmtto.getContent() );
 		
   		sbCmt.append( "	 	<div class='d-flex justify-content-between mb-2'>");
 		sbCmt.append( "  		<div class='d-flex flex-row align-items-center'>");
@@ -129,11 +133,13 @@
 				<div class="col-md-6">
 					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/list'" />
 				</div>
+				<% if( id1.equals(id) )  { %>
 				<div class="col-md-6 text-end">
 					<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>
 					<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="location.href='/community/delete?seq=<%=seq %>'" />
 				<!--<input type="button" value="쓰기" class="btn btn-outline-info" style="cursor: pointer;" onclick="" />  -->	
 				</div> 
+				<% } %> 
 			</div>
 			<!--//게시판-->
 		

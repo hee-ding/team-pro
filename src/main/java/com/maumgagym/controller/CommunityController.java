@@ -77,12 +77,12 @@ public class CommunityController {
 		
 		ModelAndView mv = new ModelAndView();
 		BoardTO bto = new BoardTO();
-		
+		MemberTO mto = new MemberTO();
 		
 		//1. 원글 가져온다.
 		int b_seq = Integer.parseInt( req.getParameter( "seq" ) );
 		bto.setSeq(b_seq);
-		bto = dao.boardView(bto);
+		bto = dao.boardView(bto, mto);
 		
 		// 2. 리뷰를 가져온다.
 		ArrayList<CommentTO> commentList = cmtdao.commentList(bto);
