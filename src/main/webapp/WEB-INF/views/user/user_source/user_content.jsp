@@ -466,12 +466,13 @@
 				data-bs-target="#expire-membership-tab-pane" type="button" role="tab"
 				aria-controls="expire-membership-tab-pane" aria-selected="false">만료된 회원권</button>
 		</li>
-		
+		<!-- 
 		<li class="nav-item" role="presentation">
 			<button class="nav-link" id="cart-membership-tab" data-bs-toggle="tab"
 				data-bs-target="#cart-membership-tab-pane" type="button" role="tab"
 				aria-controls="cart-membership-tab-pane" aria-selected="false">찜한 회원권</button>
 		</li>
+		-->
 		
 	</ul>
 	<div class="tab-content" id="myTabContent">

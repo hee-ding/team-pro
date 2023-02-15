@@ -378,12 +378,15 @@ public class BoardDAO {
 		try {
 			conn = this.dataSource.getConnection();
 			StringBuilder sb = new StringBuilder();
-			sb.append( " SELECT rv.content, rv.write_date, rv.star_score, m.nickname " );
+			
+			
+			sb.append( " SELECT rv.content, date_format( rv.write_date, '%Y-%m-%d' ) AS 'rv.write_date', rv.star_score, m.nickname " );
 			sb.append( " 		FROM review rv " );
 			sb.append( " 			LEFT OUTER JOIN board b " );
 			sb.append( " 					ON ( rv.board_seq = b.seq ) left outer join member m" );
 			sb.append( " 					ON ( rv.writer_seq = m.seq )" );
 			sb.append( " 						where rv.board_seq = ? AND rv.status = 1" );
+			sb.append( " 							order by rv.write_date desc" );
 	 		String sql = sb.toString(); 
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, to.getSeq() );

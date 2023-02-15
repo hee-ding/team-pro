@@ -129,7 +129,8 @@ public class MypageDAO {
 			
 			StringBuilder sb = new StringBuilder();
 			
-			sb.append( "select p.pay_date AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.merchant_uid AS '결제 번호'," );
+			
+			sb.append( "select date_format( p.pay_date, '%Y-%m-%d' ) AS '결제 날짜', p.type AS '결제 방식', IF( p.status = 1, '정상', '환불' ) AS '결제 상태', p.merchant_uid AS '결제 번호'," );
 			sb.append( "	ms.name AS '회원권 이름', ms.price AS '회원권 가격', ms.period AS '회원권 기간',");
 			sb.append( "		b.seq AS '게시글 번호' , b.title AS '게시글 타이틀',");
 			sb.append( "			i.name AS '대표 이미지', ");
