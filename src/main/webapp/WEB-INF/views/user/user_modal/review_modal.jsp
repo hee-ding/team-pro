@@ -15,8 +15,8 @@
 	      <!-- Modal body -->
 	      <div id="reviewConfirmMessage" class="modal-body">
 				<div class="text-center mb-5">
-					<div class="circle-image">
-						<img id='membershipImage' class='owl-carousel-image rounded w-50' style="height:250px;">
+					<div class="circle-image mb-3">
+						<img id='membershipImage' class='owl-carousel-image rounded mx-auto d-block w-50' style="height:250px;">
 					</div>
 					<span id="title" class="name mb-1 fw-500"></span><br/>
 					<small id="address" class="text-black-50"></small> 
