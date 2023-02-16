@@ -7,7 +7,13 @@
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
 	String cmt_writer = (String)session.getAttribute( "nickname" );
-	String id1 = (String)session.getAttribute( "id" );
+
+
+	String id1 = null;
+	if( session.getAttribute("id") != null ) {
+		id1 = ( String ) session.getAttribute("id");
+	}
+	
 	System.out.println(id1);
 
 	BoardTO to = (BoardTO)request.getAttribute("bto");
@@ -133,13 +139,18 @@
 				<div class="col-md-6">
 					<input type="button" value="목록" class="btn btn-primary" style="cursor: pointer;" onclick="location.href='/community/list'" />
 				</div>
-				<% if( id1.equals(id) )  { %>
-				<div class="col-md-6 text-end">
-					<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>
-					<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="location.href='/community/delete?seq=<%=seq %>'" />
-				<!--<input type="button" value="쓰기" class="btn btn-outline-info" style="cursor: pointer;" onclick="" />  -->	
-				</div> 
-				<% } %> 
+				<% if( id.equals(id1) ){ %>
+					<div class="col-md-6 text-end">
+						<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>
+						<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="location.href='/community/delete?seq=<%=seq %>'" />
+					</div> 
+			
+				<% } else if ( id == null ) {%>
+					<div class="col-md-6 text-end">
+						<input type="button" value="수정" class="btn btn-outline-primary" style="cursor: pointer;" onclick="location.href='/community/modify?seq=<%=seq %>'"/>
+						<input type="button" value="삭제" class="btn btn-outline-danger" style="cursor: pointer;" onclick="location.href='/community/delete?seq=<%=seq %>'" />
+					</div>
+				<% }%>
 			</div>
 			<!--//게시판-->
 		
