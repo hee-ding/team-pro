@@ -112,7 +112,7 @@ public class searchMailsender {
 		     String subject="[마음가짐] 임시비밀번호 안내 이메일 입니다.";
 		     String content  = "<html><head><meta charset='utf-8'></head><body>";
 		       		content += "<img src='http://localhost:8080/resources/asset/images/logo_1.jpg'/><br/>" ;
-		       		content += "<h2> 임시비밀번호는 : <input type='text', value='temporaryPW'/> 입니다. \"";
+		       		content += "<h2> 임시비밀번호는 : [" + temporaryPW + "] 입니다. 입니다. \"";
 		       		content += "마이페이지에서 비밀번호 수정을 진행해주세요. </h2> </body></html>";
 		        
 		     mailSenderPW(toEmail, toName, subject, content);
