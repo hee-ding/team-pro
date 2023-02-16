@@ -79,23 +79,17 @@
 	    Kakao.Auth.login({
 	    	scope : 'profile_nickname, account_email',
 	        success: function(authObj) {
-	        	console.log(authObj);
 		        var token = authObj.access_token;
 	          //2. 로그인 성공시, API 호출
 	          Kakao.API.request({
 	            url: '/v2/user/me',
 	            success: res => {
-	              console.log(res);
 	              var account = res.kakao_account;
 	              $('#form-kakao-login input[name=email]').val(account.email);
 				  $('#form-kakao-login input[name=nickname]').val(account.profile.nickname);
 	              var kakao_nickname = account.profile.nickname;
 	              var kakao_email = account.email;
-	              console.log(kakao_nickname);
-	             console.log(kakao_email);
 	             document.querySelector('#form-kakao-login').submit();
-				 //alert('로그인성공');
-	              //location.href="./logininfo.jsp";
 	        		}
 	         	 })
 	        },

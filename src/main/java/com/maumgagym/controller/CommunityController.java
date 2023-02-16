@@ -117,7 +117,6 @@ public class CommunityController {
 		to.setWrite_date(request.getParameter("date")); // board
 		to.setContent(request.getParameter("contents")); // board
 		to.setTitle(request.getParameter("subject")); // board
-		
 		to1.setPassword(request.getParameter("password")); // member
 		to1.setName(request.getParameter("subject")); // member
 		
@@ -126,7 +125,7 @@ public class CommunityController {
 		
 		return "community_modifyok";
 	}
-	
+
 	@GetMapping("/community/delete")
 	public String communitydelete(int seq, Model model){ 
 		BoardTO to = new BoardTO();

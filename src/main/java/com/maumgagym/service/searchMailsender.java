@@ -78,7 +78,6 @@ public class searchMailsender {
             
             javaMailSender.send(mimeMessage);
             
-            System.out.println("전송이 완료되었습니다.");
         } catch (MailException e) {
             System.out.println("[에러] : " + e.getMessage());
         } catch (UnsupportedEncodingException e) {
