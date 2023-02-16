@@ -63,7 +63,7 @@
 				sbPurchaseList.append( "	<div class='mt-3 mb-4'>");
 				sbPurchaseList.append( "		<div class='col-xl-12'>");
 				sbPurchaseList.append( "			<div class='card mb-4'>");
-				sbPurchaseList.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
+				sbPurchaseList.append( "				<div class='card-header fs-5 fw-bolder'><a href='/facility/" + boardSeq +"'>" + String.format( "%s (%s)", title, phone ) +"</a></div>");
 				sbPurchaseList.append( "				<div class='card-body'>");
 				sbPurchaseList.append( "					<div class='row g-0'>");
 				sbPurchaseList.append( "						<div class='col-md-4'>");
@@ -147,7 +147,7 @@
 				sbBeforeRegister.append( "	<div class='mt-3 mb-4'>");
 				sbBeforeRegister.append( "		<div class='col-xl-12'>");
 				sbBeforeRegister.append( "			<div class='card mb-4'>");
-				sbBeforeRegister.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
+				sbBeforeRegister.append( "				<div class='card-header fs-5 fw-bolder'><a href='/facility/" + boardSeq +"'>" + String.format( "%s (%s)", title, phone ) +"</a></div>");
 				sbBeforeRegister.append( "				<div class='card-body'>");
 				sbBeforeRegister.append( "					<div class='row g-0'>");
 				sbBeforeRegister.append( "						<div class='col-md-4'>");
@@ -213,6 +213,7 @@
 				int membershipPeriod = msto.getMembership_period();	//
 				
 				BoardTO bto = (BoardTO) map.get("bto");
+				int boardSeq = bto.getSeq();
 				String title = bto.getTitle();			//
 				String imageName = bto.getImage_name();	//
 				
@@ -228,7 +229,7 @@
 				sbAfterRegister.append( "	<div class='mt-3 mb-4'>");
 				sbAfterRegister.append( "		<div class='col-xl-12'>");
 				sbAfterRegister.append( "			<div class='card mb-4'>");
-				sbAfterRegister.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
+				sbAfterRegister.append( "				<div class='card-header fs-5 fw-bolder'><a href='/facility/" + boardSeq +"'>" + String.format( "%s (%s)", title, phone ) +"</a></div>");
 				sbAfterRegister.append( "				<div class='card-body'>");
 				sbAfterRegister.append( "					<div class='row g-0'>");
 				sbAfterRegister.append( "						<div class='col-md-4'>");
@@ -287,6 +288,7 @@
 			int membershipPeriod = msto.getMembership_period();	//
 			
 			BoardTO bto = (BoardTO) map.get("bto");
+			int boardSeq = bto.getSeq();
 			String title = bto.getTitle();			//
 			String imageName = bto.getImage_name();	//
 			
@@ -302,7 +304,7 @@
 			sbPauseMembership.append( "	<div class='mt-3 mb-4'>");
 			sbPauseMembership.append( "		<div class='col-xl-12'>");
 			sbPauseMembership.append( "			<div class='card mb-4'>");
-			sbPauseMembership.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
+			sbPauseMembership.append( "				<div class='card-header fs-5 fw-bolder'><a href='/facility/" + boardSeq +"'>" + String.format( "%s (%s)", title, phone ) +"</a></div>");
 			sbPauseMembership.append( "				<div class='card-body'>");
 			sbPauseMembership.append( "					<div class='row g-0'>");
 			sbPauseMembership.append( "						<div class='col-md-4'>");
@@ -377,7 +379,7 @@
 			sbExpireMembership.append( "	<div class='mt-3 mb-4'>");
 			sbExpireMembership.append( "		<div class='col-xl-12'>");
 			sbExpireMembership.append( "			<div class='card mb-4'>");
-			sbExpireMembership.append( "				<div class='card-header fs-5 fw-bolder'>" + String.format( "%s (%s)", title, phone ) +"</div>");
+			sbExpireMembership.append( "				<div class='card-header fs-5 fw-bolder'><a href='/facility/" + boardSeq +"'>" + String.format( "%s (%s)", title, phone ) +"</a></div>");
 			sbExpireMembership.append( "				<div class='card-body'>");
 			sbExpireMembership.append( "					<div class='row g-0'>");
 			sbExpireMembership.append( "						<div class='col-md-4'>");
