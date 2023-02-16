@@ -46,7 +46,7 @@
       
  
 <hr/><br/><br/>
-
+<!--  
 <main>
   <div class="container px-3 px-lg-5">
   <br/>
@@ -69,7 +69,7 @@
     </div>
   </div>
 </main>
-
+-->
 <div class="container px-3 px-lg-5">
 		<br/><br/>
 		<form class="row domain-search bg-pblue">
@@ -78,12 +78,14 @@
                 <div class="col-md-8">
                     <p class="h5">실시간 전체글 <span class="count"><%= totalRecord %></span>개</p>
                 </div>
+                <!--  
 		        <div class="col-md-4">
 		            <div class="input-group">
 		                <input type="text" id="search" class="form-control" placeholder="키워드로 검색해보세요." >
 		                <button class="btn btn-outline-primary" type="button" id="btn_search">찾기</button>
 		            </div>
 		        </div>
+		         -->
             </div>
         </div>
        </form>
