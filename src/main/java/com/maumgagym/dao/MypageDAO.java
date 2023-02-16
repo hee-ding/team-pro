@@ -246,6 +246,7 @@ public class MypageDAO {
 			sb.append( "																	LEFT OUTER JOIN membership_register msr ");
 			sb.append( "																		ON( p.merchant_uid = msr.merchant_uid ) ");
 			sb.append( "																			WHERE member.id = ? AND  c.seq < 9 ");
+			sb.append( "																				order by p.pay_date");
 			
 			String sql = sb.toString();
 			

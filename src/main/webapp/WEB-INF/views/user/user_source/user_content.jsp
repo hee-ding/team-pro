@@ -240,7 +240,6 @@
 				sbAfterRegister.append( "							<br>");
 				sbAfterRegister.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
 				sbAfterRegister.append( "							<p class='card-text fs-7'>");
-				sbAfterRegister.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
 				sbAfterRegister.append( "							</p>");
 				sbAfterRegister.append( "						</div>");
 				sbAfterRegister.append( "					</div>");
@@ -315,7 +314,6 @@
 			sbPauseMembership.append( "							<br>");
 			sbPauseMembership.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
 			sbPauseMembership.append( "							<p class='card-text fs-7'>");
-			sbPauseMembership.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
 			sbPauseMembership.append( "							</p>");
 			sbPauseMembership.append( "						</div>");
 			sbPauseMembership.append( "					</div>");
@@ -390,7 +388,6 @@
 			sbExpireMembership.append( "							<br>");
 			sbExpireMembership.append( "							<p class='card-text fs-5'>" + membershipName +"</p>");
 			sbExpireMembership.append( "							<p class='card-text fs-7'>");
-			sbExpireMembership.append( "							아직 등록전입니다. <br>사용하시려면 아래 등록하기 버튼을 눌러주시거나 등록된 번호로 문의하세요.</br>");
 			sbExpireMembership.append( "							</p>");
 			sbExpireMembership.append( "						</div>");
 			sbExpireMembership.append( "					</div>");
