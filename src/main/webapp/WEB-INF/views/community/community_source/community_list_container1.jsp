@@ -1,15 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
     
+<%@page import="com.maumgagym.dto.PagingDTO"%>
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maumgagym.dao.CommunityDAO"%>
 
 <%
 	String id = (String)session.getAttribute("id");
+	
 	ArrayList<BoardTO> communityList = (ArrayList) request.getAttribute("communityList");
 	
-	int totalRecord = communityList.size();
+	int boardCount = (Integer)request.getAttribute("boardCount");
+	PagingDTO pto = (PagingDTO)request.getAttribute("pto");
 	
 	StringBuilder sbHtml = new StringBuilder();
 		 
@@ -76,7 +81,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <p class="h5">실시간 전체글 <span class="count"><%= totalRecord %></span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count"><%= boardCount %></span>개</p>
                 </div>
                 <!--  
 		        <div class="col-md-4">
@@ -113,11 +118,19 @@
 			</div>
 	<%} %>
 	<br/><br/><br/>
+			<nav>
 			<ul class='pagination justify-content-center'>
-				<li class='page-item'><a class='page-link' href='#'> &lt; </a></li>
-				<li class='page-item'><a class='page-link' href='#'> 1 </a></li>
-				<li class='page-item'><a class='page-link' href='#'> 2 </a></li>
-				<li class='page-item'><a class='page-link' href='#'> 3 </a></li>
-				<li class='page-item'><a class='page-link' href='#'> &gt; </a></li>
+				<c:if test = "${pto.startPage ne 1}"> <!-- startPage가 1이 아니면 &lt;표시가 나타남. -->
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/list?pageNum=${pto.startPage-10}'> &lt; </a></li>
+				</c:if>
+				
+				<c:forEach var="pageIndex"  begin="${pto.startPage}" end="${pto.endPage}">
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/list?pageNum=${pageIndex}'>${pageIndex}</a></li>
+				</c:forEach>
+				
+				<c:if test = "${pto.totalPages ne pto.endPage}"> <!-- 전체페이지와 마지막 페이지가 같으면  &gt; 표시가 없어짐 -->
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/list?pageNum=${pto.endPage+10}'> &gt; </a></li>
+				</c:if>
 			</ul>
+			</nav>
 </div>	

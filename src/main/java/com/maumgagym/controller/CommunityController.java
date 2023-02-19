@@ -20,6 +20,7 @@ import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.CommentTO;
 import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
+import com.maumgagym.dto.PagingDTO;
 
 
 @Controller
@@ -31,14 +32,27 @@ public class CommunityController {
 	@Autowired
 	private CommentDAO cmtdao;
 	
-	@RequestMapping("/community/list")
-	public ModelAndView communitylist( ) { 
+	@GetMapping("/community/list")
+	public ModelAndView communitylist(HttpServletRequest request) { 
 		
-		ArrayList<BoardTO> communityList = dao.communityList();
+		String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
+		int pNum = 0;
+		if(strpNum == null) { //페이지값이 없을경우 무조건 1페이지로 설정
+			pNum = 1;
+		}else {
+			pNum = Integer.parseInt(strpNum);
+		}
+		ArrayList<BoardTO> communityList = dao.communityList(pNum);
+		int boardCount = dao.getPageNum(); 
+		
+		PagingDTO pto = new PagingDTO(boardCount, pNum);
+		System.out.println("페이징 처리 정보 : " + pto);
 		
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setViewName("communityPage");
-		modelAndView.addObject("communityList", communityList);
+		modelAndView.addObject("communityList", communityList); //커뮤니티리스트
+		modelAndView.addObject("boardCount", boardCount); //전체글
+		modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
 		
 		return modelAndView;
 		
@@ -148,16 +162,16 @@ public class CommunityController {
 		return "community_deleteok";
 	}
 	
-	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
-	@GetMapping("/community/like")
-	@ResponseBody
-	public Object communitylike(HttpServletRequest request, int seq) { 
-		
-		LikeDTO to = new LikeDTO();
-		to.setBoard_seq(seq);
-		
-		int flag = dao.communityLike(to);
-		
-		return flag;
-	}
+//	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
+//	@GetMapping("/community/like")
+//	@ResponseBody
+//	public Object communitylike(HttpServletRequest request, int seq) { 
+//		
+//		LikeDTO to = new LikeDTO();
+//		to.setBoard_seq(seq);
+//		
+//		int flag = dao.communityLike(to);
+//		
+//		return flag;
+//	}
 }
