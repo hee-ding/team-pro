@@ -441,3 +441,13 @@ CREATE TABLE `admin` (
 	`id` varchar(100) NULL,
 	`password` varchar(100) NULL
 );
+
+
+create table `likeaction` (
+	`seq` int NOT NULL primary key,
+	`like_check` int NOT NULL,
+	`useseq` int NOT NULL,
+	`board_seq` int NOT NULL,
+	constraint foreign key (useseq) references member (seq),
+	constraint foreign key (board_seq) references board (seq)
+);
