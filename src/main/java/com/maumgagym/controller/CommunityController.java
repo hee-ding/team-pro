@@ -18,7 +18,6 @@ import com.maumgagym.dao.CommentDAO;
 import com.maumgagym.dao.CommunityDAO;
 import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.CommentTO;
-import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.PagingDTO;
 
@@ -33,31 +32,31 @@ public class CommunityController {
 	private CommentDAO cmtdao;
 	
 	@GetMapping("/community/list")
-	public ModelAndView communitylist(HttpServletRequest request) { 
-		
-		String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
-		int pNum = 0;
-		if(strpNum == null) { //페이지값이 없을경우 무조건 1페이지로 설정
-			pNum = 1;
-		}else {
-			pNum = Integer.parseInt(strpNum);
-		}
-		ArrayList<BoardTO> communityList = dao.communityList(pNum);
-		int boardCount = dao.getPageNum(); 
-		
-		PagingDTO pto = new PagingDTO(boardCount, pNum);
-		System.out.println("페이징 처리 정보 : " + pto);
-		
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setViewName("communityPage");
-		modelAndView.addObject("communityList", communityList); //커뮤니티리스트
-		modelAndView.addObject("boardCount", boardCount); //전체글
-		modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
-		
-		return modelAndView;
-		
-	}
-	
+    public ModelAndView communitylist(HttpServletRequest request) { 
+        
+        String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
+        int pNum = 0;
+        if(strpNum == null) { //페이지값이 없을경우 무조건 1페이지로 설정
+            pNum = 1;
+        }else {
+            pNum = Integer.parseInt(strpNum);
+        }
+        ArrayList<BoardTO> communityList = dao.communityList(pNum);
+        int boardCount = dao.getPageNum();  //총페이지수 구하기 위한 함수 호출
+        
+        PagingDTO pto = new PagingDTO(boardCount, pNum); //페이지네이션 처리를 위한 dto 호출
+        System.out.println("페이징 처리 정보 : " + pto);
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("communityPage");
+        modelAndView.addObject("communityList", communityList); //커뮤니티리스트
+        modelAndView.addObject("boardCount", boardCount); //전체글
+        modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
+        
+        return modelAndView;
+        
+    }
+
 	@RequestMapping("/community/write")
 	public ModelAndView communitywrite(HttpServletRequest request) { 
 		

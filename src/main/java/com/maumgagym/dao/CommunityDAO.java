@@ -86,8 +86,6 @@ public class CommunityDAO {
 	
 	public ArrayList<BoardTO> communityList(int pageNum){
 		
-		System.out.println("dataSource :" + dataSource );
-		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null; 
@@ -100,8 +98,7 @@ public class CommunityDAO {
 			
 		conn = this.dataSource.getConnection();
 		
-		
-		int limitNum = ((pageNum-1)*10); 
+		int limitNum = ((pageNum-1)*board_count); 
 		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
 		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by b.seq desc limit ?,?";
 		pstmt = conn.prepareStatement(sql);
