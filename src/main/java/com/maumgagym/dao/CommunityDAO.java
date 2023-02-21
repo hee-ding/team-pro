@@ -84,6 +84,7 @@ public class CommunityDAO {
 		return flag;
 	}
 	
+	
 	public ArrayList<BoardTO> communityList(int pageNum){
 		
 		Connection conn = null;
@@ -100,7 +101,7 @@ public class CommunityDAO {
 		
 		int limitNum = ((pageNum-1)*board_count); 
 		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
-		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by b.seq desc limit ?,?";
+		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, (select count(*) from likeaction l where l.board_seq = b.seq) as likecount, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join likeaction l on( b.seq = l.board_seq)  where 9  < c.seq and c.seq < 13 order by b.seq desc limit ?,?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, limitNum);
 		pstmt.setInt(2, board_count);
@@ -115,7 +116,7 @@ public class CommunityDAO {
 				to.setContent(rs.getString("b.content"));
 				to.setNickname(rs.getString("m.name"));
 				to.setWrite_date(rs.getString("b.write_date"));
-				to.setLike_count(rs.getInt("r.like_count"));
+				to.setLike_check(rs.getInt("likecount"));
 				to.setStatus(rs.getString("b.status"));
 				
 				communityList.add(to);
@@ -348,38 +349,71 @@ public class CommunityDAO {
 		return flag;
 	}
 	
-	//public int communityLike(LikeDTO to) {
+	public int communityLike(LikeDTO to) {
 			
-//			Connection conn = null;
-//			PreparedStatement pstmt = null;
-//			
-//			int flag =0;
-//			try {
-//				
-//				System.out.println("db연결성공");
-//				
-//				conn = this.dataSource.getConnection();
-//				
-//				//insert 
-//				String sql = "insert into reaction values(0, 0, 0, ?  )";
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setInt(1, to.getBoard_seq());
-//				pstmt.executeUpdate();
-//				
-//				// view_count +1
-//				sql = "update reaction r left join board b on r.board_seq = b.seq set view_count=view_count+1 where r.board_seq = ?";
-//				pstmt = conn.prepareStatement(sql);
-//				pstmt.setInt(1, to.getBoard_seq());
-//				pstmt.executeUpdate();
-//				
-//				} catch (SQLException e){
-//					System.out.println( "[에러] " +  e.getMessage());
-//				} finally {
-//					if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-//					if(conn != null) try {conn.close();} catch(SQLException e) {}
-//				}
-//			System.out.println("반환성공");
-//			return flag;
-//		}
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			
+			int flag = 0 ; //비정상
+			try {
+				
+				System.out.println("db연결성공");
+				
+				conn = this.dataSource.getConnection();
+				
+				//insert 
+				String sql = "insert into likeaction values(0, 1, ?, ?  )";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, to.getUser());
+				pstmt.setInt(2, to.getBoard_seq());
+				
+				if(pstmt.executeUpdate() == 1) {
+					flag = 1; //정상
+					
+				}
+				
+				} catch (SQLException e){
+					System.out.println( "[에러] " +  e.getMessage());
+				} finally {
+					if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+					if(conn != null) try {conn.close();} catch(SQLException e) {}
+				}
+			System.out.println("반환성공");
+			
+			return flag;
+		}
+	
+	public int communitydisLike(LikeDTO to) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		int flag = 0 ; //비정상
+		try {
+			
+			System.out.println("db연결성공");
+			
+			conn = this.dataSource.getConnection();
+			
+			//insert 
+			String sql = "delete from likeaction where user = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, to.getUser());
+			
+			if(pstmt.executeUpdate() == 1) {
+				flag = 1; //정상
+				
+			}
+			
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		System.out.println("반환성공");
+		
+		return flag;
+	}
 	
 }
