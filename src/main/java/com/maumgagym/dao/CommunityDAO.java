@@ -101,7 +101,7 @@ public class CommunityDAO {
 		
 		int limitNum = ((pageNum-1)*board_count); 
 		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
-		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, (select count(*) from likeaction l where l.board_seq = b.seq) as likecount, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join likeaction l on( b.seq = l.board_seq)  where 9  < c.seq and c.seq < 13 order by b.seq desc limit ?,?";
+		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, (select count(*) from likeaction l where l.board_seq = b.seq) as like_check, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq )  where 9  < c.seq and c.seq < 13 order by b.seq desc limit ?,?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, limitNum);
 		pstmt.setInt(2, board_count);
@@ -116,7 +116,7 @@ public class CommunityDAO {
 				to.setContent(rs.getString("b.content"));
 				to.setNickname(rs.getString("m.name"));
 				to.setWrite_date(rs.getString("b.write_date"));
-				to.setLike_check(rs.getInt("likecount"));
+				to.setLike_check(rs.getInt("like_check"));
 				to.setStatus(rs.getString("b.status"));
 				
 				communityList.add(to);
