@@ -8,8 +8,8 @@ import lombok.Setter;
 public class LikeDTO {
 
 	int seq;
-	int view_count;
-	int like_count;
+	int like_check;
+	String user;
 	int board_seq;
 	
 }

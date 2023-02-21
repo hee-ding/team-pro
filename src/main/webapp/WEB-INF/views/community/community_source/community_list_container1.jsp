@@ -25,7 +25,7 @@
 			String title = to.getTitle();
 			String content = to.getContent();
 			String date = to.getWrite_date();
-			int like_count =  to.getLike_count();
+			int like_check =  to.getLike_check();
 			String status = to.getStatus();
 			 
 			sbHtml.append("<tr>");
@@ -42,6 +42,7 @@
 				sbHtml.append("</td>");
 			}
 			sbHtml.append("<td>" + date + "</td>");
+			sbHtml.append("<td>" + like_check + "</td>");
 			sbHtml.append("<td>&nbsp;</td>");
 			sbHtml.append("</tr>");
 		}
@@ -104,6 +105,7 @@
 			<th scope="col">글쓴이</th>
 			<th scope="col">제목</th>
 			<th scope="col">등록일</th>
+			<th scope="col">좋아요</th>
 			<th scope="col">&nbsp;</th>
 		</tr>
 		</thead>	

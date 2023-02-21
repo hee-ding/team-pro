@@ -1,13 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+
 
 <%@page import="com.maumgagym.dto.CommentTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
 	String cmt_writer = (String)session.getAttribute( "nickname" );
-
 
 	String id1 = null;
 	if( session.getAttribute("id") != null ) {
@@ -25,6 +25,9 @@
 	String date = to.getWrite_date();
 	String writer = to.getWriter();
 	String content = to.getContent();
+	
+	System.out.println(id);
+	
 	
 	//System.out.println( "제목 : " + subject );
 	
@@ -71,15 +74,16 @@
 	<div class="container px-3 px-lg-5">
 			<p class="h2" style="font-weight: bold;"><%= subject %></p>
 			<div class="text-end">
-				<!-- <table class="text-end">
+				<table class="text-end">
 					<th>
 					    <i class="bi-heart" style="font-size:30px; color: red; cursor: pointer;" id="heartimg"></i>
-						<input type="hidden" name="seq" id="seq" value="<%= seq %>" />
+						<input type="hidden" name="board_seq" id="board_seq" value="<%= seq %>" />
+						<input type="hidden" name="user" id="user" value="<%= id1 %>" />
 					</th>
 						<td>
 						  <b>좋아요 <span id="likenumber"></span></b> 
 						</td>
-				</table> -->
+				</table>
 			</div>
 	</div>
 	<div class="container px-3 px-lg-5">
@@ -165,10 +169,9 @@
 			const cmt_seq = <%=to.getSeq() %>
 			const cmt_writer = <%= cmt_writer%>
 			const cmt_content = $('#comment').val();
-			
-			console.log( "cmt_seq : " + cmt_seq );
-			console.log( "cmt_writer : " + cmt_writer );
-			console.log( "cmt_content : " + cmt_content );
+			//console.log( "cmt_seq : " + cmt_seq );
+			//console.log( "cmt_writer : " + cmt_writer );
+			//console.log( "cmt_content : " + cmt_content );
 			
 			if( cmt_writer == '' ){
 				alert('로그인 후 이용해 주세요.');
@@ -195,3 +198,74 @@
 			});
 		});
 </script>
+
+<script>
+	 $(document).ready(function (){
+		
+		let heart = 0;
+		
+		$('i').on('click',function(){
+			
+			let user = $('#user').val();
+			//console.log(user, typeof user);
+			let board_seq = $('#board_seq').val();
+	
+			if( user === 'null'){
+				alert('로그인 후 이용해주세요.');
+				return;
+			}
+			
+			if(heart == 0){
+				 $.ajax({
+					 url: '/community/like',
+					 type: 'post',
+					 data :
+						{
+						 "user" : user,
+						 "board_seq" : board_seq
+						},
+					success:function(result){
+						if(result == 1){
+							console.log('성공');
+							$('#heartimg').attr('class','bi-heart-fill');
+							document.getElementById('likenumber').innerHTML = +1;
+						}
+					},
+					error : function (err) { // 실패하면 0
+						console.log('실패');
+					}
+					 
+				 	});
+				 heart++;
+			}
+				 
+			else if (heart == 1){
+				 $.ajax({
+					 url: '/community/dislike',
+					 type: 'post',
+					 data :
+						{
+						 "user" : user,
+						 "board_seq" : board_seq
+						},
+					success:function(result){
+						if(result == 1){
+							$('#heartimg').attr('class','bi-heart');
+							document.getElementById('likenumber').innerHTML = -1;
+							
+						}
+					},
+					error : function (err) { // 실패하면 0
+						console.log('실패');
+					}
+					 
+				 	});
+				 heart--;
+				 }
+				 
+			});
+		
+	 });
+	</script>
+
+

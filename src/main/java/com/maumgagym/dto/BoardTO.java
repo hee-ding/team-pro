@@ -24,6 +24,7 @@ public class BoardTO {
 	String status;
 	String tag;
 	int view_count;
+	int like_check; //likeaction
 	int like_count;
 	int comment_count;
 	String image_name;

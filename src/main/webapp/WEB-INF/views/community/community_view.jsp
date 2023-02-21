@@ -44,38 +44,16 @@ String id = (String) session.getAttribute("id");
 	<jsp:include page="../main/main_source/main_search.jsp" />
 	
 	<!-- view 페이지 -->
-	<jsp:include page="./community_source/community_view_container1.jsp"/>
+	<jsp:include page="./community_source/community_view_container1.jsp">
+		<jsp:param name="id" value="<%= id %>"/>
+	</jsp:include>
 	
- 	<script>
- 	$(document).ready(function () {
- 		var i = 0;
- 		$('i').on('click',function(){	
- 			let seq = $( '#seq' ).val().trim();
- 			
- 			$.ajax({
- 					url : '/community/like',
- 					type : 'get',
- 					data : {
- 						seq : seq,
- 					},
- 					
- 					success : function(data){ //통신에 성공하면 1
- 						console.log('성공' + data);
- 						 document.getElementById('likenumber').innerHTML = ++data;
- 					},
- 					error : function (err) { // 실패하면 0
- 						console.log('실패');
- 						
- 					}
-	 			});
-	 	});
- 	});
-    </script>
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	
 	<!--  header news -->
 	<script src="/resources/asset/js/news.js"></script>
+	
 
 </body>
 </html>

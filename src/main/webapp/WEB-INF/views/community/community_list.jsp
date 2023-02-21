@@ -48,5 +48,6 @@
 	<!--  header news -->
 	<script src="/resources/asset/js/news.js"></script>
 	
+	
 </body>
 </html>

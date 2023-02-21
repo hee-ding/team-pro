@@ -18,6 +18,7 @@ import com.maumgagym.dao.CommentDAO;
 import com.maumgagym.dao.CommunityDAO;
 import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.CommentTO;
+import com.maumgagym.dto.LikeDTO;
 import com.maumgagym.dto.MemberTO;
 import com.maumgagym.dto.PagingDTO;
 
@@ -41,6 +42,7 @@ public class CommunityController {
         }else {
             pNum = Integer.parseInt(strpNum);
         }
+       
         ArrayList<BoardTO> communityList = dao.communityList(pNum);
         int boardCount = dao.getPageNum();  //총페이지수 구하기 위한 함수 호출
         
@@ -161,16 +163,30 @@ public class CommunityController {
 		return "community_deleteok";
 	}
 	
-//	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
-//	@GetMapping("/community/like")
-//	@ResponseBody
-//	public Object communitylike(HttpServletRequest request, int seq) { 
-//		
-//		LikeDTO to = new LikeDTO();
-//		to.setBoard_seq(seq);
-//		
-//		int flag = dao.communityLike(to);
-//		
-//		return flag;
-//	}
+	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
+	@ResponseBody
+	@PostMapping("/community/like")
+	public Object communitylike(HttpServletRequest request, int board_seq, String user) { 
+		
+		LikeDTO to = new LikeDTO();
+		to.setUser(user);
+		to.setBoard_seq(board_seq);
+		
+		int flag = dao.communityLike(to);
+		
+		return flag;
+	}
+	
+	@ResponseBody
+	@PostMapping("/community/dislike")
+	public Object communitydislike(HttpServletRequest request, int board_seq, String user) { 
+		
+		LikeDTO to = new LikeDTO();
+		to.setUser(user);
+		to.setBoard_seq(board_seq);
+		
+		int flag = dao.communitydisLike(to);
+		
+		return flag;
+	}
 }
