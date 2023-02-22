@@ -190,4 +190,17 @@ public class CommunityController {
 		
 		return flag;
 	}
+	
+	@ResponseBody
+	@PostMapping("/community/alreadylike")
+	public Object communityalreadylike(HttpServletRequest request, int board_seq, String user) { 
+		
+		LikeDTO to = new LikeDTO();
+		to.setUser(user);
+		to.setBoard_seq(board_seq);
+		
+		int flag = dao.communityalreadylike(to);
+		
+		return flag;
+	}
 }

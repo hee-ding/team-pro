@@ -378,7 +378,6 @@ public class CommunityDAO {
 					if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
 					if(conn != null) try {conn.close();} catch(SQLException e) {}
 				}
-			System.out.println("반환성공");
 			
 			return flag;
 		}
@@ -404,6 +403,42 @@ public class CommunityDAO {
 				flag = 1; //정상
 				
 			}
+			
+			} catch (SQLException e){
+				System.out.println( "[에러] " +  e.getMessage());
+			} finally {
+				if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+				if(conn != null) try {conn.close();} catch(SQLException e) {}
+			}
+		
+		return flag;
+	}
+	
+	public int communityalreadylike(LikeDTO to) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		int flag = 0 ; //비정상
+		try {
+			
+			System.out.println("db연결성공");
+			
+			conn = this.dataSource.getConnection();
+			
+			//insert 
+			String sql = "select * from likeaction where user = ? and board_seq = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, to.getUser());
+			pstmt.setInt(2, to.getBoard_seq());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				flag = 1;
+			}
+		
 			
 			} catch (SQLException e){
 				System.out.println( "[에러] " +  e.getMessage());

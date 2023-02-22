@@ -14,7 +14,7 @@
 		id1 = ( String ) session.getAttribute("id");
 	}
 	
-	System.out.println(id1);
+	System.out.println(id1); //로그인한 id
 
 	BoardTO to = (BoardTO)request.getAttribute("bto");
 	
@@ -26,7 +26,7 @@
 	String writer = to.getWriter();
 	String content = to.getContent();
 	
-	System.out.println(id);
+	System.out.println(id); // 게시글을 작성한 id
 	
 	
 	//System.out.println( "제목 : " + subject );
@@ -201,15 +201,33 @@
 
 <script>
 	 $(document).ready(function (){
+		 let heart = 0;
+		 
+		 let user = $('#user').val();
+		 let board_seq = $('#board_seq').val();
+		 
+		 console.log("함수실행");
+			
+			$.ajax({
+				 url: '/community/alreadylike',
+				 type: 'post',
+				 data :
+					{
+					 "user" : user,
+					 "board_seq" : board_seq
+					},
+				success:function(data){
+					if(data == 1){
+						console.log('성공');
+						$('#heartimg').attr('class','bi-heart-fill');
+					}
+				}
+			});
+			 heart++;
 		
-		let heart = 0;
 		
 		$('i').on('click',function(){
 			
-			let user = $('#user').val();
-			//console.log(user, typeof user);
-			let board_seq = $('#board_seq').val();
-	
 			if( user === 'null'){
 				alert('로그인 후 이용해주세요.');
 				return;
@@ -228,7 +246,7 @@
 						if(result == 1){
 							console.log('성공');
 							$('#heartimg').attr('class','bi-heart-fill');
-							document.getElementById('likenumber').innerHTML = +1;
+							//document.getElementById('likenumber').innerHTML = +1;
 						}
 					},
 					error : function (err) { // 실패하면 0
@@ -251,7 +269,7 @@
 					success:function(result){
 						if(result == 1){
 							$('#heartimg').attr('class','bi-heart');
-							document.getElementById('likenumber').innerHTML = -1;
+							//document.getElementById('likenumber').innerHTML = -1;
 							
 						}
 					},
