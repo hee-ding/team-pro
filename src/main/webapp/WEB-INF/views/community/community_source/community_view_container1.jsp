@@ -205,8 +205,6 @@
 		 
 		 let user = $('#user').val();
 		 let board_seq = $('#board_seq').val();
-		 
-		 console.log("함수실행");
 			
 			$.ajax({
 				 url: '/community/alreadylike',
