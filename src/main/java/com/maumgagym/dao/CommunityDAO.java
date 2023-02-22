@@ -132,6 +132,54 @@ public class CommunityDAO {
 	
 	}
 	
+	public ArrayList<BoardTO> communitysearchList(String keyword, int pageNum){
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		final int board_count = 10;
+		
+		ArrayList<BoardTO> communityList = new ArrayList<>();
+		
+		try {
+			
+		conn = this.dataSource.getConnection();
+		
+		int limitNum = ((pageNum-1)*board_count); 
+		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
+		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, (select count(*) from likeaction l where l.board_seq = b.seq) as like_check, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq )  where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%' order by b.seq desc limit ?,?";
+		pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, limitNum);
+		pstmt.setInt(2, board_count);
+		
+		rs = pstmt.executeQuery();
+		
+		while(rs.next()) {
+				BoardTO to = new BoardTO();
+				to.setSeq(rs.getInt("b.seq"));
+				to.setTopic(rs.getString("c.topic"));
+				to.setTitle(rs.getString("b.title"));
+				to.setContent(rs.getString("b.content"));
+				to.setNickname(rs.getString("m.name"));
+				to.setWrite_date(rs.getString("b.write_date"));
+				to.setLike_check(rs.getInt("like_check"));
+				to.setStatus(rs.getString("b.status"));
+				
+				communityList.add(to);
+			}
+		}catch(SQLException e) {
+			System.out.println( "[에러] " +  e.getMessage());
+		} finally {
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+		}
+		System.out.println("반환성공");
+		return communityList;
+	
+	}
+	
 	public int getPageNum() { //전체페이지 갯구 구하는 함수
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -157,6 +205,33 @@ public class CommunityDAO {
 			if(rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 		return pageNum;
+	}
+	
+	public int getSearchPageNum(String keyword) { //전체페이지 갯구 구하는 함수
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; 
+		
+		int getSearchPageNum = 0;
+		
+		try {
+			conn = this.dataSource.getConnection();
+			
+			String sql = "select count(*) from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%'";
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				getSearchPageNum = rs.getInt(1);
+			}
+		}catch(SQLException e) {
+			System.out.println( "[에러] " +  e.getMessage());
+		} finally {
+			if(conn != null) try {conn.close();} catch(SQLException e) {}
+			if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
+			if(rs != null) try {rs.close();} catch(SQLException e) {}
+		}
+		return getSearchPageNum;
 	}
 	
 	public BoardTO boardView(BoardTO to, MemberTO mto) {

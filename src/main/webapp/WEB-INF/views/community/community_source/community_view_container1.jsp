@@ -192,7 +192,8 @@
    					},
    				success:function(data){
    					if(data == 1) {
-   						console.log( "data : " + data );
+   						//console.log( "data : " + data );
+   						console.log( "댓글 data 성공");
    					}
    				}
 			});

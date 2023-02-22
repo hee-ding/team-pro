@@ -9,6 +9,8 @@ public class PagingDTO {
     private int endPage; // 끝 페이지 번호
     private static final int belowNum = 10; // 페이지는 10개씩 링크 표시(하단에 깔릴 버튼은 10개) 
     private static final int boardNum = 10; // 글 10개씩 표시 
+	private String keyword;
+
     
     public PagingDTO(int boardCount, int currentPage) {
         this.boardCount = boardCount;
@@ -99,7 +101,15 @@ public class PagingDTO {
         return boardNum;
     }
     
-    @Override
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+
+	@Override
     public String toString() {
         return "PagingDTO [ boardCount = "+ boardCount +" , currentPage = "+ currentPage +" , totalPages = "
                 +totalPages+" , startPage = "+startPage+", endPage = "+endPage+" ]";

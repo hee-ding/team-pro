@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -51,6 +53,35 @@ public class CommunityController {
         
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("communityPage");
+        modelAndView.addObject("communityList", communityList); //커뮤니티리스트
+        modelAndView.addObject("boardCount", boardCount); //전체글
+        modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
+        
+        return modelAndView;
+        
+    }
+	
+	@GetMapping("/community/searchkeyword")
+    public ModelAndView communitysearchkeyword (HttpServletRequest request, String keyword) { 
+		
+		String keywordsearch = keyword;
+        String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
+        int pNum = 0;
+        if(strpNum == null) { //페이지값이 없을경우 무조건 1페이지로 설정
+            pNum = 1;
+        }else {
+            pNum = Integer.parseInt(strpNum);
+        }
+       
+        ArrayList<BoardTO> communityList = dao.communitysearchList(keywordsearch,pNum );
+        int boardCount = dao.getSearchPageNum(keywordsearch);  //총페이지수 구하기 위한 함수 호출
+        
+        PagingDTO pto = new PagingDTO(boardCount, pNum); //페이지네이션 처리를 위한 dto 호출
+        System.out.println("페이징 처리 정보 : " + pto);
+        pto.setKeyword(keywordsearch);
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("communityPageSearch");
         modelAndView.addObject("communityList", communityList); //커뮤니티리스트
         modelAndView.addObject("boardCount", boardCount); //전체글
         modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
@@ -191,6 +222,7 @@ public class CommunityController {
 		return flag;
 	}
 	
+	//이미 좋아요를 선택한게 있는지 확인 메서드
 	@ResponseBody
 	@PostMapping("/community/alreadylike")
 	public Object communityalreadylike(HttpServletRequest request, int board_seq, String user) { 

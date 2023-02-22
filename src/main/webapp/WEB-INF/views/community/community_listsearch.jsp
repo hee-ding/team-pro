@@ -33,7 +33,7 @@
 	<jsp:include page="../main/main_source/main_search.jsp" />
 
 	<!-- 공지/이벤트 list 템플릿 -->
-	<jsp:include page="../community/community_source/community_list_container1.jsp"/>
+	<jsp:include page="../community/community_source/community_listsearch_container.jsp"/>
 	
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
