@@ -163,7 +163,7 @@ public class CommunityController {
 		return "community_deleteok";
 	}
 	
-	//좋아요 기능을 클릭하면 해당 dao가 돌아간다.
+	//좋아요
 	@ResponseBody
 	@PostMapping("/community/like")
 	public Object communitylike(HttpServletRequest request, int board_seq, String user) { 
@@ -177,6 +177,7 @@ public class CommunityController {
 		return flag;
 	}
 	
+	//좋아요 취소
 	@ResponseBody
 	@PostMapping("/community/dislike")
 	public Object communitydislike(HttpServletRequest request, int board_seq, String user) { 
