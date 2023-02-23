@@ -10,6 +10,7 @@ public class PagingDTO {
     private static final int belowNum = 10; // 페이지는 10개씩 링크 표시(하단에 깔릴 버튼은 10개) 
     private static final int boardNum = 10; // 글 10개씩 표시 
 	private String keyword;
+	private int category;
 
     
     public PagingDTO(int boardCount, int currentPage) {
@@ -107,6 +108,16 @@ public class PagingDTO {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	
+	
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
 	}
 
 	@Override

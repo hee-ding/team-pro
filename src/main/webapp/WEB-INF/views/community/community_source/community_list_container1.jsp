@@ -76,17 +76,26 @@
 </main>
  -->
 <div class="container px-3 px-lg-5">
+		<p class="h2" style="font-weight: bold;">커뮤니티</p>
 		<br/><br/>
 		<form class="row domain-search bg-pblue">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <p class="h5">실시간 전체글 <span class="count"><%= boardCount %></span>개</p>
                 </div>
+                <div class="col-md-2 text-end ">
+					 <select class="form-select" name="searchtype" aria-label="Default select example">
+						  <option selected>분류 선택</option>
+						  <option value="10">운동</option>
+						  <option value="11">건강</option>
+						  <option value="12">수다</option>
+					</select>
+				</div>
 		        <div class="col-md-4">
 		            <div class="input-group">
 		                <input type="text" name="keyword" id="keyword" class="form-control" placeholder="키워드로 검색해보세요." >
-		                <input type="button" class="btn btn-outline-primary" id="search" value="검색" onclick="location.href='/community/searchkeyword?pageNum=1&keyword='+$('#keyword').val()+''">
+		                <input type="button" class="btn btn-outline-primary" id="search" value="검색">
 		            </div>
 		        </div>
 		      

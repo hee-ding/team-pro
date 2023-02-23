@@ -16,6 +16,8 @@
 	<!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
     <link href="../resources/asset/css/notification.css" rel="stylesheet" type="text/css" />
 	<style type ="text/css">
@@ -48,6 +50,17 @@
 	<!--  header news -->
 	<script src="/resources/asset/js/news.js"></script>
 	
-	
+	 <script type = "text/javascript"> 
+		 document.getElementById("search").onclick = function(){
+			 let category = document.getElementsByName("searchtype")[0].value;
+			 let keyword = document.getElementsByName("keyword")[0].value;
+			 
+			 //값을 받아오는지 확인
+			 console.log(category);
+			 console.log(keyword);
+			 
+			location.href = "/community/searchkeyword?pageNum=1" + "&keyword=" + keyword + "&category=" + category;
+		};
+	</script>
 </body>
 </html>

@@ -121,15 +121,15 @@
 			<nav>
               <ul class='pagination justify-content-center'>
 				<c:if test = "${pto.startPage ne 1}"> <!-- startPage가 1이 아니면 &lt;표시가 나타남. -->
-					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pto.startPage-1}&keyword=${pto.keyword}'> &lt; </a></li>
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pto.startPage-1}&keyword=${pto.keyword}&category=${pto.category}'> &lt; </a></li>
 				</c:if>
 				
 				<c:forEach var="pageIndex"  begin="${pto.startPage}" end="${pto.endPage}">
-					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pageIndex}&keyword=${pto.keyword}'>${pageIndex}</a></li>
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pageIndex}&keyword=${pto.keyword}&category=${pto.category}'>${pageIndex}</a></li>
 				</c:forEach>
 				
 				<c:if test = "${pto.totalPages ne pto.endPage}"> <!-- 전체페이지와 마지막 페이지가 같으면  &gt; 표시가 없어짐 -->
-					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pto.endPage+1}&keyword=${pto.keyword}'> &gt; </a></li>
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pto.endPage+1}&keyword=${pto.keyword}&category=${pto.category}'> &gt; </a></li>
 				</c:if>
             </ul>
             </nav>

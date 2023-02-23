@@ -62,8 +62,9 @@ public class CommunityController {
     }
 	
 	@GetMapping("/community/searchkeyword")
-    public ModelAndView communitysearchkeyword (HttpServletRequest request, String keyword) { 
+    public ModelAndView communitysearchkeyword (HttpServletRequest request, String keyword, int category) { 
 		
+		int categorysearch = category;
 		String keywordsearch = keyword;
         String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
         int pNum = 0;
@@ -73,12 +74,13 @@ public class CommunityController {
             pNum = Integer.parseInt(strpNum);
         }
        
-        ArrayList<BoardTO> communityList = dao.communitysearchList(keywordsearch,pNum );
+        ArrayList<BoardTO> communityList = dao.communitysearchList(keywordsearch,pNum,category );
         int boardCount = dao.getSearchPageNum(keywordsearch);  //총페이지수 구하기 위한 함수 호출
         
         PagingDTO pto = new PagingDTO(boardCount, pNum); //페이지네이션 처리를 위한 dto 호출
         System.out.println("페이징 처리 정보 : " + pto);
         pto.setKeyword(keywordsearch);
+        pto.setCategory(categorysearch);
         
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("communityPageSearch");
