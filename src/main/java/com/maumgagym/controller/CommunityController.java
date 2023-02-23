@@ -75,7 +75,7 @@ public class CommunityController {
         }
        
         ArrayList<BoardTO> communityList = dao.communitysearchList(keywordsearch,pNum,category );
-        int boardCount = dao.getSearchPageNum(keywordsearch);  //총페이지수 구하기 위한 함수 호출
+        int boardCount = dao.getSearchPageNum(keywordsearch, category);  //총페이지수 구하기 위한 함수 호출
         
         PagingDTO pto = new PagingDTO(boardCount, pNum); //페이지네이션 처리를 위한 dto 호출
         System.out.println("페이징 처리 정보 : " + pto);

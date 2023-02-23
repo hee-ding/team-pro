@@ -55,9 +55,10 @@
 			 let category = document.getElementsByName("searchtype")[0].value;
 			 let keyword = document.getElementsByName("keyword")[0].value;
 			 
-			 //값을 받아오는지 확인
-			 console.log(category);
-			 console.log(keyword);
+			 if(category === "분류 선택"){
+				 alert('분류를 선택하셔야 합니다.');
+				 return;
+			 }
 			 
 			location.href = "/community/searchkeyword?pageNum=1" + "&keyword=" + keyword + "&category=" + category;
 		};

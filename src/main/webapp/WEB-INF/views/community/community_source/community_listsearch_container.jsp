@@ -27,24 +27,25 @@
 			String date = to.getWrite_date();
 			int like_check =  to.getLike_check();
 			String status = to.getStatus();
-			 
-			sbHtml.append("<tr>");
-			sbHtml.append("<td>&nbsp;</td>");
-			sbHtml.append("<td scope='row'>" + seq + "</td>");
-			sbHtml.append("<td class='text-muted'>" + topic + "</td>");
-			sbHtml.append("<td>" + nickname + "</td>");
-			if(status.equals("3")){
-				sbHtml.append("<td class='text-muted'>삭제된 게시물 입니다.</td>&nbsp;"); 
-			}
-			else {
-				sbHtml.append("<td class='text-start fw-bold'>");
-				sbHtml.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
-				sbHtml.append("</td>");
-			}
-			sbHtml.append("<td>" + date + "</td>");
-			sbHtml.append("<td>" + like_check + "</td>");
-			sbHtml.append("<td>&nbsp;</td>");
-			sbHtml.append("</tr>");
+			
+				 
+				sbHtml.append("<tr>");
+				sbHtml.append("<td>&nbsp;</td>");
+				sbHtml.append("<td scope='row'>" + seq + "</td>");
+				sbHtml.append("<td class='text-muted'>" + topic + "</td>");
+				sbHtml.append("<td>" + nickname + "</td>");
+				if(status.equals("3")){
+					sbHtml.append("<td class='text-muted'>삭제된 게시물 입니다.</td>&nbsp;"); 
+				} 
+				else {
+					sbHtml.append("<td class='text-start fw-bold'>");
+					sbHtml.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+					sbHtml.append("</td>");
+				}
+				sbHtml.append("<td>" + date + "</td>");
+				sbHtml.append("<td>" + like_check + "</td>");
+				sbHtml.append("<td>&nbsp;</td>");
+				sbHtml.append("</tr>");
 		}
 %>    
       
@@ -80,16 +81,16 @@
 		<form class="row domain-search bg-pblue">
         <div class="container">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-11">
                     <p class="h5">실시간 전체글 <span class="count"><%= boardCount %></span>개</p>
                 </div>
-		        <div class="col-md-4">
+              <% if(boardCount != 0) {%>
+		        <div class="col-md-1">
 		            <div class="input-group">
-		                <input type="text" name="keyword" id="keyword" class="form-control" placeholder="키워드로 검색해보세요." >
-		                <input type="button" class="btn btn-outline-primary" id="search" value="검색"/>
+		                <input type="button" class="btn btn-outline-primary" id="search" value="돌아가기" onclick="location.href='/community/list?pageNum=1'"/>
 		            </div>
 		        </div>
-		      
+		      <% } %>
             </div>
         </div>
        </form>
@@ -120,12 +121,14 @@
 	<br/><br/><br/>
 			<nav>
               <ul class='pagination justify-content-center'>
-				<c:if test = "${pto.startPage ne 1}"> <!-- startPage가 1이 아니면 &lt;표시가 나타남. -->
+				<c:if test = "${0 < pto.startPage && 1 < pto.startPage}"> <!-- startPage가 1이 아니면 &lt;표시가 나타남. -->
 					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pto.startPage-1}&keyword=${pto.keyword}&category=${pto.category}'> &lt; </a></li>
 				</c:if>
 				
 				<c:forEach var="pageIndex"  begin="${pto.startPage}" end="${pto.endPage}">
-					<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pageIndex}&keyword=${pto.keyword}&category=${pto.category}'>${pageIndex}</a></li>
+					<c:if test = "${0 < pto.startPage}"> 
+						<li class='page-item'><a class='page-link' href='http://localhost:8080/community/searchkeyword?pageNum=${pageIndex}&keyword=${pto.keyword}&category=${pto.category}'>${pageIndex}</a></li>
+					</c:if>
 				</c:forEach>
 				
 				<c:if test = "${pto.totalPages ne pto.endPage}"> <!-- 전체페이지와 마지막 페이지가 같으면  &gt; 표시가 없어짐 -->
@@ -134,12 +137,16 @@
             </ul>
             </nav>
 </div>
-<!-- 
+
 <script>
-	 $(document).ready(function (){
-		$('#btn_search').on('click',function(){
-				alert('로그인 후 이용해 주세요.');
-			});
-		 });
-	</script>
- -->
+
+window.onload=function(){
+		 let BoardCount = <%= boardCount %>;
+		 
+		 if(BoardCount == 0){
+			 alert ('해당되는 게시물이 없습니다.');
+			 history.back();
+		 }
+	}
+	
+</script>

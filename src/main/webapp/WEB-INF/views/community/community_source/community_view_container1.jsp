@@ -7,11 +7,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
-	String cmt_writer = (String)session.getAttribute( "nickname" );
 
 	String id1 = null;
+	String nickname1 = null;
 	if( session.getAttribute("id") != null ) {
 		id1 = ( String ) session.getAttribute("id");
+		nickname1 = ( String ) session.getAttribute("nickname");
 	}
 	
 	System.out.println(id1); //로그인한 id
@@ -60,8 +61,12 @@
  	 	sbCmt.append( "			<div class='d-flex flex-row align-items-center'>");
 	 	sbCmt.append( "				<p class='small mb-0 ms-2'> " + comment +" </p>");
 	 	sbCmt.append( "			</div>"); 
-	 	sbCmt.append( "			<div class='d-flex flex-row align-items-center'>");
-		sbCmt.append( "			</div>");
+		if(nickname.equals(nickname1)){
+			sbCmt.append( "	  		<div class='d-flex flex-row align-items-center'>");
+			sbCmt.append( "	    		<a href='#'><small>수정</small></a> &nbsp");
+			sbCmt.append( "	    	    <a href='#'><small>삭제</small></a> &nbsp");
+		 	sbCmt.append( " 		</div>");
+		}
 	 	sbCmt.append( "		</div>");
 	 	sbCmt.append( "		<hr>");
  	}
@@ -128,8 +133,8 @@
 							</div> 
 						    </div>-->
 							<div class="text-end">
-							<textarea class="form-control" id="comment" rows="3"></textarea>
-							<button type="button" class="btn btn-dark mt-3" id="cmtbtn"><i class="fa-solid fa-floppy-disk"></i>&nbsp;댓글쓰기</button>
+								<textarea class="form-control" id="comment" rows="3"></textarea>
+								<input type="button" class="btn btn-dark mt-3" id="cmtbtn" value="댓글쓰기">
 						    </div>
 						    </li>
 						</ul>
@@ -162,46 +167,10 @@
 	<br/><br/><br/>
 	</div>	
 </div>
-<script>
-	$('#cmtbtn').click(function(){
-			
-			//JSON으로 변환할 파라미터 변수 선언
-			const cmt_seq = <%=to.getSeq() %>
-			const cmt_writer = <%= cmt_writer%>
-			const cmt_content = $('#comment').val();
-			//console.log( "cmt_seq : " + cmt_seq );
-			//console.log( "cmt_writer : " + cmt_writer );
-			//console.log( "cmt_content : " + cmt_content );
-			
-			if( cmt_writer == '' ){
-				alert('로그인 후 이용해 주세요.');
-				return;
-			} else if( cmt_content == '' ) {
-				alert('내용을 입력해 주세요.');
-				return;
-			}
-			
-			$.ajax({
-				type: 'post',
-				url: '/comment/write',
-				data:
-   					{
-   						"cmt_seq": cmt_seq,
-   						"cmt_writer": cmt_writer,
-   						"cmt_content": cmt_content
-   					},
-   				success:function(data){
-   					if(data == 1) {
-   						//console.log( "data : " + data );
-   						console.log( "댓글 data 성공");
-   					}
-   				}
-			});
-		});
-</script>
 
 <script>
 	 $(document).ready(function (){
+ 		
 		 let heart = 0;
 		 
 		 let user = $('#user').val();
@@ -224,7 +193,17 @@
 			});
 			 heart++;
 		
-		
+		//댓글
+		$('#cmtbtn').click(function(){
+					
+			if( user === 'null'){
+				alert('로그인 후 이용해주세요.');
+				return;
+			}
+					
+		});
+			 
+		//좋아요
 		$('i').on('click',function(){
 			
 			if( user === 'null'){

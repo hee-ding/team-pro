@@ -207,7 +207,7 @@ public class CommunityDAO {
 		return pageNum;
 	}
 	
-	public int getSearchPageNum(String keyword) { //전체페이지 갯구 구하는 함수
+	public int getSearchPageNum(String keyword, int category ) { //전체페이지 갯구 구하는 함수
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null; 
@@ -217,7 +217,7 @@ public class CommunityDAO {
 		try {
 			conn = this.dataSource.getConnection();
 			
-			String sql = "select count(*) from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%'";
+			String sql = "select count(*) from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%' and c.seq like '%"+category+"%' ";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
