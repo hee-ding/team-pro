@@ -46,7 +46,7 @@
 	<!--  <h4 class="fw-bold py-3">글쓰기</h4>-->
 	<div class="row">
 		<div class="col-sm-2 h3 fw-bold py-3">글쓰기</div>
-		<div class="col-sm-10 text-secondary fs-6 fw-lighter"  style="margin-top:25px">회원권 금액은 숫자만 입력해 주세요.</div>
+		<div class="col-sm-10 text-secondary fs-6 fw-lighter"  style="margin-top:25px">글쓰기 버튼 클릭 시 마음가짐 관리자가 확인 후 등룍 완료 됩니다.</div>
 	</div>
 	<div class="con_txt">
 		<form action="/facility/writeOK" method="post" name="wfrm" enctype="multipart/form-data">

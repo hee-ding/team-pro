@@ -11,7 +11,6 @@
 
 	session.removeAttribute("id"); 
 	session.removeAttribute("type"); 
-	session.removeAttribute("nickname"); 
 	
 %>
 
