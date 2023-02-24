@@ -81,24 +81,33 @@ public class CommentDAO {
 		return commentLists;
 	}
 	
-	public int commentInsert(CommentTO cmtto) {
+	public int commentInsert(CommentTO cmtto, MemberTO mto) {
 		  Connection conn = null;
 		  PreparedStatement pstmt = null;
+		  ResultSet rs = null;
 
-		  MemberTO mto = new MemberTO();
-		  BoardTO bto = new BoardTO();
+		  int flag = 0;
 		  
-		  int flag = 1;
 		  try {
 			conn = this.dataSource.getConnection();
-			  String sql = "insert into comment values(0, ?, ?, now(), 1, ?)";
+			
+			  String sql = "select seq from member where nickname = ?";
 			  pstmt = conn.prepareStatement(sql);
+			  pstmt.setString(1, mto.getNickname());
+			  rs = pstmt.executeQuery();
+			  if(rs.next()) {
+				  cmtto.setWriter_seq(rs.getInt("seq"));
+			  }
+			  
+			  sql = "insert into comment values(0, ?, ?, now(), 1, ?)";
+			  pstmt = conn.prepareStatement(sql);
+			  
 			  pstmt.setString(1, cmtto.getContent());
-			  pstmt.setInt(2, mto.getSeq() );
-			  pstmt.setInt(3, bto.getSeq());
+			  pstmt.setInt(2, cmtto.getWriter_seq() );
+			  pstmt.setInt(3, cmtto.getBoard_seq());
 			  
 			  if( pstmt.executeUpdate() == 1 ) {
-				  flag = 0;
+				  flag = 1;
 			  }
 			  
 		} catch (SQLException e) {

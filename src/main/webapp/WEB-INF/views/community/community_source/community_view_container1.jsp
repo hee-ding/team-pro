@@ -15,7 +15,8 @@
 		nickname1 = ( String ) session.getAttribute("nickname");
 	}
 	
-	System.out.println(id1); //로그인한 id
+	System.out.println(id1); //로그인한 회원의 id
+	System.out.println(nickname1); //로그인한 회원의 닉네임
 
 	BoardTO to = (BoardTO)request.getAttribute("bto");
 	
@@ -120,24 +121,16 @@
 		                  </div>
 					</div><br/>
 					<div class="container">
+					<form action="#" method="post">
 						<ul class="list-group list-group-flush">
-						    <li class="list-group-item">
-						<!--<div class="row">
-							<div class="col-md-4">
-								<label for="replyId"><i class="fa-sharp fa-solid fa-user"></i></label>
-								<input type="text" class="form-control" placeholder="Enter yourId" id="replyId">
-							</div>
-							<div class="col-md-4">
-								<label for="replyPassword" class="ml-4"><i class="fa fa-unlock-alt"></i></label>
-								<input type="password" class="form-control ml-2" placeholder="Enter password" id="replyPassword">
-							</div> 
-						    </div>-->
-							<div class="text-end">
-								<textarea class="form-control" id="comment" rows="3"></textarea>
-								<input type="button" class="btn btn-dark mt-3" id="cmtbtn" value="댓글쓰기">
-						    </div>
+						    <li class="list-group-item text-end">
+									<textarea class="form-control" name="textarea" id="textarea" rows="3"></textarea>
+									<input type="button" class="btn btn-dark mt-3" id="cmtbtn" value="댓글쓰기">
+									<input type="hidden" name="board_seq" id="board_seq" value="<%= seq %>" 
+									<input type="hidden" name="cmt_nickname" id="cmt_nickname" value="<%= nickname1 %>" />
 						    </li>
 						</ul>
+					</form>
 					</div>
 				</td>
 				</tr>
@@ -173,8 +166,10 @@
  		
 		 let heart = 0;
 		 
-		 let user = $('#user').val();
-		 let board_seq = $('#board_seq').val();
+		 const comments = $('#textarea').val();
+		 const cmt_nickname = $('#cmtnickname').val();
+		 const user = $('#user').val();
+		 const board_seq = $('#board_seq').val();
 			
 			$.ajax({
 				 url: '/community/alreadylike',
@@ -200,6 +195,27 @@
 				alert('로그인 후 이용해주세요.');
 				return;
 			}
+			
+			if( comments === 'null'){
+				alert('내용을 입력해주세요.');
+				return;
+			}
+				$.ajax({
+					 url: '/comment/write',
+					 type: 'post',
+					 data :
+						{
+						 "comments" : comments,
+						 "cmt_nickname" : cmt_nickname,
+						 "board_seq" : board_seq
+						},
+					success:function(result){
+						if(result == 1){
+							console.log(result);
+							
+						}
+					}
+				});
 					
 		});
 			 

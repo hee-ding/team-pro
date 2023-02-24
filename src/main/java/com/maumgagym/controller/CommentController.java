@@ -28,28 +28,19 @@ public class CommentController {
 
 	@ResponseBody
 	@RequestMapping( value = "/comment/write", method = RequestMethod.POST )
-	public HashMap<String, Object> insertCmt( HttpServletRequest req ) { 
+	public int addComment( HttpServletRequest request ) { 
 		
 		CommentTO cto = new CommentTO();
 		MemberTO mto = new MemberTO();
 		BoardTO bto = new BoardTO();
 		
-		cto.setContent( req.getParameter( "content" ));
-		cto.setWriter_seq( mto.getSeq());
-		cto.setBoard_seq(bto.getSeq());
+		cto.setContent( request.getParameter( "comments" ));
+		mto.setNickname( request.getParameter("cmt_nickname"));
+		cto.setBoard_seq(Integer.parseInt(request.getParameter("board_seq")));
 		
 		
-		int flag = dao.commentInsert(cto);
+		int flag = dao.commentInsert(cto, mto);
 		
-		if( cto.getFlag() == 0 ) {
-			mto.setSeq( cto.getWriter_seq() );
-			bto.setSeq( cto.getBoard_seq() );
-			flag = dao.commentInsert(cto);
-		}
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put( "flag", flag );
-		
-		return map;
+		return flag;
 	}
 }
