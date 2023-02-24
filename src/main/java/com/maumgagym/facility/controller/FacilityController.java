@@ -1,4 +1,4 @@
-package com.maumgagym.controller;
+package com.maumgagym.facility.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonObject;
-import com.maumgagym.dao.FacilityDAO;
 import com.maumgagym.dao.MypageDAO;
 import com.maumgagym.dto.BoardTO;
 import com.maumgagym.dto.MemberShipTO;
 import com.maumgagym.dto.MemberTO;
+import com.maumgagym.facility.dao.FacilityDAO;
 
 @Controller
 public class FacilityController {

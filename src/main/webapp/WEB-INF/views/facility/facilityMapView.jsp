@@ -25,9 +25,8 @@
 	<jsp:include page="../include/header.jsp">
 		<jsp:param name="userID" value="<%=userID%>" />
 	</jsp:include>
-	<jsp:include page="../main/main_source/main_search.jsp">
-		<jsp:param name="userID" value="<%=userID%>" />
-	</jsp:include>
+	<jsp:include page="../main/main_source/main_search.jsp" />
+
 	
 	<!-- 지도 페이지 -->
 	<jsp:include page="./facility_source/facility_map.jsp" />

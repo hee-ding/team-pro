@@ -1,4 +1,4 @@
-package com.maumgagym.dao;
+package com.maumgagym.facility.dao;
 
 import java.lang.reflect.Array;
 import java.sql.Connection;
@@ -43,6 +43,7 @@ public class FacilityDAO {
 		
 		try {
 			conn = this.dataSource.getConnection();
+			
 			
 			// 글 게시판의 title을 통한 업체 정보, 멤버 게시판의 address을 통한 주소 정보, 멤버쉽 게시판의 price를 통한 가격 정보, 이미지 게시판의 name을 통한 이미지 파일, 태그 게시판의 tag를 통한 글 태그를 가져옴
 			// 카테고리 게시판의 seq는 1~9번(운동시설)으로 가져옴

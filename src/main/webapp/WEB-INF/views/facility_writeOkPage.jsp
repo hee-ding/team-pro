@@ -1,7 +1,7 @@
 <%@page import="com.maumgagym.dto.MemberShipTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maumgagym.dto.MemberTO"%>
-<%@page import="com.maumgagym.dao.FacilityDAO"%>
+<%@page import="com.maumgagym.facility.dao.FacilityDAO"%>
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>

@@ -34,11 +34,11 @@ public class CommentController {
 		MemberTO mto = new MemberTO();
 		BoardTO bto = new BoardTO();
 		
-		cto.setContent( req.getParameter( "content" ));
+		cto.setContent( req.getParameter( "cmt_content" ));
 		cto.setWriter_seq( mto.getSeq());
 		cto.setBoard_seq(bto.getSeq());
 		
-		
+		System.out.println("writer_seq : " + mto.getSeq());
 		int flag = dao.commentInsert(cto);
 		
 		if( cto.getFlag() == 0 ) {

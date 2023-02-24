@@ -75,7 +75,7 @@ var markerPosition  = new kakao.maps.LatLng(33.450701, 126.570667);
 
 // 마커를 생성합니다
 var marker = new kakao.maps.Marker({
-    position: markerPosition,
+    position: markerPosition
     //image: "././marker/8703735_location_map_pin_navigation_place_icon.png"
     });
 
@@ -158,7 +158,7 @@ kakao.maps.event.addListener(map, 'center_changed', function() {
  		function link1_click() {
 		//alert( $("#centerAddr").text() );
 		var data = $("#centerAddr").text();  // 지도에서 받은 행정동 주소를 data로 넣고 
-		if( data != null ) {	// dat가 null이 아니면
+		if( data != null ) {	// data가 null이 아니면
 			//location.href="./facilityPage.jsp?dongAddr="+data;  // 링크 이동 
 			location.href="/facility?address="+data;  // 링크 이동 
 			
