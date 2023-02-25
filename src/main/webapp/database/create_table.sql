@@ -99,6 +99,7 @@ CREATE TABLE `member` (
 	`referaddress` varchar(100) NULL
 );
 
+
 CREATE TABLE `membership` (
 	`seq` int NOT NULL,
 	`member_seq` int NOT NULL,
@@ -437,8 +438,9 @@ REFERENCES `board` (
 
 
 CREATE TABLE `admin` (
-	`seq` int NOT NULL,
+	`seq` int NOT NULL primary key,
 	`id` varchar(100) NULL,
+	`nickname` varchar(100) NULL,
 	`password` varchar(100) NULL
 );
 
@@ -450,4 +452,15 @@ create table `likeaction` (
 	`board_seq` int NOT NULL,
 	constraint foreign key (useseq) references member (seq),
 	constraint foreign key (board_seq) references board (seq)
+);
+
+create table `notification` (
+	`seq` int NOT NULL primary key,
+	`category_seq` int NOT NULL,
+	`subject` varchar(50) NOT NULL,
+	`writer_admin` int NOT NULL,
+	`date`  datetime  NOT NULL,
+	`hit`  int NOT NULL,
+	constraint foreign key (category_seq) references category (seq),
+	constraint foreign key (writer_admin) references admin (seq)
 );
