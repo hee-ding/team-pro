@@ -11,7 +11,7 @@
 	     <a href="#"><img src="./resources/asset/images/event1_image.jpg" style="width:1000px; height:100%;" class="img-responsive rounded"></a>
     </div>
      -->
-    <br/>
+    
 	<div class="container px-3 px-lg-5">
         <p class="h2" style="font-weight: bold;">공지사항/이벤트</p>
 	    <br/><br/>
@@ -21,20 +21,19 @@
                 <div class="col-md-6">
                     <p class="h5">실시간 전체글 <span class="count">5</span>개</p>
                 </div>
-			    <div class="col-md-2 text-end">
-					  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-					  분류
-					  </button>
-						  <ul class="dropdown-menu">
-						    <li><a class="dropdown-item" href="#">전체보기</a></li>
-						    <li><a class="dropdown-item" href="#">공지사항</a></li>
-						    <li><a class="dropdown-item" href="#">이벤트</a></li>
-						  </ul>
-				</div> 
+                <div class="col-md-2 text-end ">
+					 <select class="form-select" name="searchtype" aria-label="Default select example">
+						  <option selected>분류 선택</option>
+						  <option value="10">전체보기</option>
+						  <option value="11">공지사항</option>
+						  <option value="12">이벤트</option>
+					</select>
+				</div>
+			    
 		        <div class="col-md-4">
 		            <div class="input-group">
 		                <input type="text" id="search" class="form-control" placeholder="키워드로 검색해보세요." >
-		                <button class="btn btn-outline-primary" type="button" id="btn_search">찾기</button>
+		                <button class="btn btn-outline-primary" type="button" id="btn_search">검색</button>
 		            </div>
 		        </div>
             </div>
