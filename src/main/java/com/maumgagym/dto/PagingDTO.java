@@ -120,10 +120,10 @@ public class PagingDTO {
 		this.category = category;
 	}
 
-	@Override
-    public String toString() {
-        return "PagingDTO [ boardCount = "+ boardCount +" , currentPage = "+ currentPage +" , totalPages = "
-                +totalPages+" , startPage = "+startPage+", endPage = "+endPage+" ]";
-    }
-    
+//	@Override
+//    public String toString() {
+//        return "PagingDTO [ boardCount = "+ boardCount +" , currentPage = "+ currentPage +" , totalPages = "
+//                +totalPages+" , startPage = "+startPage+", endPage = "+endPage+" ]";
+//    }
+//    
 }

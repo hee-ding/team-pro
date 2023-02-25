@@ -43,4 +43,17 @@ public class CommentController {
 		
 		return flag;
 	}
+	
+	@ResponseBody
+	@RequestMapping( value = "/comment/delete")
+	public int deleteComment( HttpServletRequest request ) { 
+		
+		int cmtseq = Integer.parseInt(request.getParameter("cmtseq"));
+		System.out.println(cmtseq);
+		int flag = dao.commentDelete(cmtseq);
+		System.out.println(flag);
+		
+		return flag;
+	}
+	
 }

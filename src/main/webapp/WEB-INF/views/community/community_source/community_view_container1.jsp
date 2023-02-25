@@ -7,6 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.maumgagym.dto.BoardTO"%>
 <%
+	request.setCharacterEncoding("UTF-8");
 
 	String id1 = null;
 	String nickname1 = null;
@@ -40,9 +41,12 @@
  	
  	StringBuilder sbCmt = new StringBuilder();
  	int size = cmtList.size();
+ 	
+ 	int cmtseq = 0;
  		
  	for( CommentTO cmtto : cmtList ) {
  		
+ 		cmtseq = cmtto.getSeq();
  		String nickname = cmtto.getNickname();
  		String writeDate = cmtto.getWrite_date();
  		String comment = cmtto.getContent();
@@ -64,8 +68,7 @@
 	 	sbCmt.append( "			</div>"); 
 		if(nickname.equals(nickname1)){
 			sbCmt.append( "	  		<div class='d-flex flex-row align-items-center'>");
-			sbCmt.append( "	    		<a href='#'><small>수정</small></a> &nbsp");
-			sbCmt.append( "	    	    <a href='#'><small>삭제</small></a> &nbsp");
+			sbCmt.append( "	    	    <a id='cmtdmt'><small>삭제</small></a> &nbsp");
 		 	sbCmt.append( " 		</div>");
 		}
 	 	sbCmt.append( "		</div>");
@@ -85,6 +88,7 @@
 					    <i class="bi-heart" style="font-size:30px; color: red; cursor: pointer;" id="heartimg"></i>
 						<input type="hidden" name="board_seq" id="board_seq" value="<%= seq %>" />
 						<input type="hidden" name="user" id="user" value="<%= id1 %>" />
+						<input type="hidden" name="cmtseq" id="cmtseq" value="<%= cmtseq %>" />
 					</th>
 						<td>
 						  <b>좋아요 <span id="likenumber"></span></b> 
@@ -120,18 +124,18 @@
 							<%=sbCmt.toString() %> 
 		                  </div>
 					</div><br/>
-					<div class="container">
-					<form action="#" method="post">
-						<ul class="list-group list-group-flush">
-						    <li class="list-group-item text-end">
+					 <form>
+						<div class="container">
+							<ul class="list-group list-group-flush">
+							    <li class="list-group-item text-end">
 									<textarea class="form-control" name="textarea" id="textarea" rows="3"></textarea>
+								    <!--<input type="text" class="form-control" style="width:100%;height:100px;" id="textarea" name="textarea">  -->
 									<input type="button" class="btn btn-dark mt-3" id="cmtbtn" value="댓글쓰기">
-									<input type="hidden" name="board_seq" id="board_seq" value="<%= seq %>" 
-									<input type="hidden" name="cmt_nickname" id="cmt_nickname" value="<%= nickname1 %>" />
-						    </li>
-						</ul>
+						            <input type="hidden" name="nickname1" id="nickname1" value="<%= nickname1 %>" />
+							    </li>
+							</ul>
+						</div>
 					</form>
-					</div>
 				</td>
 				</tr>
 				</table>
@@ -166,10 +170,8 @@
  		
 		 let heart = 0;
 		 
-		 const comments = $('#textarea').val();
-		 const cmt_nickname = $('#cmtnickname').val();
-		 const user = $('#user').val();
-		 const board_seq = $('#board_seq').val();
+		 let user = $('#user').val();
+		 let board_seq = $('#board_seq').val();
 			
 			$.ajax({
 				 url: '/community/alreadylike',
@@ -190,7 +192,13 @@
 		
 		//댓글
 		$('#cmtbtn').click(function(){
-					
+			
+			 let comments = $('#textarea').val();
+			 let cmt_nickname = $('#nickname1').val();
+			 
+			console.log(cmt_nickname);
+			 console.log(comments);
+			 
 			if( user === 'null'){
 				alert('로그인 후 이용해주세요.');
 				return;
@@ -200,24 +208,43 @@
 				alert('내용을 입력해주세요.');
 				return;
 			}
-				$.ajax({
-					 url: '/comment/write',
-					 type: 'post',
-					 data :
-						{
-						 "comments" : comments,
-						 "cmt_nickname" : cmt_nickname,
-						 "board_seq" : board_seq
-						},
-					success:function(result){
-						if(result == 1){
-							console.log(result);
-							
-						}
-					}
-				});
-					
+			
+			$.ajax({
+    	        type: 'POST',
+    	        url: '/comment/write',
+    	        data: {
+    	        	"comments": comments,
+    	        	"cmt_nickname": cmt_nickname,
+    	        	"board_seq": board_seq
+    	        },
+    	        success: function (result) {
+    	        	console.log('성공');
+    	        	location.reload();
+    	        }
+			});
 		});
+		
+		//댓글삭제
+		$('#cmtdmt').click(function(){
+			
+			let cmtseq = $('#cmtseq').val();
+			//console.log(cmtseq);
+			
+			alert('댓글을 삭제 하시겠습니까?');
+			
+			$.ajax({
+   	        type: 'POST',
+   	        url: '/comment/delete',
+   	        data: {
+   	        	"cmtseq": cmtseq
+   	        },
+   	        success: function (result) {
+   	        	location.reload();
+	   	        }
+			});
+		});
+		
+			
 			 
 		//좋아요
 		$('i').on('click',function(){

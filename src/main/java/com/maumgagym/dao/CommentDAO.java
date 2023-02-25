@@ -116,6 +116,7 @@ public class CommentDAO {
 		} finally {
 			if( pstmt != null) try { pstmt.close(); } catch( SQLException e ) {}
 			if( conn != null) try { conn.close(); } catch( SQLException e ) {}
+			if( rs != null) try { rs.close(); } catch( SQLException e ) {}
 		}
 		  return flag;
 	}
@@ -124,8 +125,8 @@ public class CommentDAO {
 		  
 		  Connection conn = null;
 		  PreparedStatement pstmt = null;
-		  ResultSet rs = null; 
-		  int result = 0;
+		  
+		  int flag = 0;
 		  
 		  try {
 			  conn = this.dataSource.getConnection();
@@ -133,15 +134,17 @@ public class CommentDAO {
 			  String  sql = "delete from comment where seq = ?";
 			  pstmt = conn.prepareStatement(sql);
 			  pstmt.setInt(1, seq);
-			  result = pstmt.executeUpdate();
+			  
+			  if(pstmt.executeUpdate() == 1) {
+				  flag = 1;
+			  }
 			  
 		  }catch(SQLException e) {
 			  System.out.println( "[에러] " +  e.getMessage());
 		  } finally {
 			  if(conn != null) try {conn.close();} catch(SQLException e) {}
 			  if(pstmt != null) try {pstmt.close();} catch(SQLException e) {}
-			  if(rs != null) try {rs.close();} catch(SQLException e) {}
 		  }
-		  return result;
+		  return flag;
 	  }
 }
