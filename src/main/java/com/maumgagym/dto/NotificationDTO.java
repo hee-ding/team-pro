@@ -9,6 +9,7 @@ public class NotificationDTO {
 	
 	int seq;
 	int category_seq;
+	String topic;
 	String subject;
 	int writer_admin;
 	String date;

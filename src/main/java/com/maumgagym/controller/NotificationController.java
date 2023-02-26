@@ -57,7 +57,36 @@ public class NotificationController {
 	        modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
         
 	        return modelAndView;
+    }
+	
+	@GetMapping("/notification/listsearch")
+    public ModelAndView notificationlistsearch(HttpServletRequest request, String keyword, int category) { 
+		
+		  int categorysearch = category;
+		  String keywordsearch = keyword;
+		  String strpNum = request.getParameter("pageNum"); //주소창에get방식 - ?pageNum=숫자
+	        int pNum = 0;
+	        if(strpNum == null) { //페이지값이 없을경우 무조건 1페이지로 설정
+	            pNum = 1;
+	        }else {
+	            pNum = Integer.parseInt(strpNum);
+	        }
+	       
+	        ArrayList<NotificationDTO> notificationList = dao.notificationsearchList(keywordsearch, pNum, categorysearch);
+	        int boardCount = dao.getSearchPageNum(keywordsearch, categorysearch);  //총페이지수 구하기 위한 함수 호출
+	        
+	        PagingDTO pto = new PagingDTO(boardCount, pNum); //페이지네이션 처리를 위한 dto 호출
+	       // System.out.println("페이징 처리 정보 : " + pto);
+	        pto.setCategory(categorysearch);
+	        pto.setKeyword(keywordsearch);
+	        
+	        ModelAndView modelAndView = new ModelAndView();
+	        modelAndView.setViewName("notificationsearchPage");
+	        modelAndView.addObject("notificationList", notificationList); //커뮤니티리스트
+	        modelAndView.addObject("boardCount", boardCount); //전체글
+	        modelAndView.addObject("pto", pto); // 하단 페이지네이션처리
         
+	        return modelAndView;
     }
 	
 	@GetMapping("/notification/view")

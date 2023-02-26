@@ -35,27 +35,13 @@
 	<jsp:include page="./notification_source/main_search.jsp"/>
 	
 	<!-- 공지/이벤트 게시판 템플릿 -->
-	<jsp:include page="./notification_source/notification_list_container1.jsp"/>
+	<jsp:include page="./notification_source/notification_listsearch_container.jsp"/>
 
 	<!-- footer -->
 	<jsp:include page="../include/footer.jsp" />
 	
 	<!--  header news -->
 	<!--  <script src="/resources/asset/js/news.js"></script>  -->
-	
-	<script type = "text/javascript"> 
-		 document.getElementById("search").onclick = function(){
-			 let category = document.getElementsByName("searchtype")[0].value;
-			 let keyword = document.getElementsByName("keyword")[0].value;
-			 
-			 if(category === "분류 선택"){
-				 alert('분류를 선택하셔야 합니다.');
-				 return;
-			 }
-			 
-			location.href = "/notification/listsearch?pageNum=1" + "&keyword=" + keyword + "&category=" + category;
-		};
-	</script>
 	
 </body>
 </html>

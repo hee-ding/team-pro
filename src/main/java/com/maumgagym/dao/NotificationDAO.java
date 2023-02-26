@@ -84,7 +84,7 @@ public class NotificationDAO {
 	
 	}
 	
-	public ArrayList<BoardTO> communitysearchList(String keyword, int pageNum , int category){
+	public ArrayList<NotificationDTO> notificationsearchList(String keyword, int pageNum , int category){
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -92,15 +92,14 @@ public class NotificationDAO {
 		
 		final int board_count = 10;
 		
-		ArrayList<BoardTO> communityList = new ArrayList<>();
+		ArrayList<NotificationDTO> notificationList = new ArrayList<>();
 		
 		try {
 			
 		conn = this.dataSource.getConnection();
 		
 		int limitNum = ((pageNum-1)*board_count); 
-		//String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, r.like_count, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 order by r.like_count desc";
-		String sql =  "select b.seq, c.topic, b.title, b.content, m.name , b.write_date, (select count(*) from likeaction l where l.board_seq = b.seq) as like_check, b.status from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq )  where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%' and c.seq like '%"+category+"%' order by b.seq desc limit ?,?";
+		String sql =  "select n.seq, c.topic, n.subject, a.nickname, n.date, n.hit from notification n  left join category c on(n.category_seq = c.seq) left join admin a on (a.seq = n.writer_admin) where n.subject like '%"+keyword+"%' and c.seq like '%"+category+"%' order by n.seq desc limit ?,?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, limitNum);
 		pstmt.setInt(2, board_count);
@@ -108,17 +107,15 @@ public class NotificationDAO {
 		rs = pstmt.executeQuery();
 		
 		while(rs.next()) {
-				BoardTO to = new BoardTO();
-				to.setSeq(rs.getInt("b.seq"));
-				to.setTopic(rs.getString("c.topic"));
-				to.setTitle(rs.getString("b.title"));
-				to.setContent(rs.getString("b.content"));
-				to.setNickname(rs.getString("m.name"));
-				to.setWrite_date(rs.getString("b.write_date"));
-				to.setLike_check(rs.getInt("like_check"));
-				to.setStatus(rs.getString("b.status"));
+				NotificationDTO to = new NotificationDTO();
+				to.setSeq(rs.getInt("n.seq"));
+				to.setCategory(rs.getString("c.topic"));
+				to.setSubject(rs.getString("n.subject"));
+				to.setWriter(rs.getString("a.nickname"));
+				to.setDate(rs.getString("n.date"));
+				to.setHit(rs.getInt("n.hit"));
 				
-				communityList.add(to);
+				notificationList.add(to);
 			}
 		}catch(SQLException e) {
 			System.out.println( "[에러] " +  e.getMessage());
@@ -128,7 +125,7 @@ public class NotificationDAO {
 			if(rs != null) try {rs.close();} catch(SQLException e) {}
 		}
 		System.out.println("반환성공");
-		return communityList;
+		return notificationList;
 	
 	}
 	
@@ -169,7 +166,7 @@ public class NotificationDAO {
 		try {
 			conn = this.dataSource.getConnection();
 			
-			String sql = "select count(*) from board b left join category c on( b.category_seq = c.seq) left join member m on( m.seq = b.write_seq ) left join reaction r on( b.seq = r.board_seq) where 9  < c.seq and c.seq < 13 and b.title like '%"+keyword+"%' and c.seq like '%"+category+"%' ";
+			String sql = "select count(*) from notification n left join category c on( n.category_seq = c.seq) left join admin a on( a.seq = n.writer_admin ) where n.subject like '%"+keyword+"%' and c.seq like '%"+category+"%' ";
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
