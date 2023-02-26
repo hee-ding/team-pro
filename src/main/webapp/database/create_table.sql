@@ -455,12 +455,13 @@ create table `likeaction` (
 );
 
 create table `notification` (
-	`seq` int NOT NULL primary key,
+	`seq` int auto_increment NOT NULL primary key,
 	`category_seq` int NOT NULL,
 	`subject` varchar(50) NOT NULL,
 	`writer_admin` int NOT NULL,
 	`date`  datetime  NOT NULL,
 	`hit`  int NOT NULL,
+	`content`  text NOT NULL,
 	constraint foreign key (category_seq) references category (seq),
 	constraint foreign key (writer_admin) references admin (seq)
 );
