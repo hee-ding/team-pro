@@ -16,7 +16,7 @@
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-    <link href="./resources/asset/css/notification.css" rel="stylesheet" type="text/css" />
+    <link href="../resources/asset/css/notification.css" rel="stylesheet" type="text/css" />
 	<style type ="text/css">
 	</style>
 	<script type="text/javascript" src="./resources/asset/script/jquery-1.11.1.min.js"></script>
