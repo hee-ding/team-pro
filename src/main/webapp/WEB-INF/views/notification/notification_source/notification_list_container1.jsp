@@ -1,6 +1,45 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
+    
+<%@page import="com.maumgagym.dto.PagingDTO"%>
+<%@page import="com.maumgagym.dto.NotificationDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.maumgagym.dao.NotificationDAO"%>
+
+<%
+	String id = (String)session.getAttribute("id");
+	
+	ArrayList<NotificationDTO> notificationList = (ArrayList) request.getAttribute("notificationList"); // 커뮤니티리스트 호출
+	int boardCount = (Integer)request.getAttribute("boardCount"); //총데이터갯수
+	PagingDTO pto = (PagingDTO)request.getAttribute("pto"); //아래 페이지네이션처리
+	
+	StringBuilder sbHtml = new StringBuilder();
+		 
+	for( NotificationDTO to : notificationList){
+		
+			int seq = to.getSeq();
+			String category = to.getCategory();
+			String subject = to.getSubject();
+			String writer = to.getWriter();
+			String date = to.getDate();
+			int hit =  to.getHit();
+			 
+			sbHtml.append("<tr>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("<td scope='row'>" + seq + "</td>");
+			sbHtml.append("<td class='text-muted'> " +category +"</td>");
+			sbHtml.append("<td class='text-start fw-bold'>");
+			sbHtml.append("<a href='/notification/view?seq="+seq+"' style='text-decoration-line: none;'>" + subject + "</a>&nbsp;"); 
+			sbHtml.append("</td>");
+			sbHtml.append("<td>" + writer + "</td>");
+			sbHtml.append("<td>" + date + "</td>");
+			sbHtml.append("<td>" + hit + "</td>");
+			sbHtml.append("<td>&nbsp;</td>");
+			sbHtml.append("</tr>");
+		}
+%>    
 
 <hr/>
 	
@@ -19,7 +58,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="h5">실시간 전체글 <span class="count">5</span>개</p>
+                    <p class="h5">실시간 전체글 <span class="count"> <%= boardCount %></span>개</p>
                 </div>
                 <div class="col-md-2 text-end ">
 					 <select class="form-select" name="searchtype" aria-label="Default select example">
@@ -39,7 +78,7 @@
             </div>
         </div>
        </form>
-		<br/><br/>
+		<br/>
 		<table class="table table-hover text-center">
 		<thead class="table-primary">
 		<tr>
@@ -50,74 +89,26 @@
 			<th scope="col">글쓴이</th>
 			<th scope="col">등록일</th>
 			<th scope="col">조회</th>
-			<th scope="col">&nbsp;</th>
+			<th scope="col">&nbsp;</th> 
 		</tr>
 		</thead>
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">5</td>
-			<td class="text-muted">공지사항</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td><a href="./notification_viewPage.jsp" style="text-decoration-line: none;">공지사항 입니다.1</a></td>
-			<td>하태현</td>
-			<td>2017-01-31</td>
-			<td>0</td>	
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">4</td>
-			<td class="text-muted">공지사항</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td>공지사항 입니다.2</td>
-			<td>이현주</td>
-			<td>2017-01-31</td>
-			<td>0</td>
-			<td>&nbsp;</td>
-			</tr>
-			
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">3</td>
-			<td class="text-muted">공지사항</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td>공지사항 입니다.3</td>
-			<td>테스트</td>
-			<td>2017-01-31</td>
-			<td>0</td>
-			<td>&nbsp;</td>
-		</tr>			
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">2</td>
-			<td class="text-muted">이벤트</td>
-		<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td>이벤트 입니다.1</td>
-			<td>김종희</td>
-			<td>2017-01-31</td>
-			<td>0</td>
-			<td>&nbsp;</td>
-		</tr>		
-		<tr>
-			<td>&nbsp;</td>
-			<td scope="row">1</td>
-			<td class="text-muted">이벤트</td>
-			<!--<td class="left"><a href="board_view1.jsp">adfas</a>&nbsp;<img src="./images/icon_new.gif" alt="NEW"></td> -->
-			<td>이벤트 입니다.2</td>
-			<td>황병국</td>
-			<td>2017-01-31</td>
-			<td>0</td>
-			<td>&nbsp;</td>
-		</tr>
+		<%= sbHtml.toString() %>
 	</table>
 	
 	<br/><br/><br/>
-		<ul class="pagination justify-content-center">
-		  <li class="page-item"><a class="page-link" href="#"><</a></li>
-		  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-		  <li class="page-item"><a class="page-link" href="#">2</a></li>
-		  <li class="page-item"><a class="page-link" href="#">3</a></li>
-		  <li class="page-item"><a class="page-link" href="#">></a></li>
-		</ul>
-	</div>	
+		<nav>
+              <ul class='pagination justify-content-center'>
+				<c:if test = "${pto.startPage ne 1}"> <!-- startPage가 1이 아니면 &lt;표시가 나타남. -->
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/notification/list?pageNum=${pto.startPage-1}'> &lt; </a></li>
+				</c:if>
+				
+				<c:forEach var="pageIndex"  begin="${pto.startPage}" end="${pto.endPage}">
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/notification/list?pageNum=${pageIndex}'>${pageIndex}</a></li>
+				</c:forEach>
+				
+				<c:if test = "${pto.totalPages ne pto.endPage}"> <!-- 전체페이지와 마지막 페이지가 같으면  &gt; 표시가 없어짐 -->
+					<li class='page-item'><a class='page-link' href='http://localhost:8080/notification/list?pageNum=${pto.endPage+1}'> &gt; </a></li>
+				</c:if>
+            </ul>
+            </nav>
 </div>

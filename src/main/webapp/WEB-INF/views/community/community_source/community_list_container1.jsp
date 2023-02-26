@@ -32,15 +32,15 @@
 			sbHtml.append("<td>&nbsp;</td>");
 			sbHtml.append("<td scope='row'>" + seq + "</td>");
 			sbHtml.append("<td class='text-muted'>" + topic + "</td>");
-			sbHtml.append("<td>" + nickname + "</td>");
 			if(status.equals("3")){
 				sbHtml.append("<td class='text-muted'>삭제된 게시물 입니다.</td>&nbsp;"); 
 			}
 			else {
 				sbHtml.append("<td class='text-start fw-bold'>");
-				sbHtml.append("<a href='/community/view?seq=" + seq + "'>" + title + "</a>&nbsp;"); 
+				sbHtml.append("<a href='/community/view?seq=" + seq + "' style='text-decoration-line: none;'>" + title + "</a>&nbsp;"); 
 				sbHtml.append("</td>");
 			}
+			sbHtml.append("<td>" + nickname + "</td>");
 			sbHtml.append("<td>" + date + "</td>");
 			sbHtml.append("<td>" + like_check + "</td>");
 			sbHtml.append("<td>&nbsp;</td>");
@@ -110,8 +110,8 @@
 			<th scope="col">&nbsp;</th>
 			<th scope="col">번호</th>
 			<th scope="col">분류</th>
-			<th scope="col">글쓴이</th>
 			<th scope="col">제목</th>
+			<th scope="col">글쓴이</th>
 			<th scope="col">등록일</th>
 			<th scope="col">좋아요</th>
 			<th scope="col">&nbsp;</th>
