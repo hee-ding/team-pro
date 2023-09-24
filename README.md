@@ -59,7 +59,7 @@ Maumgagymとは、
     src="https://github.com/hee-ding/team-pro/assets/122540359/55cd91fa-c851-4dd8-8553-93d7d56a91bd">
 <br><br>
 
-- <h3>カスタマーセンター(CSS, tawk.to API)</h3>
+- <h3>カスタマーセンター(CSS, tawk.toウィジェット設定)</h3>
 
 FAQがあり、チャットで問い合わせできるページです。
 
