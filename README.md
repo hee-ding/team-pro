@@ -64,7 +64,7 @@ Maumgagymとは、
 FAQがあり、チャットで問い合わせできるページです。
 
 ![４](https://github.com/hee-ding/team-pro/assets/122540359/ec35d32b-edd5-4a35-a21a-e30c05c15ad0)
-<br><br><br>
+<br><br>
 <div align="center">
 
   ![custom c](https://github.com/hee-ding/team-pro/assets/122540359/6b106452-a9bc-4548-957c-0eedda648194)
@@ -78,10 +78,10 @@ FAQがあり、チャットで問い合わせできるページです。
 ![６](https://github.com/hee-ding/team-pro/assets/122540359/1d9ae9ad-feaf-4773-bec4-e9b243904746)
 
 ![５](https://github.com/hee-ding/team-pro/assets/122540359/0217cfd2-6a27-4acf-8b13-73c5a3955827)
-<br><br><br>
+<br><br>
 <div align="center">
 
-  ![admin c](https://github.com/hee-ding/team-pro/assets/122540359/a0b0feb0-1986-4341-a4a6-6594cfe8d468)
+  ![ezgif com-video-to-gif](https://github.com/hee-ding/instagram-clone-pro/assets/122540359/acc25057-16b0-4c7b-8c43-3336c1177ada)
 </div>
 <br><br>
 
